@@ -80,6 +80,7 @@ function checkout() {
     alert("Funcionalidad de finalizar compra aún no implementada.");
 }
 
+//función para buscar productos
 document.getElementById('search-input').addEventListener('input', () => {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const productRow = document.getElementById('product-row');
