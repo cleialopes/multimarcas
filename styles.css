@@ -253,7 +253,7 @@ h1 {
     margin: auto;
     display: block;
     width: 80%;
-    max-width: 700px;
+    max-width: 500px;
 }
 
 .close {
@@ -420,7 +420,7 @@ footer p {
 }
 
 /* Media Query para dispositivos pequeños */
-@media (min-width: 768px) and (max-width: 1125px) {
+@media (min-width: 768px) and (max-width: 1023px) {
     .container {
         width: 90%;
     }
