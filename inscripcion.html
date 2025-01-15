@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Inscripción - Tienda de Ropa</title>
     <link rel="stylesheet" href="styles.css">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=JttoggwRx8bND8oTrGCNopLAqdw="></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key="></script>
 </head>
 <body>
     <!-- Header -->
@@ -36,65 +38,57 @@
                 <li><a href="inscripcion.html">Iniciar Seción</a></li>
                 <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
             </ul>
-            <form class="search-form" onsubmit="searchProducts(event)">
+            <form class="search-form">
                 <input type="text" id="search-input" placeholder="Buscar productos...">
-                <button type="submit">Buscar</button>
             </form>
         </nav>
     </header>
     <main>
-        <div class="form-container">
-            <h1>Inscríbete</h1>
-            <form id="registroForm">
-                <div class="form-group">
-                    <label for="nombre">Nombre completo:</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
-                </div>
-
-                <div class="form-group">
+         <!-- Formulario de registro -->
+        <section class="form-section">
+            <div class="form-container">
+                <h1>Regístrate</h1>
+                <form action="#" method="post">
+                    <label for="name">Nombre completo:</label>
+                    <input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo" required>
+        
                     <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required>
-                </div>
-
-                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
+        
                     <label for="password">Contraseña:</label>
                     <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" placeholder="Ingresa tu dirección" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="genero">Género:</label>
-                    <select id="genero" name="genero" required>
-                        <option value="">Selecciona una opción</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <input type="checkbox" id="terminos" name="terminos" required>
-                    <label for="terminos" class="terms">Acepto los <a href="#">términos y condiciones</a>.</label>
-                </div>
-
-                <div class="form-group">
+        
+                    <label for="confirm-password">Confirmar contraseña:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Repite la contraseña" required>
+        
+                    <div class="terms">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Acepto los <a href="#">términos y condiciones</a></label>
+                    </div>
+        
                     <button type="submit">Registrarse</button>
+                </form>
+        
+                <p>¿Ya tienes una cuenta? <a href="#">Inicia sesión aquí</a></p>
+        
+                <div class="social-login">
+                    <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
                 </div>
-            </form>
-        </div>
-        <div class="image-container">
-            <img src="img/formulario.jpg" alt="Imagen relacionada con la tienda">
-        </div>
-        <div id="sunrise-sunset-info">
-            <h2>Horarios de Amanecer y Atardecer</h2>
-            <p id="sunrise"></p>
-            <p id="sunset"></p>
-        </div>
+            </div>
+            <div class="form-image">
+                <img src="img/vestido-midi1.jpeg" alt="Formulario de registro" />
+            </div>
+        </section>
+        <!-- Google Maps -->
+        <section>
+            <h2>Encuéntranos en el mapa</h2>
+            <div id="map" style="width: 100%; height: 400px; margin: 20px 0;"></div>
+        </section>
     </main>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Mi Tienda de Ropa. Todos los derechos reservados.</p>
         <div class="social-media">
@@ -103,50 +97,23 @@
             <a href="#">Twitter</a>
         </div>
     </footer>
+
+    <!-- Script para inicializar el mapa -->
     <script>
-        //pagina de registro
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('registroForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evitar el envío del formulario
+        function initMap() {
+            const location = { lat: 43.313675, lng: -1.981969 }; // Cambia por las coordenadas de tu tienda
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: location,
+            });
 
-        const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const direccion = document.getElementById('direccion').value;
-        const genero = document.getElementById('genero').value;
-        const terminos = document.getElementById('terminos').checked;
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+        }
 
-        const usuario = {
-            nombre,
-            email,
-            password,
-            direccion,
-            genero,
-            terminos
-        };
-
-        localStorage.setItem('usuario', JSON.stringify(usuario));
-
-        alert('Información enviada correctamente');
-    });
-});
-// URL de la API
-const apiUrl = 'https://api.sunrise-sunset.org/json?lat=53.900600&lng=27.558971&formatted=0';
-
-// Llamada a la API
-fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        // Convertir las horas a formato local
-        const sunrise = new Date(data.results.sunrise).toLocaleTimeString('es-ES', { timeZone: 'Europe/Minsk' });
-        const sunset = new Date(data.results.sunset).toLocaleTimeString('es-ES', { timeZone: 'Europe/Minsk' });
-
-        // Mostrar los datos en la página
-        document.getElementById('sunrise').innerText = `Amanecer: ${sunrise}`;
-        document.getElementById('sunset').innerText = `Atardecer: ${sunset}`;
-    })
-    .catch(error => console.error('Error al obtener los datos:', error));
-
+        window.onload = initMap;
     </script>
-</body>
-</html>
+    </body>
+    </html>
