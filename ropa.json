@@ -1,0 +1,74 @@
+[
+    {
+        "titulo": "Vestido Corto",
+        "precio": "$20.00",
+        "imagenes": [
+            "img/vestido-corto1.jpeg",
+            "https://via.placeholder.com/400x300/ff0000",
+            "https://via.placeholder.com/400x300/00ff00"
+        ]
+    },
+    {
+        "titulo": "Camisa Blanca",
+        "precio": "$25.00",
+        "imagenes": [
+            "img/camisa-blanca1.jpeg",
+            "https://via.placeholder.com/400x300/ff00ff",
+            "https://via.placeholder.com/400x300/ffff00"
+        ]
+    },
+    {
+        "titulo": "Vestido Fiesta",
+        "precio": "$30.00",
+        "imagenes": [
+            "img/vestido-elegante1.webp",
+            "https://via.placeholder.com/400x300/ff6600",
+            "https://via.placeholder.com/400x300/800080"
+        ]
+    },
+    {
+        "titulo": "Pantalon Lazos",
+        "precio": "$22.00",
+        "imagenes": [
+            "img/pantalon-mujer1.jpeg",
+            "https://via.placeholder.com/400x300/555555",
+            "https://via.placeholder.com/400x300/222222"
+        ]
+    },
+    {
+        "titulo": "Vestido Midi",
+        "precio": "$18.00",
+        "imagenes": [
+            "img/vestido-midi1.jpeg",
+            "https://via.placeholder.com/400x300/eeeeee",
+            "https://via.placeholder.com/400x300/dddddd"
+        ]
+    },
+    {
+        "titulo": "Camisa Rayas",
+        "precio": "$27.00",
+        "imagenes": [
+            "img/camisa-blanca2.jpeg",
+            "https://via.placeholder.com/400x300/ffcc00",
+            "https://via.placeholder.com/400x300/ff9900"
+        ]
+    },
+    {
+    "titulo": "Pantalon Campana",
+    "precio": "$27.00",
+    "imagenes": [
+        "img/pantalon-mujer2.jpeg",
+        "https://via.placeholder.com/400x300/ffcc00",
+        "https://via.placeholder.com/400x300/ff9900"
+        ]
+    },
+    {
+        "titulo": "Vestido Corto Flores",
+        "precio": "$27.00",
+        "imagenes": [
+            "img/vestido-corto2.jpeg",
+            "https://via.placeholder.com/400x300/ffcc00",
+            "https://via.placeholder.com/400x300/ff9900"
+            ]
+        }
+]

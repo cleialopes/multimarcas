@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inscripción - Tienda de Ropa</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="img/logo.webp" alt="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#">Productos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Vestidos</a></li>
+                        <li><a href="#">Camisas</a></li>
+                        <li><a href="#">Pantalones</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Contacto</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Teléfono</a></li>
+                        <li><a href="#">Redes Sociales</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                    </ul>
+                </li>
+                <li><a href="inscripcion.html">Iniciar Seción</a></li>
+                <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
+            </ul>
+            <form class="search-form" onsubmit="searchProducts(event)">
+                <input type="text" id="search-input" placeholder="Buscar productos...">
+                <button type="submit">Buscar</button>
+            </form>
+        </nav>
+    </header>
+    <main>
+        <div class="form-container">
+            <h1>Inscríbete</h1>
+            <form id="registroForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Ingresa tu dirección" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="genero">Género:</label>
+                    <select id="genero" name="genero" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="terminos" name="terminos" required>
+                    <label for="terminos" class="terms">Acepto los <a href="#">términos y condiciones</a>.</label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Registrarse</button>
+                </div>
+            </form>
+        </div>
+        <div class="image-container">
+            <img src="img/formulario.jpg" alt="Imagen relacionada con la tienda">
+        </div>
+        <div id="sunrise-sunset-info">
+            <h2>Horarios de Amanecer y Atardecer</h2>
+            <p id="sunrise"></p>
+            <p id="sunset"></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mi Tienda de Ropa. Todos los derechos reservados.</p>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+    <script>
+        //pagina de registro
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('registroForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar el envío del formulario
+
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const direccion = document.getElementById('direccion').value;
+        const genero = document.getElementById('genero').value;
+        const terminos = document.getElementById('terminos').checked;
+
+        const usuario = {
+            nombre,
+            email,
+            password,
+            direccion,
+            genero,
+            terminos
+        };
+
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+
+        alert('Información enviada correctamente');
+    });
+});
+// URL de la API
+const apiUrl = 'https://api.sunrise-sunset.org/json?lat=53.900600&lng=27.558971&formatted=0';
+
+// Llamada a la API
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        // Convertir las horas a formato local
+        const sunrise = new Date(data.results.sunrise).toLocaleTimeString('es-ES', { timeZone: 'Europe/Minsk' });
+        const sunset = new Date(data.results.sunset).toLocaleTimeString('es-ES', { timeZone: 'Europe/Minsk' });
+
+        // Mostrar los datos en la página
+        document.getElementById('sunrise').innerText = `Amanecer: ${sunrise}`;
+        document.getElementById('sunset').innerText = `Atardecer: ${sunset}`;
+    })
+    .catch(error => console.error('Error al obtener los datos:', error));
+
+    </script>
+</body>
+</html>

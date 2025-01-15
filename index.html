@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Ropa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="img/logo.webp" alt="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#">Productos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Vestidos</a></li>
+                        <li><a href="#">Camisas</a></li>
+                        <li><a href="#">Pantalones</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Contacto</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Teléfono</a></li>
+                        <li><a href="#">Redes Sociales</a></li>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                    </ul>
+                </li>
+                <li><a href="inscripcion.html">Iniciar Seción</a></li>
+                <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
+            </ul>
+            <form class="search-form" onsubmit="searchProducts(event)">
+                <input type="text" id="search-input" placeholder="Buscar productos...">
+                <button type="submit">Buscar</button>
+            </form>
+        </nav>
+    </header>
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="img/video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>Tienda de Ropa</h1>
+        <div id="product-row" class="product-row">
+            <!-- Aquí se agregarán los productos dinámicamente -->
+        </div>
+        <!-- Botón para agregar más productos -->
+        <button class="add-more" onclick="addMoreProducts()">Cargar más productos</button>
+    </div>
+
+    <!-- Modal para expandir la imagen -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
+    <!-- Modal para el carrito -->
+    <div id="cartModal" class="modal">
+        <span class="close" onclick="closeCart()">&times;</span>
+        <h2>Productos en el Carrito</h2>
+        <div id="cart-items" class="cart-items">
+            <!-- Los productos del carrito se mostrarán aquí -->
+        </div>
+        <button onclick="checkout()">Finalizar Compra</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Mi Tienda de Ropa. Todos los derechos reservados.</p>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
