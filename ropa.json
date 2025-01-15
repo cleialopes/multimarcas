@@ -1,7 +1,7 @@
 [
     {
         "titulo": "Vestido Corto",
-        "precio": "$20.00",
+        "precio": "€20.00",
         "imagenes": [
             "img/vestido-corto1.jpeg",
             "https://via.placeholder.com/400x300/ff0000",
@@ -10,7 +10,7 @@
     },
     {
         "titulo": "Camisa Blanca",
-        "precio": "$25.00",
+        "precio": "€25.00",
         "imagenes": [
             "img/camisa-blanca1.jpeg",
             "https://via.placeholder.com/400x300/ff00ff",
@@ -19,7 +19,7 @@
     },
     {
         "titulo": "Vestido Fiesta",
-        "precio": "$30.00",
+        "precio": "€30.00",
         "imagenes": [
             "img/vestido-elegante1.webp",
             "https://via.placeholder.com/400x300/ff6600",
@@ -28,7 +28,7 @@
     },
     {
         "titulo": "Pantalon Lazos",
-        "precio": "$22.00",
+        "precio": "€22.00",
         "imagenes": [
             "img/pantalon-mujer1.jpeg",
             "https://via.placeholder.com/400x300/555555",
@@ -37,7 +37,7 @@
     },
     {
         "titulo": "Vestido Midi",
-        "precio": "$18.00",
+        "precio": "€18.00",
         "imagenes": [
             "img/vestido-midi1.jpeg",
             "https://via.placeholder.com/400x300/eeeeee",
@@ -46,7 +46,7 @@
     },
     {
         "titulo": "Camisa Rayas",
-        "precio": "$27.00",
+        "precio": "€27.00",
         "imagenes": [
             "img/camisa-blanca2.jpeg",
             "https://via.placeholder.com/400x300/ffcc00",
@@ -55,7 +55,7 @@
     },
     {
     "titulo": "Pantalon Campana",
-    "precio": "$27.00",
+    "precio": "€27.00",
     "imagenes": [
         "img/pantalon-mujer2.jpeg",
         "https://via.placeholder.com/400x300/ffcc00",
