@@ -48,24 +48,24 @@
         <section class="form-section">
             <div class="form-container">
                 <h1>Regístrate</h1>
-                <form action="#" method="post">
+                <form id="registration-form">
                     <label for="name">Nombre completo:</label>
                     <input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo" required>
-        
+
                     <label for="email">Correo electrónico:</label>
                     <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
-        
+
                     <label for="password">Contraseña:</label>
                     <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
-        
+
                     <label for="confirm-password">Confirmar contraseña:</label>
                     <input type="password" id="confirm-password" name="confirm-password" placeholder="Repite la contraseña" required>
-        
+
                     <div class="terms">
                         <input type="checkbox" id="terms" name="terms" required>
                         <label for="terms">Acepto los <a href="#">términos y condiciones</a></label>
                     </div>
-        
+
                     <button type="submit">Registrarse</button>
                 </form>
         
@@ -112,8 +112,46 @@
                 map: map,
             });
         }
-
         window.onload = initMap;
+
+        // Referencia al formulario
+        const form = document.getElementById('registration-form');
+
+        // Escucha el evento de envío
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita el envío del formulario
+
+            // Captura los valores de los campos
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Valida que las contraseñas coincidan
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
+                return;
+            }
+
+            // Guarda los valores en localStorage
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password); // Nota: No es seguro guardar contraseñas así
+
+            alert('¡Registro guardado con éxito en localStorage!');
+
+            // Opcional: Vaciar el formulario
+            form.reset();
+        });
+
+        // Opcional: Cargar datos desde localStorage al recargar la página
+        window.addEventListener('load', () => {
+            const savedName = localStorage.getItem('name');
+            const savedEmail = localStorage.getItem('email');
+
+            if (savedName) document.getElementById('name').value = savedName;
+            if (savedEmail) document.getElementById('email').value = savedEmail;
+        });
     </script>
     </body>
     </html>
