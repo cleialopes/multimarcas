@@ -80,38 +80,42 @@ function checkout() {
     alert("Funcionalidad de finalizar compra aún no implementada.");
 }
 
-function searchProducts(event) {
-    event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+document.getElementById('search-input').addEventListener('input', () => {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const productRow = document.getElementById('product-row');
 
-    // Limpiar productos actuales
-    productRow.innerHTML = '';
-
-    // Filtrar y mostrar productos coincidentes
-    const filteredProducts = productos.filter(producto =>
-        producto.titulo.toLowerCase().includes(searchTerm)
-    );
-
-    if (filteredProducts.length > 0) {
-        filteredProducts.forEach(producto => {
-            const productElement = document.createElement('div');
-            productElement.classList.add('product');
-            productElement.innerHTML = `
-                <div class="product-images">
-                    <img src="${producto.imagenes[0]}" alt="${producto.titulo}">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-title">${producto.titulo}</h2>
-                    <p class="product-price">${producto.precio}</p>
-                </div>
-            `;
-            productRow.appendChild(productElement);
-        });
+    if (searchTerm.trim() === '') {
+        // Si el campo de búsqueda está vacío, mostrar todos los productos
+        productRow.innerHTML = '';
+        productosCargados = 0; // Reiniciar el contador de productos cargados
+        addMoreProducts(); // Cargar nuevamente los productos
     } else {
-        productRow.innerHTML = '<p>No se encontraron productos.</p>';
+        // Filtrar y mostrar productos coincidentes
+        productRow.innerHTML = '';
+        const filteredProducts = productos.filter(producto =>
+            producto.titulo.toLowerCase().includes(searchTerm)
+        );
+
+        if (filteredProducts.length > 0) {
+            filteredProducts.forEach(producto => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product');
+                productElement.innerHTML = `
+                    <div class="product-images">
+                        <img src="${producto.imagenes[0]}" alt="${producto.titulo}">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-title">${producto.titulo}</h2>
+                        <p class="product-price">${producto.precio}</p>
+                    </div>
+                `;
+                productRow.appendChild(productElement);
+            });
+        } else {
+            productRow.innerHTML = '<p>No se encontraron productos.</p>';
+        }
     }
-}
+});
 
 // Función para cargar más productos
 function addMoreProducts() {
