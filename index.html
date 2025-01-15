@@ -40,36 +40,38 @@
             </form>
         </nav>
     </header>
-    <div class="video-background">
-        <video autoplay loop muted playsinline>
-            <source src="img/video.mp4" type="video/mp4">
-        </video>
-    </div>
-    <!-- Contenedor principal -->
-    <div class="container">
-        <h1>Tienda de Ropa</h1>
-        <div id="product-row" class="product-row">
-            <!-- Aquí se agregarán los productos dinámicamente -->
+    <main>
+        <div class="video-background">
+            <video autoplay loop muted playsinline>
+                <source src="img/video.mp4" type="video/mp4">
+            </video>
         </div>
-        <!-- Botón para agregar más productos -->
-        <button class="add-more" onclick="addMoreProducts()">Cargar más productos</button>
-    </div>
-
-    <!-- Modal para expandir la imagen -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="expandedImg">
-    </div>
-
-    <!-- Modal para el carrito -->
-    <div id="cartModal" class="modal">
-        <span class="close" onclick="closeCart()">&times;</span>
-        <h2>Productos en el Carrito</h2>
-        <div id="cart-items" class="cart-items">
-            <!-- Los productos del carrito se mostrarán aquí -->
+        <!-- Contenedor principal -->
+        <div class="container">
+            <h1>Tienda de Ropa</h1>
+            <div id="product-row" class="product-row">
+                <!-- Aquí se agregarán los productos dinámicamente -->
+            </div>
+            <!-- Botón para agregar más productos -->
+            <button class="add-more" onclick="addMoreProducts()">Cargar más productos</button>
         </div>
-        <button onclick="checkout()">Finalizar Compra</button>
-    </div>
+
+        <!-- Modal para expandir la imagen -->
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="expandedImg">
+        </div>
+
+        <!-- Modal para el carrito -->
+        <div id="cartModal" class="modal">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Productos en el Carrito</h2>
+            <div id="cart-items" class="cart-items">
+                <!-- Los productos del carrito se mostrarán aquí -->
+            </div>
+            <button onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer>
