@@ -304,6 +304,7 @@ footer p {
     margin-left: 20px;
 }
  
+/* Estilos del video de fondo */
 .video-background {
     position: fixed;
     top: 0;
@@ -327,15 +328,14 @@ footer p {
 /* Estilos del formulario de registro */
 .form-section {
     display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center; 
     padding: 60px;
     background: linear-gradient(135deg, #4CAF50, #81C784);
     color: #fff;
-    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    /* gap: 20px; Espaciado entre los elementos */
+    gap: 20px;
 }
 
 .form-container {
@@ -377,7 +377,7 @@ footer p {
 .form-container input {
     width: 90%;
     padding: 12px;
-    /* margin-bottom: 20px; */
+    /* margin-bottom: 20px;  */
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
