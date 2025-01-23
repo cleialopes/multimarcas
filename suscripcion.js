@@ -12,6 +12,13 @@ function initMap() {
 }
 window.onload = initMap;
 
+// Función para sanitizar entradas de texto
+function sanitizeInput(input) {
+    const temp = document.createElement('div');
+    temp.textContent = input; // Escapa caracteres HTML
+    return temp.innerHTML.trim(); // Devuelve texto escapado y sin espacios extra
+}
+
 // Referencia al formulario
 const form = document.getElementById('registration-form');
 
@@ -19,11 +26,18 @@ const form = document.getElementById('registration-form');
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // Evita el envío del formulario
 
-    // Captura los valores de los campos
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
+    // Captura y sanitiza los valores de los campos
+    const name = sanitizeInput(document.getElementById('name').value);
+    const email = sanitizeInput(document.getElementById('email').value);
+    const password = sanitizeInput(document.getElementById('password').value);
+    const confirmPassword = sanitizeInput(document.getElementById('confirm-password').value);
+
+    // Valida que el correo electrónico tenga un formato válido
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Por favor, ingresa un correo electrónico válido.');
+        return;
+    }
 
     // Valida que las contraseñas coincidan
     if (password !== confirmPassword) {
@@ -31,22 +45,73 @@ form.addEventListener('submit', (event) => {
         return;
     }
 
-    // Guarda los valores en localStorage
+    // Verifica que se cumplan los términos y condiciones
+    const termsAccepted = document.getElementById('terms').checked;
+    if (!termsAccepted) {
+        alert('Debes aceptar los términos y condiciones.');
+        return;
+    }
+
+    // Validar nombre completo (solo letras y espacios)
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    if (!nameRegex.test(name)) {
+    alert('El nombre solo debe contener letras y espacios.');
+    return;
+    }
+
+    // Guarda los valores sanitizados en localStorage (aunque guardar contraseñas así no es seguro)
     localStorage.setItem('name', name);
     localStorage.setItem('email', email);
-    localStorage.setItem('password', password); // Nota: No es seguro guardar contraseñas así
+    localStorage.setItem('password', password); // Esto es solo para pruebas; usa hash en producción
 
-    alert('¡Registro guardado con éxito en localStorage!');
+    alert('¡Registro exitoso!');
 
     // Opcional: Vaciar el formulario
     form.reset();
 });
 
-// Opcional: Cargar datos desde localStorage al recargar la página
-window.addEventListener('load', () => {
-    const savedName = localStorage.getItem('name');
-    const savedEmail = localStorage.getItem('email');
+// Selecciona el input de la foto y la imagen de previsualización
+const photoInput = document.getElementById('photo');
+const previewImage = document.getElementById('preview');
 
-    if (savedName) document.getElementById('name').value = savedName;
-    if (savedEmail) document.getElementById('email').value = savedEmail;
+// Escucha cambios en el input de archivos
+photoInput.addEventListener('change', (event) => {
+    const file = event.target.files[0]; // Obtén el archivo seleccionado
+
+    if (file) {
+        // Asegúrate de que sea una imagen
+        if (file.type === "image/png") {
+            const reader = new FileReader(); // Usa FileReader para leer el archivo
+            reader.onload = (e) => {
+                previewImage.src = e.target.result; // Establece la fuente de la imagen
+                previewImage.style.display = 'block'; // Muestra la imagen
+            };
+            reader.readAsDataURL(file); // Lee el archivo como una URL
+        } else {
+            alert('Por favor, selecciona un archivo en formato PNG.');
+            photoInput.value = ""; // Limpia el campo si el archivo no es válido
+            previewImage.style.display = 'none'; // Oculta la imagen
+        }
+    }
 });
+
+// Función para alternar la visibilidad de la contraseña
+function togglePasswordVisibility(inputId, toggleId) {
+    const passwordInput = document.getElementById(inputId);
+    const toggleIcon = document.getElementById(toggleId);
+
+    toggleIcon.addEventListener('click', () => {
+        // Cambia el tipo del input entre "password" y "text"
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.textContent = '🙈'; // Cambia el icono a "ocultar"
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.textContent = '👁️'; // Cambia el icono a "mostrar"
+        }
+    });
+}
+
+// Llama a la función para los campos de contraseña
+togglePasswordVisibility('password', 'toggle-password');
+togglePasswordVisibility('confirm-password', 'toggle-confirm-password');

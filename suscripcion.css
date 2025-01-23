@@ -116,10 +116,13 @@ nav {
 }
 
 .form-container:hover {
-    box-shadow: 0 0 15px 5px rgba(148, 199, 149, 0.8); /* Efecto de brillo */
-    transform: scale(1.02); /* Opcional: un ligero zoom al pasar el ratón */
-    transition: all 0.3s ease-in-out; /* Transición suave */
+    box-shadow: 0 0 25px 10px rgba(76, 175, 80, 0.9); /* Aumenta el brillo */
+    transform: scale(1.05); /* Incrementa ligeramente el tamaño */
+    transition: all 0.3s ease-in-out; /* Suaviza la animación */
+    border: 2px solid rgba(76, 175, 80, 0.9); /* Añade un borde brillante */
+    background: linear-gradient(135deg, #81C784, #66BB6A); /* Realza el fondo */
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -263,6 +266,39 @@ nav {
 }
 .form-image img:hover {
     transform: rotate(0deg) scale(1.05);
+}
+
+#preview {
+    border: 2px dashed #ddd;
+    padding: 5px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+/* estilo para mensaje a la hora de subir foto de perfil */
+.photo-input-container {
+    position: relative; /* Necesario para posicionar el tooltip */
+    display: inline-block; /* Asegura que el tooltip se ajuste al contenido */
+}
+
+.tooltip {
+    display: none; /* Oculta el mensaje inicialmente */
+    position: absolute;
+    top: 100%; /* Aparece debajo del input */
+    left: 0;
+    background-color: #4CAF50; /* Color de fondo del tooltip */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    white-space: nowrap; /* Evita que el texto se divida */
+    z-index: 1000;
+    margin-top: 5px; /* Espacio entre el input y el tooltip */
+}
+
+#photo:hover + .tooltip {
+    display: block; /* Muestra el tooltip al pasar el ratón */
 }
 
 /* Estilos del mapa */
