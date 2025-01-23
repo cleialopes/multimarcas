@@ -62,19 +62,46 @@ function showCart() {
     // Limpiar el contenido anterior del carrito
     cartItemsContainer.innerHTML = '';
 
-    // Agregar productos al carrito en el modal
-    cartItems.forEach((item, index) => {
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('item');
-        itemElement.innerHTML = `
-            <h3>${item.titulo}</h3>
-            <p>${item.precio}</p>
-            <button onclick="removeFromCart(${index})">Eliminar</button>
-        `;
-        cartItemsContainer.appendChild(itemElement);
-    });
+    if (cartItems.length > 0) {
+        let totalPrice = 0; // Variable para calcular el precio total
 
-    cartModal.style.display = "block"; // Mostrar el modal del carrito
+        // Mostrar cada producto del carrito
+        cartItems.forEach((item, index) => {
+            // Limpia el precio para asegurarte de que sea un número válido
+            const precioLimpio = parseFloat(item.precio.replace(/[^0-9.-]+/g, ''));
+            if (!isNaN(precioLimpio)) {
+                totalPrice += precioLimpio; // Sumar precio del producto al total
+            }
+
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('item');
+            itemElement.innerHTML = `
+                <h3>${item.titulo}</h3>
+                <p>Precio: ${item.precio}</p>
+                <button onclick="removeFromCart(${index})">Eliminar</button>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+        });
+
+        // Mostrar el precio total
+        const totalElement = document.createElement('div');
+        totalElement.className = 'total-price';
+        totalElement.innerHTML = `<h3>Total: ${totalPrice.toFixed(2)}</h3>`;
+        cartItemsContainer.appendChild(totalElement);
+
+        // Añadir el botón "Vaciar Carrito"
+        const emptyCartButton = document.createElement('button');
+        emptyCartButton.textContent = 'Vaciar Carrito';
+        emptyCartButton.className = 'empty-cart-btn';
+        emptyCartButton.onclick = emptyCart;
+        cartItemsContainer.appendChild(emptyCartButton);
+    } else {
+        // Mostrar mensaje si el carrito está vacío
+        cartItemsContainer.innerHTML = '<p>El carrito está vacío.</p>';
+    }
+
+    // Mostrar el modal del carrito
+    cartModal.style.display = "block";
 }
 
 function closeCart() {
@@ -86,6 +113,20 @@ function removeFromCart(index) {
     cartCount--; // Decrementar el contador del carrito
     document.getElementById('cart-count').innerText = cartCount; // Actualizar el contador en el header
     showCart(); // Volver a mostrar el carrito actualizado
+    showNotification('Producto eliminado del carrito.');
+}
+
+function emptyCart() {
+    cartItems.length = 0; // Vaciar el arreglo del carrito
+    cartCount = 0; // Reiniciar el contador del carrito
+    document.getElementById('cart-count').innerText = cartCount;
+
+    // Actualizar el contenido del carrito
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = '<p>El carrito está vacío.</p>';
+
+    // Mostrar una notificación
+    showNotification('El carrito ha sido vaciado.');
 }
 
 function changeImage(mainImageId, newSrc) {
