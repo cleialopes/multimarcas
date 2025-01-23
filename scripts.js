@@ -20,12 +20,39 @@ fetch("ropa.json")
     let cartCount = 0; // Contador del carrito
     const cartItems = []; // Array para almacenar los productos en el carrito
 
+    // Función para mostrar una notificación
+function showNotification(mensaje) {
+    // Crear un contenedor de notificación si no existe
+    let notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) {
+        notificationContainer = document.createElement('div');
+        notificationContainer.id = 'notification-container';
+        document.body.appendChild(notificationContainer);
+    }
+
+    // Crear la notificación
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = mensaje;
+
+    // Agregar la notificación al contenedor
+    notificationContainer.appendChild(notification);
+
+    // Remover la notificación después de 3 segundos
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
 function addToCart(titulo, precio) {
     cartCount++; // Incrementar el contador del carrito
     document.getElementById('cart-count').innerText = cartCount; // Actualizar el contador en el header
-    
+
     // Agregar producto al carrito
     cartItems.push({ titulo, precio });
+
+    // Mostrar la notificación
+    showNotification(`"${titulo}" fue añadido al carrito.`);
 }
 
 function showCart() {
