@@ -27,12 +27,39 @@
         ]
     },
     {
+        "titulo": "Vestido Primavera",
+        "precio": "€30.00",
+        "imagenes": [
+            "img/vestido_verde1.png",
+            "img/vestido_verde2.png",
+            "img/vestido_verde3.webp"
+        ]
+    },
+    {
         "titulo": "Pantalon Lazos",
         "precio": "€22.00",
         "imagenes": [
             "img/pantalon-lazo3.jpeg",
             "img/pantalon-lazo2.png",
             "img/pantalon-lazo1.jpg"
+        ]
+    },
+    {
+        "titulo": "Pantalon Ancho",
+        "precio": "€22.00",
+        "imagenes": [
+            "img/pantalon_1.png",
+            "img/pantalon_2.png",
+            "img/pantalon_3.png.jpg"
+        ]
+    },
+    {
+        "titulo": "Pantalon Drapeado",
+        "precio": "€22.00",
+        "imagenes": [
+            "img/pantalon_blanco1.png",
+            "img/pantalon_blanco2.png",
+            "img/pantalon_blanco3.png"
         ]
     },
     {
@@ -54,12 +81,30 @@
         ]
     },
     {
+        "titulo": "Camisa Corazones",
+        "precio": "€25.00",
+        "imagenes": [
+            "img/camisa_corazones1.png",
+            "img/camisa_corazones2.png",
+            "img/camisa_corazones3.png"
+        ]
+    },
+    {
         "titulo": "Camisa Rayas",
         "precio": "€27.00",
         "imagenes": [
             "img/camisa-blanca1.webp",
             "img/camisa-blanca2.webp",
             "img/camisa-blanca3.webp"
+        ]
+    },
+    {
+        "titulo": "Camisa Azul",
+        "precio": "€27.00",
+        "imagenes": [
+            "img/camisa_azul1.png",
+            "img/camisa_azul2.png",
+            "img/camisa_azul3.png"
         ]
     },
     {
@@ -70,14 +115,32 @@
             "img/chaqueta-azul2.webp",
             "img/chaqueta-azul3.webp"
             ]
-        },
-        {
-            "titulo": "Abrigo Blanco",
-            "precio": "$27.00",
-            "imagenes": [
-                "img/abrigo-blanco1.webp",
-                "img/abrigo-blanco2.webp",
-                "img/abrigo-blanco3.webp"
-            ]
-        }
+    },
+    { 
+        "titulo": "Abrigo Verde",
+        "precio": "$27.00",
+        "imagenes": [
+            "img/abrigo_musgo1.png",
+            "img/abrigo_musgo2.png",
+            "img/abrigo_musgo3.png"
+        ]
+    },
+    { 
+        "titulo": "Abrigo Rojo",
+        "precio": "$27.00",
+        "imagenes": [
+            "img/abrigo_rojo1.png",
+            "img/abrigo_rojo2.png",
+            "img/abrigo_rojo3.png"
+        ]
+    },
+    {
+        "titulo": "Abrigo Blanco",
+        "precio": "$27.00",
+        "imagenes": [
+            "img/abrigo-blanco1.webp",
+            "img/abrigo-blanco2.webp",
+            "img/abrigo-blanco3.webp"
+        ]
+    }
 ]
