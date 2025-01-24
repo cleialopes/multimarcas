@@ -3,72 +3,81 @@
         "titulo": "Vestido Corto",
         "precio": "€20.00",
         "imagenes": [
-            "img/vestido-corto1.jpeg",
-            "https://via.placeholder.com/400x300/ff0000",
-            "https://via.placeholder.com/400x300/00ff00"
-        ]
-    },
-    {
-        "titulo": "Camisa Blanca",
-        "precio": "€25.00",
-        "imagenes": [
-            "img/camisa-blanca1.jpeg",
-            "https://via.placeholder.com/400x300/ff00ff",
-            "https://via.placeholder.com/400x300/ffff00"
-        ]
-    },
-    {
-        "titulo": "Vestido Fiesta",
-        "precio": "€30.00",
-        "imagenes": [
-            "img/vestido-elegante1.webp",
-            "https://via.placeholder.com/400x300/ff6600",
-            "https://via.placeholder.com/400x300/800080"
-        ]
-    },
-    {
-        "titulo": "Pantalon Lazos",
-        "precio": "€22.00",
-        "imagenes": [
-            "img/pantalon-mujer1.jpeg",
-            "https://via.placeholder.com/400x300/555555",
-            "https://via.placeholder.com/400x300/222222"
+            "img/vestido-corto1.webp",
+            "img/vestido-corto2.webp",
+            "img/vestido-corto3.webp"
         ]
     },
     {
         "titulo": "Vestido Midi",
         "precio": "€18.00",
         "imagenes": [
-            "img/vestido-midi1.jpeg",
-            "https://via.placeholder.com/400x300/eeeeee",
-            "https://via.placeholder.com/400x300/dddddd"
+            "img/vestido-rojo1.webp",
+            "img/vestido-rojo2.webp",
+            "img/vestido-rojo3.webp"
+        ]
+    },
+    {
+        "titulo": "Vestido Fiesta",
+        "precio": "€30.00",
+        "imagenes": [
+            "img/vestido-elegante1.png",
+            "img/vestido-elegante2.png",
+            "img/vestido-elegante3.webp"
+        ]
+    },
+    {
+        "titulo": "Pantalon Lazos",
+        "precio": "€22.00",
+        "imagenes": [
+            "img/pantalon-lazo3.jpeg",
+            "img/pantalon-lazo2.png",
+            "img/pantalon-lazo1.jpg"
+        ]
+    },
+    {
+        "titulo": "Pantalon Campana",
+        "precio": "€27.00",
+        "imagenes": [
+            "img/pantalon-campana1.webp",
+            "img/pantalon-campana2.webp",
+            "img/pantalon-campana3.webp"
+        ]
+    },
+    {
+        "titulo": "Camisa Rayas",
+        "precio": "€25.00",
+        "imagenes": [
+            "img/camisa-rayas1.webp",
+            "img/camisa-rayas2.webp",
+            "img/camisa-rayas3.webp"
         ]
     },
     {
         "titulo": "Camisa Rayas",
         "precio": "€27.00",
         "imagenes": [
-            "img/camisa-blanca2.jpeg",
-            "https://via.placeholder.com/400x300/ffcc00",
-            "https://via.placeholder.com/400x300/ff9900"
+            "img/camisa-blanca1.webp",
+            "img/camisa-blanca2.webp",
+            "img/camisa-blanca3.webp"
         ]
     },
     {
-    "titulo": "Pantalon Campana",
-    "precio": "€27.00",
-    "imagenes": [
-        "img/pantalon-mujer2.jpeg",
-        "https://via.placeholder.com/400x300/ffcc00",
-        "https://via.placeholder.com/400x300/ff9900"
-        ]
-    },
-    {
-        "titulo": "Vestido Corto Flores",
+        "titulo": "Chaqueta Azul",
         "precio": "$27.00",
         "imagenes": [
-            "img/vestido-corto2.jpeg",
-            "https://via.placeholder.com/400x300/ffcc00",
-            "https://via.placeholder.com/400x300/ff9900"
+            "img/chaqueta-azul1.webp",
+            "img/chaqueta-azul2.webp",
+            "img/chaqueta-azul3.webp"
+            ]
+        },
+        {
+            "titulo": "Abrigo Blanco",
+            "precio": "$27.00",
+            "imagenes": [
+                "img/abrigo-blanco1.webp",
+                "img/abrigo-blanco2.webp",
+                "img/abrigo-blanco3.webp"
             ]
         }
 ]
