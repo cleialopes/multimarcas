@@ -98,17 +98,32 @@ nav {
     justify-content: center; 
     align-items: center; 
     padding: 60px;
-    background: linear-gradient(135deg, #4CAF50, #81C784);
+    background-color: #45e8e0; /* Color de fondo */
+    background-image:
+        url("https://www.transparenttextures.com/patterns/black-thread.png"), /* Dos texturas */ 
+      url("https://www.transparenttextures.com/patterns/perforated-white-leather.png");
+    background-repeat: repeat, repeat; /* Ambas texturas se repiten */
+    background-position: center, center; /* Posición inicial */
+    animation: moveTexture 60s linear infinite; /* Animación para mover la segunda textura */
     color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     gap: 20px;
 }
+/* Animación para mover la segunda textura */
+@keyframes moveTexture {
+    0% {
+      background-position: center, 0% 0%; /* Primera capa fija, segunda comienza en 0% */
+    }
+    100% {
+      background-position: center, 100% 100%; /* Primera capa fija, segunda termina en 100% */
+    }
+  }
 
 .form-container {
     width: 35%;
     max-width: 500px; /*Tamaño máximo del formulario */
     padding: 20px;
-    background: #fff;
+    background: #6eebe5;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     text-align: center;
@@ -118,9 +133,9 @@ nav {
 .form-container:hover {
     box-shadow: 0 0 25px 10px rgba(76, 175, 80, 0.9); /* Aumenta el brillo */
     transform: scale(1.05); /* Incrementa ligeramente el tamaño */
-    transition: all 0.3s ease-in-out; /* Suaviza la animación */
+    transition: all 0.5s ease-in-out; /* Suaviza la animación */
     border: 2px solid rgba(76, 175, 80, 0.9); /* Añade un borde brillante */
-    background: linear-gradient(135deg, #81C784, #66BB6A); /* Realza el fondo */
+    background: linear-gradient(135deg, #81c7ba, #669fbb); /* Realza el fondo */
 }
 
 @keyframes fadeIn {
