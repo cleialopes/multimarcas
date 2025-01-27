@@ -4,7 +4,26 @@ body {
     background-color: #f8f8f8;
     margin: 0;
     padding: 0;
+    background-color: #45e8e0; /* Color de fondo */
+    background-image:
+        url("https://www.transparenttextures.com/patterns/black-thread.png"), /* Dos texturas */ 
+      url("https://www.transparenttextures.com/patterns/perforated-white-leather.png");
+    background-repeat: repeat, repeat; /* Ambas texturas se repiten */
+    background-position: center, center; /* Posición inicial */
+    animation: moveTexture 60s linear infinite; /* Animación para mover la segunda textura */
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    gap: 20px;
 }
+/* Animación para mover la segunda textura */
+@keyframes moveTexture {
+    0% {
+      background-position: center, 0% 0%; /* Primera capa fija, segunda comienza en 0% */
+    }
+    100% {
+      background-position: center, 100% 100%; /* Primera capa fija, segunda termina en 100% */
+    }
+  }
 
 .container {
     width: 80%;
@@ -98,26 +117,7 @@ nav {
     justify-content: center; 
     align-items: center; 
     padding: 60px;
-    background-color: #45e8e0; /* Color de fondo */
-    background-image:
-        url("https://www.transparenttextures.com/patterns/black-thread.png"), /* Dos texturas */ 
-      url("https://www.transparenttextures.com/patterns/perforated-white-leather.png");
-    background-repeat: repeat, repeat; /* Ambas texturas se repiten */
-    background-position: center, center; /* Posición inicial */
-    animation: moveTexture 60s linear infinite; /* Animación para mover la segunda textura */
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    gap: 20px;
 }
-/* Animación para mover la segunda textura */
-@keyframes moveTexture {
-    0% {
-      background-position: center, 0% 0%; /* Primera capa fija, segunda comienza en 0% */
-    }
-    100% {
-      background-position: center, 100% 100%; /* Primera capa fija, segunda termina en 100% */
-    }
-  }
 
 .form-container {
     width: 35%;
