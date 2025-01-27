@@ -38,12 +38,12 @@
                 <li><a href="suscripcion.html">Entrar/Suscribirte</a></li>
                 <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
             </ul>
-            <form class="search-form">
-                <input type="text" id="search-input" placeholder="Buscar productos...">
-            </form>
         </nav>
     </header>
     <main>
+        <form class="search-form">
+            <input type="text" id="search-input" placeholder="Buscar productos...">
+        </form>
          <!-- Formulario de registro -->
         <section class="form-section">
             <div class="form-container">
@@ -75,13 +75,13 @@
                     <div style="position: relative;">
                         <label for="password">Contraseña:</label>
                         <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
-                        <span id="toggle-password" class="toggle-password" style="position: absolute; right: 15px; top: 65%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+                        <span id="toggle-password" class="toggle-password" style="position: absolute; right: 15px; top: 75%; transform: translateY(-50%); cursor: pointer;">👁️</span>
                     </div>
                     
                     <div style="position: relative;">
                         <label for="confirm-password">Confirmar contraseña:</label>
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Repite la contraseña" required>
-                        <span id="toggle-confirm-password" class="toggle-password" style="position: absolute; right: 15px; top: 65%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+                        <span id="toggle-confirm-password" class="toggle-password" style="position: absolute; right: 15px; top: 75%; transform: translateY(-50%); cursor: pointer;">👁️</span>
                     </div>
                     
                     <div class="terms">
@@ -101,6 +101,7 @@
                 </div>
             </div>
             <div class="form-image">
+                <h1 class="image-heading">Conoce nuestros productos destacados</h1> <!-- Encabezado añadido -->
                 <img src="img/vestido-midi1.jpeg" alt="Formulario de registro" />
             </div>
         </section>

@@ -2,6 +2,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
+    font-size: 16px;
+    line-height: 1.5;
     margin: 0;
     padding: 0;
     background-color: #45e8e0; /* Color de fondo */
@@ -115,7 +117,7 @@ nav {
     display: flex;
     flex-wrap: wrap; 
     justify-content: center; 
-    align-items: center; 
+    align-items: flex-start; 
     padding: 60px;
 }
 
@@ -162,6 +164,7 @@ nav {
     margin-bottom: 10px;
     font-weight: bold;
     color: #555;
+    text-align: left; /* Alinea el texto al lado izquierdo */
 }
 
 .form-container input,
@@ -210,6 +213,9 @@ nav {
     color: #666;
 }
 
+.terms label {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
 .terms input {
     margin-right: 10px;
 }
@@ -264,16 +270,55 @@ nav {
     background-color: #0D95E8;
     transform: scale(1.1);
 }
-.form-image {
-    width: 50%;
+
+.search-form {
     display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.search-form input {
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px; /* Ajusta el ancho según sea necesario */
+}
+
+.form-image {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-align: center; /* Centrar contenido dentro del contenedor */
+    margin-bottom: 10px; /* Espacio entre la sección y otros elementos */
+    width: 50%;
     justify-content: center;
     align-items: center;
     animation: fadeIn 1.2s ease;
+    top: 5%; /* Ajusta según la posición deseada */
 }
+    
+.image-heading {
+    position: relative;
+    margin-bottom: 15px;
+    text-align: center;
+    top: 5%; /* Ajusta según la posición deseada */
+    left: 35%;
+    transform: translate(-50%, -50%);
+    color: white; /* Color del texto */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mayor visibilidad */
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1.5em; /* Tamaño del texto */
+    z-index: 10; /* Asegura que el encabezado esté sobre la imagen */
+}
+
 .form-image img {
     max-width: 90%;
-    height: auto;
+    height: 700px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transform: rotate(-2deg);
@@ -356,4 +401,77 @@ footer p {
 
 .social-media a:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        padding: 10px 0;
+        text-align: center; /* Centra el contenido */
+    }
+
+    .logo img {
+        width: 150px; /* Tamaño reducido del logo */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center; /* Centra los enlaces */
+        gap: 10px;
+    }
+
+    .form-section {
+        flex-direction: column; /* Acomoda formulario e imagen verticalmente */
+        padding: 20px;
+    }
+
+    .form-container {
+        width: 90%; /* Ocupa casi todo el ancho */
+        padding: 15px;
+    }
+
+    .form-image img {
+        width: 80%;
+        margin-top: 20px;
+    }
+
+    #map {
+        height: 300px; /* Reduce el tamaño del mapa */
+    }
+}
+
+/* Para móviles (pantallas de hasta 480px) */
+@media screen and (max-width: 480px) {
+    header {
+        padding: 5px 0;
+    }
+
+    .logo img {
+        width: 120px; /* Logo más pequeño */
+    }
+
+    .nav-links {
+        font-size: 14px; /* Texto más pequeño */
+    }
+
+    .form-container {
+        width: 95%; /* Máximo ancho en móviles */
+    }
+
+    .form-container h1 {
+        font-size: 20px; /* Título más compacto */
+    }
+
+    .form-container label,
+    .form-container input,
+    .form-container button {
+        font-size: 14px; /* Ajuste del tamaño de fuentes */
+    }
+
+    .form-image img {
+        display: none; /* Oculta la imagen para ganar espacio */
+    }
+
+    #map {
+        height: 250px; /* Tamaño reducido del mapa */
+    }
 }

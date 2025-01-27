@@ -1,36 +1,23 @@
-var usuarios = [];
-async function getUsuarios() {
-    const response = await fetch('/suscripcion');
-    if (!response.ok) {
-        throw new Error('Error loading JSON');
-    }
-    // Cargar los usuarios al iniciar la página
-    usuarios = await response.json();
-}
-getUsuarios();
+const registrationForm = document.getElementById('registration-form');
 
-document.getElementById('registration-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const newUsuario = {
-        id: Date.now(), // Generar un ID único basado en el timestamp
-        name: formData.get('name'),
-        email: formData.get('email'),
-        password: formData.get('password'),
-        gender: formData.get('tipo'),
-        birthdate: formData.get('fecha'),
-    };
-    
-    await fetch('/api/new', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUsuario),
-      });
-    
-      //cargarUsuario();
-      e.target.reset();
+    registrationForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Evita que el formulario se envíe de manera predeterminada
+
+        const formData = new FormData(registrationForm);
+        const data = {};
+
+        // Convertir los datos del formulario en un objeto
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        // Convertir los datos a JSON
+        const jsonData = JSON.stringify(data, null, 2);
+
+        // Mostrar los datos JSON en la consola (opcional)
+        console.log('Datos del formulario en formato JSON:', jsonData);
     });
-
+    
 function initMap() {
     const location = { lat: 43.313675, lng: -1.981969 }; // Cambia por las coordenadas de tu tienda
     const map = new google.maps.Map(document.getElementById("map"), {
