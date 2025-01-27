@@ -384,83 +384,63 @@ footer p {
     object-fit: cover; /* Escala el video para cubrir toda la pantalla */
 }
 
-/* Media Query para dispositivos pequeños */
-@media (min-width: 768px) and (max-width: 1023px) {
-    .container {
-        width: 90%;
-    }
-
+/* Estilos para pantallas de tablets */
+@media (max-width: 1024px) {
     nav {
         flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
+        align-items: flex-start;
     }
 
     .nav-links {
-        flex-direction: row;
-        justify-content: flex-start;
-        width: auto;
+        flex-direction: column;
+        margin: 10px 0;
     }
 
     .nav-links li {
-        margin: 0 15px;
-    }
-
-    .search-form {
-        width: 50%;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .search-form input {
-        width: 70%;
-        padding: 8px 10px;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    .search-form button {
-        width: 25%;
-        padding: 8px;
-        font-size: 14px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .product-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        margin: 10px 0;
     }
 
     .product {
-        width: 30%; /* Ajusta el tamaño de los productos para tablet */
+        width: 45%; /* Ajustar el ancho de los productos */
+        margin: 10px auto;
     }
 
-    .product-thumbnails img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .add-more {
-        width: 50%; /* Botón más ancho pero no ocupa todo el espacio */
-        margin: 20px auto;
-    }
-
-    .cart {
-        font-size: 16px;
-    }
-
-    footer {
-        text-align: center;
-    }
-
-    footer p {
-        font-size: 14px;
+    .search-form input {
+        width: 80%; /* Hacer la barra de búsqueda más grande */
     }
 }
 
+/* Estilos para pantallas de móviles */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        margin: 10px 0;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .search-form input {
+        width: 100%; /* Barra de búsqueda ocupa todo el ancho */
+    }
+
+    .product {
+        width: 100%; /* Los productos ocupan todo el ancho disponible */
+        margin: 10px auto;
+    }
+
+    .video-background video {
+        object-fit: contain; /* Ajusta el video para pantallas más pequeñas */
+    }
+
+    footer {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
