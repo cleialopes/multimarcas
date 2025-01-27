@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Ropa</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/43d19060f3.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Header -->
@@ -32,15 +33,16 @@
                         <li><a href="#">Sobre Nosotros</a></li>
                     </ul>
                 </li>
+                <i class="fa-light fa-user"></i>
                 <li><a href="suscripcion.html">Entrar/Suscribirte</a></li>
                 <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
             </ul>
-            <form class="search-form">
-                <input type="text" id="search-input" placeholder="Buscar productos...">
-            </form>
         </nav>
     </header>
     <main>
+        <form class="search-form">
+            <input type="text" id="search-input" placeholder="Buscar productos...">
+        </form>
         <div class="video-background">
             <video autoplay loop muted playsinline>
                 <source src="img/video.mp4" type="video/mp4">
@@ -48,7 +50,7 @@
         </div>
         <!-- Contenedor principal -->
         <div class="container">
-            <h1>Tienda de Ropa</h1>
+            <!-- <h1>Tienda de Ropa</h1> -->
             <div id="product-row" class="product-row">
                 <!-- Aquí se agregarán los productos dinámicamente -->
             </div>

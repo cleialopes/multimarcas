@@ -38,6 +38,9 @@ nav {
     font-weight: bold;
 }
 
+.fa-light {
+    color: white;
+}
 .nav-links {
     list-style: none;
     display: flex;
@@ -95,6 +98,7 @@ nav {
 /* Formulario de búsqueda */
 .search-form {
     display: flex;
+    padding: 20px;
     align-items: center;
     justify-content: center;
     margin-left: 20px;
@@ -109,10 +113,10 @@ nav {
     max-width: 300px; /* Ajusta el ancho según sea necesario */
 }
 /* Productos */
-h1 {
+/* h1 {
     text-align: center;
     padding: 20px 0;
-}
+} */
 
 .product-row {
     display: flex;
@@ -138,7 +142,8 @@ h1 {
 
 .product img {
     max-width: 100%;
-    height: auto;
+    width: 250px;
+    height: 250px;
     display: block;
     margin: 10px auto;
     cursor: pointer;
@@ -203,7 +208,8 @@ h1 {
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
+    height: 500px;
+    width: 500px;
     max-width: 500px;
 }
 
