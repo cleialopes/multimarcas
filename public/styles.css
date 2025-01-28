@@ -41,9 +41,15 @@ nav {
 .fa-light {
     color: white;
 }
+
 .nav-links {
     list-style: none;
     display: flex;
+}
+
+.nav-links a i {
+    color: white;
+    margin-right: 5px; /* Espacio entre el ícono y el texto */
 }
 
 .nav-links li {
