@@ -1,24 +1,28 @@
 // llamar la función JSON
 var productos = [];
-fetch("ropa.json")
-.then ( response =>{ 
+async function getRopa() {
+    const response = await fetch('/ropa');
     if (!response.ok) {
         throw new Error('Error loading JSON');
     }
-    return response. json ();
-    })
-    .then (data => {
-        productos = data;
-        console.log (productos);
-        // Cargar los primeros productos al iniciar la página
-        addMoreProducts(); 
-        //renderCart ();
-    })
-    .catch(error => console.error(error));
+    // Cargar los primeros productos al iniciar la página
+    productos = await response.json();
+    addMoreProducts();
+}
+getRopa();
+
     let productosCargados = 0;
     const productosPorPagina = 4;
     let cartCount = 0; // Contador del carrito
     const cartItems = []; // Array para almacenar los productos en el carrito
+
+function addToCart(titulo, precio) {
+    cartCount++; // Incrementar el contador del carrito
+    document.getElementById('cart-count').innerText = cartCount; // Actualizar el contador en el header
+    
+    // Agregar producto al carrito
+    cartItems.push({ titulo, precio });
+}
 
     // Función para mostrar una notificación
 function showNotification(mensaje) {

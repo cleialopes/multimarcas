@@ -1,4 +1,37 @@
 
+//llamar al json de subscriptores
+var usuarios = [];
+async function getUsuarios() {
+    const response = await fetch('/suscriptores');
+    if (!response.ok) {
+        throw new Error('Error loading JSON');
+    }
+    // Cargar los usuarios al iniciar la página
+    usuarios = await response.json();
+
+}
+getUsuarios();
+
+document.getElementById('registration-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const newUsuario = {
+      id: Date.now(), // Genera el id en funcion de la hora actual
+      name: formData.get('name'),
+      email: formData.get('email'), // Enviar nombre del archivo para simplificar
+      password: formData.get('password'),
+    };
+
+    await fetch('/api/new', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newUsuario),
+    });
+  
+    //cargarUsuario();
+    e.target.reset();
+  });
+
 function initMap() {
     const location = { lat: 43.313675, lng: -1.981969 }; // Cambia por las coordenadas de tu tienda
     const map = new google.maps.Map(document.getElementById("map"), {
