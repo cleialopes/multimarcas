@@ -1,23 +1,4 @@
-const registrationForm = document.getElementById('registration-form');
 
-    registrationForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Evita que el formulario se envíe de manera predeterminada
-
-        const formData = new FormData(registrationForm);
-        const data = {};
-
-        // Convertir los datos del formulario en un objeto
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        // Convertir los datos a JSON
-        const jsonData = JSON.stringify(data, null, 2);
-
-        // Mostrar los datos JSON en la consola (opcional)
-        console.log('Datos del formulario en formato JSON:', jsonData);
-    });
-    
 function initMap() {
     const location = { lat: 43.313675, lng: -1.981969 }; // Cambia por las coordenadas de tu tienda
     const map = new google.maps.Map(document.getElementById("map"), {
