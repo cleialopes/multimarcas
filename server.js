@@ -27,12 +27,12 @@ app.get('/suscriptores', (req, res) => {
 app.post('/api/new', (req, res) => {
     const newUsuario = req.body;
     
-    fs.readFile('data/suscriptores.json', 'utf-8', (err, data) => {
+    fs.readFile('data/suscripcion.json', 'utf-8', (err, data) => {
       if (err) return res.status(500).send('Error leyendo el archivo');
       const usuarios = JSON.parse(data);
       usuarios.push(newUsuario);
       
-      fs.writeFile('data/suscriptores.json', JSON.stringify(usuarios, null, 2), (err) => {
+      fs.writeFile('data/suscripcion.json', JSON.stringify(usuarios, null, 2), (err) => {
         if (err) return res.status(500).send('Error escribiendo el archivo');
         res.send({ message: 'Usuario añadido' });
       });

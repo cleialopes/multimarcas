@@ -2,7 +2,7 @@
 //llamar al json de subscriptores
 var usuarios = [];
 async function getUsuarios() {
-    const response = await fetch('/suscriptores');
+    const response = await fetch('/suscripcion');
     if (!response.ok) {
         throw new Error('Error loading JSON');
     }
