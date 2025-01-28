@@ -1,5 +1,5 @@
 
-//llamar al json de subscriptores
+//llamar al json de suscripcion
 var usuarios = [];
 async function getUsuarios() {
     const response = await fetch('/suscripcion');
