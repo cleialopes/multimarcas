@@ -2,7 +2,7 @@ main {
     background-color: #45e8e0; /* Color de fondo */
     background-image:
         url("https://www.transparenttextures.com/patterns/black-thread.png"), /* Dos texturas */ 
-      url("https://www.transparenttextures.com/patterns/perforated-white-leather.png");
+        url("https://www.transparenttextures.com/patterns/perforated-white-leather.png");
     background-repeat: repeat, repeat; /* Ambas texturas se repiten */
     background-position: center, center; /* Posición inicial */
     animation: moveTexture 60s linear infinite; /* Animación para mover la segunda textura */
@@ -31,7 +31,7 @@ main {
 
 .form-container {
     width: 35%;
-    max-width: 500px; /*Tamaño máximo del formulario */
+    max-width: 500px;
     padding: 20px;
     background: #6eebe5;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -72,19 +72,17 @@ main {
     margin-bottom: 10px;
     font-weight: bold;
     color: #555;
-    text-align: left; /* Alinea el texto al lado izquierdo */
+    text-align: left;
 }
 
 .form-container input,
 .form-container select {
     width: 90%;
     padding: 10px;
-    /* margin-bottom: 20px; */
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s;
-    /* font-size: 16px; */
 }
 
 .form-container input:focus,
@@ -122,7 +120,7 @@ main {
 }
 
 .terms label {
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    white-space: nowrap;
 }
 .terms input {
     margin-right: 10px;
@@ -183,28 +181,28 @@ main {
     display: flex;
     flex-direction: column;
     position: relative;
-    text-align: center; /* Centrar contenido dentro del contenedor */
-    margin-bottom: 10px; /* Espacio entre la sección y otros elementos */
+    text-align: center;
+    margin-bottom: 10px;
     width: 50%;
     justify-content: center;
     align-items: center;
     animation: fadeIn 1.2s ease;
-    top: 5%; /* Ajusta según la posición deseada */
+    top: 5%;
 }
     
 .image-heading {
     position: relative;
     margin-bottom: 15px;
     text-align: center;
-    top: 5%; /* Ajusta según la posición deseada */
+    top: 5%; 
     left: 35%;
     transform: translate(-50%, -50%);
-    color: white; /* Color del texto */
+    color: white;
     background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mayor visibilidad */
     padding: 10px 20px;
     border-radius: 10px;
-    font-size: 1.5em; /* Tamaño del texto */
-    z-index: 10; /* Asegura que el encabezado esté sobre la imagen */
+    font-size: 1.5em;
+    z-index: 10; 
 }
 
 .form-image img {
@@ -226,30 +224,31 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     object-fit: cover;
 }
+
 /* estilo para mensaje a la hora de subir foto de perfil */
 .photo-input-container {
-    position: relative; /* Necesario para posicionar el tooltip */
-    display: inline-block; /* Asegura que el tooltip se ajuste al contenido */
+    position: relative;
+    display: inline-block; 
 }
 
 .tooltip {
-    display: none; /* Oculta el mensaje inicialmente */
+    display: none; 
     position: absolute;
-    top: 100%; /* Aparece debajo del input */
+    top: 100%; 
     left: 0;
-    background-color: #4CAF50; /* Color de fondo del tooltip */
+    background-color: #4CAF50;
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 12px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    white-space: nowrap; /* Evita que el texto se divida */
+    white-space: nowrap; 
     z-index: 1000;
-    margin-top: 5px; /* Espacio entre el input y el tooltip */
+    margin-top: 5px;
 }
 
 #photo:hover + .tooltip {
-    display: block; /* Muestra el tooltip al pasar el ratón */
+    display: block;
 }
 
 /* Estilos del mapa */

@@ -49,11 +49,11 @@ nav {
 
 .nav-links a i {
     color: white;
-    margin-right: 5px; /* Espacio entre el ícono y el texto */
+    margin-right: 5px; 
 }
 
 .nav-links li {
-    position: relative; /* Necesario para dropdown */
+    position: relative; 
     margin-left: 20px;
 }
 
@@ -82,7 +82,7 @@ nav {
     border: 1px solid #ddd;
     border-radius: 5px;
     width: 100%;
-    max-width: 300px; /* Ajusta el ancho según sea necesario */
+    max-width: 300px; 
 }
 
 /* Dropdown */
