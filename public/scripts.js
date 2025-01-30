@@ -16,15 +16,20 @@ const productosPorPagina = 4;
 let cartCount = 0; // Contador del carrito
 const cartItems = []; // Array para almacenar los productos en el carrito
 
-function addToCart(titulo, precio) {
+function addToCart(titulo, precio, talla) {
+    if (!talla) {
+        alert('Por favor, selecciona una talla.');
+        return;
+    }
+
     cartCount++; // Incrementar el contador del carrito
     document.getElementById('cart-count').innerText = cartCount; // Actualizar el contador en el header
 
     // Agregar producto al carrito
-    cartItems.push({ titulo, precio });
+    cartItems.push({ titulo, precio, talla });
 
     // Mostrar la notificación
-    showNotification(`"${titulo}" fue añadido al carrito.`);
+    showNotification(`"${titulo}" (Talla: ${talla}) fue añadido al carrito.`);
 }
 
 function showNotification(mensaje) {
@@ -63,7 +68,7 @@ function showCart() {
             const itemElement = document.createElement('div');
             itemElement.classList.add('item');
             itemElement.innerHTML = `
-                <h3>${item.titulo}</h3>
+                <h3>${item.titulo} (Talla: ${item.talla})</h3>
                 <p>Precio: ${item.precio}</p>
                 <button onclick="removeFromCart(${index})">Eliminar</button>
             `;
@@ -181,6 +186,8 @@ function addMoreProducts() {
         const productElement = document.createElement('div');
         productElement.classList.add('product');
 
+        const tallasOptions = Object.keys(producto.tallas).map(talla => `<option value="${talla}">${talla}</option>`).join('');
+
         productElement.innerHTML = `
             <div class="product-images">
                 <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo} Imagen Principal" onclick="expandImage(this)">
@@ -193,7 +200,11 @@ function addMoreProducts() {
             <div class="product-info">
                 <h2 class="product-title">${producto.titulo}</h2>
                 <p class="product-price">${producto.precio}</p>
-                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}')">Añadir al Carrito</button>
+                <select class="select-talla" id="select-talla-${i}">
+                    <option value="" disabled selected>Selecciona una talla</option>
+                    ${tallasOptions}
+                </select>
+                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', document.getElementById('select-talla-${i}').value)">Añadir al Carrito</button>
             </div>
         `;
 
@@ -206,3 +217,4 @@ function addMoreProducts() {
         document.querySelector('.add-more').style.display = 'none';
     }
 }
+

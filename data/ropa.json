@@ -6,7 +6,12 @@
             "img/vestido-corto1.webp",
             "img/vestido-corto2.webp",
             "img/vestido-corto3.webp"
-        ]
+        ],
+        "tallas": {
+            "S": 10,
+            "M": 15,
+            "L": 7
+        }
     },
     {
         "titulo": "Vestido Midi",
@@ -15,7 +20,12 @@
             "img/vestido-rojo1.webp",
             "img/vestido-rojo2.webp",
             "img/vestido-rojo3.webp"
-        ]
+        ],
+        "tallas": {
+            "S": 8,
+            "M": 12,
+            "L": 6
+        }
     },
     {
         "titulo": "Vestido Fiesta",
@@ -24,7 +34,12 @@
             "img/vestido-elegante1.png",
             "img/vestido-elegante2.png",
             "img/vestido-elegante3.webp"
-        ]
+        ],
+        "tallas": {
+            "S": 5,
+            "M": 7,
+            "L": 3
+        }
     },
     {
         "titulo": "Vestido Primavera",
@@ -33,7 +48,12 @@
             "img/vestido_verde1.png",
             "img/vestido_verde2.png",
             "img/vestido_verde3.png"
-        ]
+        ],
+        "tallas": {
+            "S": 9,
+            "M": 11,
+            "L": 4
+        }
     },
     {
         "titulo": "Pantalon Lazos",
@@ -42,7 +62,13 @@
             "img/pantalon-lazo3.jpeg",
             "img/pantalon-lazo2.png",
             "img/pantalon-lazo1.jpg"
-        ]
+        ],
+        "tallas": {
+            "S": 6,
+            "M": 10,
+            "L": 8,
+            "XL": 4
+        }
     },
     {
         "titulo": "Pantalon Ancho",
@@ -51,7 +77,12 @@
             "img/pantalon_1.png",
             "img/pantalon_2.png",
             "img/pantalon_3.png"
-        ]
+        ],
+        "tallas": {
+            "S": 10,
+            "M": 14,
+            "L": 12
+        }
     },
     {
         "titulo": "Pantalon Drapeado",
@@ -60,7 +91,12 @@
             "img/pantalon_blanco1.png",
             "img/pantalon_blanco2.png",
             "img/pantalon_blanco3.png"
-        ]
+        ],
+        "tallas": {
+            "S": 7,
+            "M": 9,
+            "L": 5
+        }
     },
     {
         "titulo": "Pantalon Campana",
@@ -69,7 +105,12 @@
             "img/pantalon-campana1.webp",
             "img/pantalon-campana2.webp",
             "img/pantalon-campana3.webp"
-        ]
+        ],
+        "tallas": {
+            "M": 10,
+            "L": 6,
+            "XL": 3
+        }
     },
     {
         "titulo": "Camisa Rayas",
@@ -78,7 +119,12 @@
             "img/camisa-rayas1.webp",
             "img/camisa-rayas2.webp",
             "img/camisa-rayas3.webp"
-        ]
+        ],
+        "tallas": {
+            "S": 15,
+            "M": 20,
+            "L": 10
+        }
     },
     {
         "titulo": "Camisa Corazones",
@@ -87,16 +133,12 @@
             "img/camisa_corazones1.png",
             "img/camisa_corazones2.png",
             "img/camisa_corazones3.png"
-        ]
-    },
-    {
-        "titulo": "Camisa Rayas",
-        "precio": "€27.00",
-        "imagenes": [
-            "img/camisa-blanca1.webp",
-            "img/camisa-blanca2.webp",
-            "img/camisa-blanca3.webp"
-        ]
+        ],
+        "tallas": {
+            "S": 10,
+            "M": 10,
+            "L": 5
+        }
     },
     {
         "titulo": "Camisa Azul",
@@ -105,7 +147,12 @@
             "img/camisa_azul1.png",
             "img/camisa_azul2.png",
             "img/camisa_azul3.png"
-        ]
+        ],
+        "tallas": {
+            "S": 8,
+            "M": 12,
+            "L": 6
+        }
     },
     {
         "titulo": "Chaqueta Azul",
@@ -114,7 +161,12 @@
             "img/chaqueta-azul1.webp",
             "img/chaqueta-azul2.webp",
             "img/chaqueta-azul3.webp"
-            ]
+        ],
+        "tallas": {
+            "S": 6,
+            "M": 10,
+            "L": 5
+        }
     },
     { 
         "titulo": "Abrigo Verde",
@@ -123,7 +175,12 @@
             "img/abrigo_musgo1.png",
             "img/abrigo_musgo2.png",
             "img/abrigo_musgo3.png"
-        ]
+        ],
+        "tallas": {
+            "S": 4,
+            "M": 8,
+            "L": 6
+        }
     },
     { 
         "titulo": "Abrigo Rojo",
@@ -132,7 +189,12 @@
             "img/abrigo_rojo1.png",
             "img/abrigo_rojo2.png",
             "img/abrigo_rojo3.png"
-        ]
+        ],
+        "tallas": {
+            "S": 7,
+            "M": 9,
+            "L": 4
+        }
     },
     {
         "titulo": "Abrigo Blanco",
@@ -141,6 +203,11 @@
             "img/abrigo-blanco1.webp",
             "img/abrigo-blanco2.webp",
             "img/abrigo-blanco3.webp"
-        ]
+        ],
+        "tallas": {
+            "S": 5,
+            "M": 7,
+            "L": 3
+        }
     }
 ]
