@@ -2,7 +2,7 @@
 //llamar al json de suscripcion
 var usuarios = [];
 async function getUsuarios() {
-    const response = await fetch('/suscripcion');
+    const response = await fetch('/suscriptores');
     if (!response.ok) {
         throw new Error('Error loading JSON');
     }
@@ -11,26 +11,47 @@ async function getUsuarios() {
 
 }
 getUsuarios();
-
 document.getElementById('registration-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+    // Crea el FormData a partir del formulario
     const formData = new FormData(e.target);
-    const newUsuario = {
-      id: Date.now(), // Genera el id en funcion de la hora actual
-      name: formData.get('name'),
-      email: formData.get('email'), // Enviar nombre del archivo para simplificar
-      password: formData.get('password'),
-    };
-
-    await fetch('/api/new', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUsuario),
-    });
-  
-    //cargarUsuario();
-    e.target.reset();
+    try {
+      const response = await fetch('/upload', {
+        method: 'POST',
+        body: formData // Envía el FormData directamente
+      });
+      if (response.ok) {
+        //document.getElementById('mensaje').textContent = 'Alumno añadido correctamente.';
+        setTimeout(() => {
+          window.location.href = 'index.html'; // Redirige al listado de alumnos.
+        }, 2000);
+      } else {
+        const error = await response.text();
+       // document.getElementById('mensaje').textContent = `Error al añadir el alumno: ${error}`;
+      }
+    } catch (err) {
+      //document.getElementById('mensaje').textContent = `Error de conexión: ${err.message}`;
+    }
   });
+// document.getElementById('registration-form').addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     const formData = new FormData(e.target);
+//     const newUsuario = {
+//       id: Date.now(), // Genera el id en funcion de la hora actual
+//       name: formData.get('name'),
+//       email: formData.get('email'), // Enviar nombre del archivo para simplificar
+//       password: formData.get('password'),
+//     };
+
+//     await fetch('/api/new', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(newUsuario),
+//     });
+  
+//     //cargarUsuario();
+//     e.target.reset();
+//   });
 
 function initMap() {
     const location = { lat: 43.313675, lng: -1.981969 }; // Cambia por las coordenadas de tu tienda

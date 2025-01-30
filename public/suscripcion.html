@@ -48,10 +48,10 @@
         <section class="form-section">
             <div class="form-container">
                 <h1><i class="fa-regular fa-user"></i></i>Regístrate</h1>
-                <form action="POST" id="registration-form">
+                <form enctype="multipart/form-data" id="registration-form">
                     <div class="photo-input-container">
                         <label for="photo">Tu Imagen de perfil:</label>
-                        <input type="file" id="photo" name="photo" accept=".png">
+                        <input type="file" id="photo" name="photo" accept="image/*">
                         <span class="tooltip">Solo se permite fotos en formato PNG</span>
                         <img id="preview" src="" alt="Previsualización de tu imagen" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 10px;"/>
                     </div>
@@ -63,7 +63,7 @@
                     <input type="date" id="birthdate" name="fecha" required>
 
                     <label for="gender">Género:</label>
-                    <select id="gender" name="tipo">
+                    <select id="gender" name="gender">
                         <option value="H">Hombre</option>
                         <option value="M">Mujer</option>
                         <option value="o">Otro</option>

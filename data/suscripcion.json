@@ -1,8 +1,12 @@
 [
   {
-    "id": 1738055760696,
-    "name": "cleia lopes lima",
+    "id": 1738235279096,
+    "photo": "/uploads/1738235279087-641767206.png",
+    "name": "Jozicleia Lopes",
+    "fecha": "1998-07-15",
+    "gender": "M",
     "email": "cleialopes530@gmail.com",
-    "password": "123456"
+    "password": "123456",
+    "terms": "on"
   }
 ]
