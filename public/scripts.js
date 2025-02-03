@@ -16,7 +16,9 @@ const productosPorPagina = 4;
 let cartCount = 0; // Contador del carrito
 const cartItems = []; // Array para almacenar los productos en el carrito
 
-function addToCart(titulo, precio, talla) {
+function addToCart(titulo, precio, productIndex) {
+    const talla = selectedTallas[productIndex]; // Obtener la talla seleccionada para el producto específico
+
     if (!talla) {
         alert('Por favor, selecciona una talla.');
         return;
@@ -30,7 +32,7 @@ function addToCart(titulo, precio, talla) {
 
     // Mostrar la notificación
     showNotification(`"${titulo}" (Talla: ${talla}) fue añadido al carrito.`);
-}
+}   
 
 function showNotification(mensaje) {
     let notificationContainer = document.getElementById('notification-container');
@@ -186,7 +188,10 @@ function addMoreProducts() {
         const productElement = document.createElement('div');
         productElement.classList.add('product');
 
-        const tallasOptions = Object.keys(producto.tallas).map(talla => `<option value="${talla}">${talla}</option>`).join('');
+        // Generar botones para cada talla
+        const tallasButtons = Object.keys(producto.tallas).map(talla => `
+            <button class="talla-button" onclick="selectTalla(${i}, '${talla}')">${talla}</button>
+        `).join('');
 
         productElement.innerHTML = `
             <div class="product-images">
@@ -200,11 +205,10 @@ function addMoreProducts() {
             <div class="product-info">
                 <h2 class="product-title">${producto.titulo}</h2>
                 <p class="product-price">${producto.precio}</p>
-                <select class="select-talla" id="select-talla-${i}">
-                    <option value="" disabled selected>Selecciona una talla</option>
-                    ${tallasOptions}
-                </select>
-                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', document.getElementById('select-talla-${i}').value)">Añadir al Carrito</button>
+                <div class="tallas-container">
+                    ${tallasButtons}
+                </div>
+                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})">Añadir al Carrito</button>
             </div>
         `;
 
@@ -217,4 +221,29 @@ function addMoreProducts() {
         document.querySelector('.add-more').style.display = 'none';
     }
 }
+
+// Objeto para almacenar las tallas seleccionadas
+const selectedTallas = {};
+
+// Función para seleccionar una talla
+function selectTalla(productIndex, talla) {
+    selectedTallas[productIndex] = talla; // Guardar la talla seleccionada para el producto específico
+    highlightSelectedTalla(productIndex, talla); // Resaltar la talla seleccionada
+}
+
+// Función para resaltar la talla seleccionada
+function highlightSelectedTalla(productIndex, talla) {
+    // Seleccionar todos los botones de tallas del producto específico
+    const tallaButtons = document.querySelectorAll(`#product-row .product:nth-child(${productIndex + 1}) .talla-button`);
+    
+    // Resaltar la talla seleccionada y desresaltar las demás
+    tallaButtons.forEach(button => {
+        if (button.textContent === talla) {
+            button.classList.add('selected-talla'); // Añadir clase para resaltar
+        } else {
+            button.classList.remove('selected-talla'); // Quitar resaltado de otras tallas
+        }
+    });
+}
+
 

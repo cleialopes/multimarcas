@@ -127,6 +127,20 @@
         }
     },
     {
+        "titulo": "Camisa Perlas",
+        "precio": "€27.00",
+        "imagenes": [
+            "img/camisa-blanca1.webp",
+            "img/camisa-blanca2.webp",
+            "img/camisa-blanca3.webp"
+        ],
+        "tallas": {
+            "S": 8,
+            "M": 12,
+            "L": 6
+        }
+    },
+    {
         "titulo": "Camisa Corazones",
         "precio": "€25.00",
         "imagenes": [
