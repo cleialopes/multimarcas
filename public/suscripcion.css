@@ -189,6 +189,13 @@ svg {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.contact-form:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(76, 175, 80, 0.9); /* Brillo blanco y verde */
+    transition: all 0.10s ease-in-out; /*Suaviza la animación */
+    border: 2px solid rgba(76, 175, 80, 0.9); /* Añade un borde brillante */
+    background: linear-gradient(135deg, #81c7ba, #669fbb); /* Realza el fondo */
+}
+
 .contact-form h2 {
     margin-bottom: 15px;
     font-size: 20px;
