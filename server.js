@@ -11,6 +11,7 @@ app.use(express.static('public')); //carpeta con los archivos estáticos
 // Subir imagenes
 const multer = require('multer');
 const path = require('path');
+const db = require('./database');
 // Define la ruta completa a la carpeta 'uploads'
 const uploadDir = path.join(__dirname, 'uploads');
 // Verifica si la carpeta existe y créala si no está presente
@@ -45,36 +46,38 @@ const storage = multer.diskStorage({
   }
 });
 
-app.post("/upload", upload.single('photo'), (req, res) => {
-  const { name, fecha, gender, email, password, terms } = req.body;
+app.post('/api/register', async(req,res) => {
+  try {
+    const { name, telefono, email, password } = req.body;
 
-  if (!req.file) {
-    return res.status(400).send('No se ha subido ninguna foto.');
+    db.get('SELECT * FROM users WHERE email = ?', [email], (err, row) => {
+      if (err) throw err;{
+        // return res.status(500).send('Error en la base de datos');
+      }
+
+      // Verificar si el correo electrónico ya está registrado
+      if (row) {
+        return res.status(400).send('El correo electrónico ya está registrado');
+      }
+      
+      // hash de la contraseña
+      const passwordHash = bcrypt.hash(password, saltrounds);
+      // Insertar un nuevo usuario
+      db.run(
+        'INSERT INTO users (name, telefono, email, password) VALUES (?, ?, ?, ?)',
+        [name, telefono, email, password],
+        (err) => {
+          if (err) {
+            return res.status(500).send('Error en la base de datos');
+          }
+          res.send('Usuario registrado correctamente');
+        }
+      );
+    });
+  } catch (err) {
+    res.status(500).send('Error en el servidor');
   }
-
-  // Crea un nuevo usuario
-  const newUser = {
-    id: Date.now(),
-    photo: `/uploads/${req.file.filename}`,
-    name,
-    fecha,
-    gender,
-    email,
-    password,
-    terms
-  };
-
-  // Guarda la información en un archivo JSON
-  const filePath = './data/suscripcion.json';
-  const usuarios = fs.existsSync(filePath)
-    ? JSON.parse(fs.readFileSync(filePath))
-    : [];
-  usuarios.push(newUser);
-  fs.writeFileSync(filePath, JSON.stringify(usuarios, null, 2));
-
-  res.status(200).send('Alumno añadido correctamente.');
-
-});
+})
 
 app.get('/ropa', (req, res) => {
     fs.readFile('data/ropa.json', 'utf8', (err, data) => {
@@ -83,29 +86,6 @@ app.get('/ropa', (req, res) => {
     }); 
 });
 
-app.get('/suscriptores', (req, res) => {
-    fs.readFile('data/suscripcion.json', 'utf8', (err, data) => {
-        if (err) return res.status(500).send('Error al leer el archivo');
-        res.send(JSON.parse(data));
-    }); 
-});
-
-// Añadir un nuevo usuario suscrito
-app.post('/api/new', (req, res) => {
-    const newUsuario = req.body;
-    
-    fs.readFile('data/suscripcion.json', 'utf-8', (err, data) => {
-      if (err) return res.status(500).send('Error leyendo el archivo');
-      const usuarios = JSON.parse(data);
-      usuarios.push(newUsuario);
-      
-      fs.writeFile('data/suscripcion.json', JSON.stringify(usuarios, null, 2), (err) => {
-        if (err) return res.status(500).send('Error escribiendo el archivo');
-        res.send({ message: 'Usuario añadido' });
-      });
-    });
-  });
-
-  app.listen(3000, () => {
-    console.log('Server started on http://localhost:3000');
+app.listen(3000, () => {
+  console.log('Server started on http://localhost:3000');
 });
