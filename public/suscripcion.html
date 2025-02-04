@@ -46,70 +46,56 @@
         </form>
          <!-- Formulario de registro -->
         <section class="form-section">
-            <div class="form-container">
-                <h1><i class="fa-regular fa-user"></i></i>Regístrate</h1>
-                <form enctype="multipart/form-data" id="registration-form">
-                    <div class="photo-input-container">
-                        <label for="photo">Tu Imagen de perfil:</label>
-                        <input type="file" id="photo" name="photo" accept="image/*">
-                        <span class="tooltip">Solo se permite fotos en formato PNG</span>
-                        <img id="preview" src="" alt="Previsualización de tu imagen" style="display:none; width: 150px; height: 150px; margin-top: 10px; border-radius: 10px;"/>
-                    </div>
-
-                    <label for="name">Nombre completo:</label>
-                    <input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo" required>
-
-                    <label for="fecha">Fecha de Nacimiento:</label>
-                    <input type="date" id="birthdate" name="fecha" required>
-
-                    <label for="gender">Género:</label>
-                    <select id="gender" name="gender">
-                        <option value="H">Hombre</option>
-                        <option value="M">Mujer</option>
-                        <option value="o">Otro</option>
-                    </select>
-
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
-
-                    <div style="position: relative;">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
-                        <span id="toggle-password" class="toggle-password" style="position: absolute; right: 15px; top: 75%; transform: translateY(-50%); cursor: pointer;">👁️</span>
-                    </div>
-                    
-                    <div style="position: relative;">
-                        <label for="confirm-password">Confirmar contraseña:</label>
-                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Repite la contraseña" required>
-                        <span id="toggle-confirm-password" class="toggle-password" style="position: absolute; right: 15px; top: 75%; transform: translateY(-50%); cursor: pointer;">👁️</span>
-                    </div>
-                    
-                    <div class="terms">
+            <div class="void" id="void">
+			<div class="crop">
+			<ul class="ul-carrusel" id="card-list" style="--count: 6;">
+				<li class="li-carrusel"><div class="card"><a href=""><span class="model-name">Coco Chanel</span><span> No es la apariencia, es la esencia. No es el dinero, es la educación. No es la ropa, es la clase.</span></a></div></li>
+				<li class="li-carrusel"><div class="card"><a href=""><span class="model-name">Giorgio Armani</span><span> La elegancia no consiste en ser notado, sino en ser recordado.</span></a></div></li>
+				<li class="li-carrusel"><div class="card"><a href=""><span class="model-name">Coco Chanel</span><span> El lujo no depende de la riqueza, sino de la ausencia de vulgaridad. </span></a></div></li>
+				<li class="li-carrusel"><div class="card"><a href=""><span class="model-name">Oscar Wilde</span><span>Nada tan peligroso como ser demasiado moderno. Corre uno el riesgo de quedarse súbitamente anticuado.</span></a></div></li>
+				<li class="li-carrusel"><div class="card"><a href=""><span class="model-name">Carolina Herrera</span><span>No es fácil hacer que algo parezca simple. La sencillez es mucho más difícil que la complejidad.</span></a></div></li>
+				<li class="li-carrusel"><div class="card"><a href=""><span class="model-name">Conde de Chesterfield</span><span>El estilo es el ropaje del pensamiento; y un pensamiento bien vestido, como un hombre bien vestido, se presenta mejor.</span></a></div></li>
+			</ul>
+			<div class="last-circle"></div>
+			<div class="second-circle"></div>
+			</div>
+			<div class="mask">
+                <form class="contact-form" enctype="multipart/form-data" id="registration-form">
+                    <h1><i class="fa-regular fa-user"></i></i>Regístrate</h1>
+					<label for="name">Nombre completo:</label>
+					<input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo" required>
+		
+					<label for="telefono">Número de Teléfono:</label>
+					<input type="tel" id="tel" name="telefono" placeholder="Ej: +34 123 456 789" required pattern="\+34\s[0-9]{3}\s[0-9]{3}\s[0-9]{3}">
+			
+					<label for="email">Correo electrónico:</label>
+					<input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
+			
+					<label for="password">Contraseña:</label>
+					<input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
+		
+					<label for="confirm-password">Confirmar contraseña:</label>
+					<input type="password" id="confirm-password" name="confirm-password" placeholder="Repite la contraseña" required>
+		
+					<div class="terms">
                         <input type="checkbox" id="terms" name="terms" required>
                         <label for="terms">Acepto los <a href="#">términos y condiciones</a></label>
                     </div>
-
-                    <button type="submit">Registrarse</button>
-                </form>
-        
-                <p>¿Ya tienes una cuenta? <a href="#">Inicia sesión aquí</a></p>
-        
-                <div class="social-login">
-                    <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="google"><i class="fab fa-google"></i></a>
-                    <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="form-image">
-                <h1 class="image-heading">Conoce nuestros productos destacados</h1> <!-- Encabezado añadido -->
-                <div class="gallery">
-                    <img src="https://picsum.photos/id/1004/400/400" alt="a lovely kiss in the night">
-                    <img src="https://picsum.photos/id/1013/400/400" alt="a women inside a car">
-                    <img src="https://picsum.photos/id/1066/400/400" alt="a baby">
-                    <img src="https://picsum.photos/id/325/400/400" alt="a girl in the forest">
-                    <img src="https://picsum.photos/id/65/400/400" alt="a girl">
-                  </div>
-            </div>
+			
+					<div>
+						<button type="submit" class="boton-estilo">Registrarse</button>
+						<button type="submit" class="boton-estilo">Entrar</button>
+					  </div>
+		
+					<div class="social-login">
+						<a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+						<a href="#" class="google"><i class="fab fa-google"></i></a>
+						<a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+					</div>
+				</form>
+			</div>
+			<div class="center-circle"></div>
+		<div>       
         </section>
         <!-- Google Maps -->
         <section>
