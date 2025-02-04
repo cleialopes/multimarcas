@@ -71,11 +71,17 @@
 					<label for="email">Correo electrónico:</label>
 					<input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
 			
-					<label for="password">Contraseña:</label>
-					<input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
-		
-					<label for="confirm-password">Confirmar contraseña:</label>
-					<input type="password" id="confirm-password" name="confirm-password" placeholder="Repite la contraseña" required>
+					<div style="position: relative;">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
+                        <span id="toggle-password" class="toggle-password" style="position: absolute; right: 15px; top: 75%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+                    </div>
+                    
+                    <div style="position: relative;">
+                        <label for="confirm-password">Confirmar contraseña:</label>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Repite la contraseña" required>
+                        <span id="toggle-confirm-password" class="toggle-password" style="position: absolute; right: 15px; top: 75%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+                    </div>
 		
 					<div class="terms">
                         <input type="checkbox" id="terms" name="terms" required>
@@ -93,9 +99,21 @@
 						<a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
 					</div>
 				</form>
-			</div>
-			<div class="center-circle"></div>
-		<div>       
+                <div id="login-form" class="contact-form" style="display: none;">
+                    <h1><i class="fa-regular fa-user"></i> Iniciar Sesión</h1>
+                    <label for="login-email">Correo electrónico:</label>
+                    <input type="email" id="login-email" name="login-email" placeholder="Ingresa tu correo" required>
+
+                    <label for="login-password">Contraseña:</label>
+                    <input type="password" id="login-password" name="login-password" placeholder="Ingresa tu contraseña" required>
+                    
+                    <button type="submit" class="boton-estilo">Iniciar Sesión</button>
+                    
+                    <p>¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+                </div>
+                </div>
+                <div class="center-circle"></div>
+            <div>       
         </section>
         <!-- Google Maps -->
         <section>
