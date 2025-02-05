@@ -11,7 +11,9 @@
             "S": 10,
             "M": 15,
             "L": 7
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Vestido Midi",
@@ -25,7 +27,9 @@
             "S": 8,
             "M": 12,
             "L": 6
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Vestido Fiesta",
@@ -39,7 +43,9 @@
             "S": 5,
             "M": 7,
             "L": 3
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Vestido Primavera",
@@ -53,7 +59,9 @@
             "S": 9,
             "M": 11,
             "L": 4
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Pantalon Lazos",
@@ -68,7 +76,9 @@
             "M": 10,
             "L": 8,
             "XL": 4
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Pantalon Ancho",
@@ -82,7 +92,9 @@
             "S": 10,
             "M": 14,
             "L": 12
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Pantalon Drapeado",
@@ -96,7 +108,9 @@
             "S": 7,
             "M": 9,
             "L": 5
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Pantalon Campana",
@@ -110,7 +124,9 @@
             "M": 10,
             "L": 6,
             "XL": 3
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Camisa Rayas",
@@ -124,7 +140,9 @@
             "S": 15,
             "M": 20,
             "L": 10
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Camisa Perlas",
@@ -138,7 +156,9 @@
             "S": 8,
             "M": 12,
             "L": 6
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Camisa Corazones",
@@ -152,7 +172,9 @@
             "S": 10,
             "M": 10,
             "L": 5
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Camisa Azul",
@@ -166,7 +188,9 @@
             "S": 8,
             "M": 12,
             "L": 6
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Chaqueta Azul",
@@ -180,7 +204,9 @@
             "S": 6,
             "M": 10,
             "L": 5
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     { 
         "titulo": "Abrigo Verde",
@@ -194,7 +220,9 @@
             "S": 4,
             "M": 8,
             "L": 6
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     { 
         "titulo": "Abrigo Rojo",
@@ -208,7 +236,9 @@
             "S": 7,
             "M": 9,
             "L": 4
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     },
     {
         "titulo": "Abrigo Blanco",
@@ -222,6 +252,8 @@
             "S": 5,
             "M": 7,
             "L": 3
-        }
+        },
+        "descripcion": "Vestido corto ideal para verano, hecho de algodón ligero.",
+        "cuidados": "Lavar a mano con agua fría. No usar secadora."
     }
 ]
