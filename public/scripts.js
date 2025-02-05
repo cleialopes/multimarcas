@@ -129,16 +129,45 @@ function changeImage(mainImageId, newSrc) {
     document.getElementById(mainImageId).src = newSrc;
 }
 
-function expandImage(img) {
+function expandImage(img, index) {
     const modal = document.getElementById("imageModal");
     const expandedImg = document.getElementById("expandedImg");
-    modal.style.display = "block";
+    const modalTitle = document.getElementById("modal-title");
+    const modalPrice = document.getElementById("modal-price");
+    const modalDescription = document.getElementById("modal-description");
+    const modalCare = document.getElementById("modal-care");
+
+    // Verifica que el índice esté dentro del rango de productos cargados
+    if (!productos || productos.length === 0 || index >= productos.length) {
+        console.error("Error: Producto no encontrado en la lista.");
+        return;
+    }
+
+    // Obtener la información del producto
+    const producto = productos[index];
+
+    // Verifica que el modal y sus elementos existen
+    if (!modal || !expandedImg || !modalTitle || !modalPrice || !modalDescription || !modalCare) {
+        console.error("Error: Elementos del modal no encontrados.");
+        return;
+    }
+
+    // Asignar la información al modal
     expandedImg.src = img.src;
+    modalTitle.textContent = producto.titulo;
+    modalPrice.textContent = `Precio: ${producto.precio}`;
+    modalDescription.textContent = producto.descripcion ? `Descripción: ${producto.descripcion}` : "Sin descripción.";
+    modalCare.textContent = producto.cuidados ? `Cuidados: ${producto.cuidados}` : "No se especifican cuidados.";
+
+    // Mostrar el modal
+    modal.style.display = "block";
 }
 
+// Función para cerrar el modal
 function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
+
 
 function checkout() {
     alert("Funcionalidad de finalizar compra aún no implementada.");
@@ -195,7 +224,7 @@ function addMoreProducts() {
 
         productElement.innerHTML = `
             <div class="product-images">
-                <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo} Imagen Principal" onclick="expandImage(this)">
+                <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo}" onclick="expandImage(this, ${i})">
                 <div class="product-thumbnails">
                     <img onclick="changeImage('main-image-${i}', '${producto.imagenes[0]}')" src="${producto.imagenes[0]}" alt="Imagen 1">
                     <img onclick="changeImage('main-image-${i}', '${producto.imagenes[1]}')" src="${producto.imagenes[1]}" alt="Imagen 2">

@@ -100,11 +100,30 @@
 }
 
 /* Modal */
+.modal-info {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.modal-info h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.modal-info p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
-    padding-top: 100px;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -114,11 +133,11 @@
 }
 
 .modal-content {
-    margin: auto;
     display: block;
-    height: 500px;
-    width: 500px;
-    max-width: 500px;
+    margin: auto;
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 10px;
 }
 
 .close {
