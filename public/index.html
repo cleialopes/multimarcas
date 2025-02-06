@@ -9,7 +9,7 @@
     <link rel="icon" href="img/logo.webp" type="image/x-icon">
     <script src="https://kit.fontawesome.com/43d19060f3.js" crossorigin="anonymous"></script> <!--para que se vea la i-->
 </head>
-<body>
+<body id="index">
     <!-- Header -->
     <header>
         <nav>
@@ -35,13 +35,13 @@
                         <li><a href="#">Sobre Nosotros</a></li>
                     </ul>
                 </li>
-                <li><a href="suscripcion.html"><i class="fa-regular fa-user"></i></i>Entrar/Suscribirte</a></li>
-                <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
                 <!-- Sección para usuario logueado -->
                 <li id="user-info" style="display: none;">
                     <i class="fa-regular fa-user"></i> <span id="user-name"></span>
                     <button id="logout-button" class="boton-estilo">Cerrar Sesión</button>
                 </li>
+                <li><a href="suscripcion.html"><i class="fa-regular fa-user"></i></i>Entrar/Suscribirte</a></li>
+                <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
             </ul>
         </nav>
     </header>

@@ -7,7 +7,7 @@ async function getRopa() {
     }
     // Cargar los primeros productos al iniciar la página
     productos = await response.json();
-    addMoreProducts();
+    if (document.body.id === "index") addMoreProducts();
 }
 getRopa();
 
@@ -34,7 +34,7 @@ function addToCart(titulo, precio, productIndex) {
     showNotification(`"${titulo}" (Talla: ${talla}) fue añadido al carrito.`);
 }   
 
-function showNotification(mensaje) {
+function showNotification(mensaje, tipo = 'info') {
     let notificationContainer = document.getElementById('notification-container');
     if (!notificationContainer) {
         notificationContainer = document.createElement('div');
@@ -43,7 +43,7 @@ function showNotification(mensaje) {
     }
 
     const notification = document.createElement('div');
-    notification.className = 'notification';
+    notification.className = `notification ${tipo}`;
     notification.textContent = mensaje;
     notificationContainer.appendChild(notification);
 
@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-
+    
         const userData = {
             name: sanitizeInput(formData.get('name')),
             username: sanitizeInput(formData.get('username')),
@@ -321,24 +321,26 @@ document.addEventListener("DOMContentLoaded", () => {
             email: sanitizeInput(formData.get('email')),
             password: sanitizeInput(formData.get('password')),
         };
-
+    
         try {
             const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             });
-
+    
             if (response.ok) {
-                alert('Registro exitoso');
+                showNotification('Registro exitoso. Redirigiendo...', 'success'); // Agregar notificación
                 localStorage.setItem("user", JSON.stringify({ name: userData.name }));
-                window.location.href = 'index.html';
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
             } else {
                 const error = await response.text();
-                alert(`Error: ${error}`);
+                showNotification(`Error: ${error}`, 'error'); // Agregar notificación
             }
         } catch (err) {
-            alert(`Error de conexión: ${err.message}`);
+            showNotification(`Error de conexión: ${err.message}`, 'error'); // Agregar notificación
         }
     });
 
@@ -362,17 +364,19 @@ document.addEventListener("DOMContentLoaded", () => {
     
             if (response.ok) {
                 const data = await response.json();
-                alert('Inicio de sesión exitoso');
+                showNotification('Inicio de sesión exitoso. Redirigiendo...', 'success'); // Agregar notificación
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify({ username: data.username }));
     
-                updateUserInterface(); // Llamamos a la función que actualiza la UI
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
             } else {
                 const error = await response.text();
-                alert(`Error: ${error}`);
+                showNotification(`Error: ${error}`, 'error'); // Agregar notificación
             }
         } catch (err) {
-            alert(`Error de conexión: ${err.message}`);
+            showNotification(`Error de conexión: ${err.message}`, 'error'); // Agregar notificación
         }
     });
 
@@ -438,7 +442,7 @@ function updateUserInterface() {
 
     if (user) {
         userInfo.style.display = "inline-block"; // Mostrar la sección de usuario logueado
-        userNameDisplay.textContent = user.username; // Mostrar el username en vez del email
+        userNameDisplay.textContent = user.username; // Mostrar el nombre de usuario
         if (loginLink) loginLink.style.display = "none"; // Ocultar "Entrar/Suscribirte"
     } else {
         userInfo.style.display = "none"; // Ocultar la sección de usuario logueado
