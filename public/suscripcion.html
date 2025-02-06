@@ -70,6 +70,9 @@
                     <h1><i class="fa-regular fa-user"></i></i>Regístrate</h1>
 					<label for="name">Nombre completo:</label>
 					<input type="text" id="name" name="name" placeholder="Ingresa tu nombre completo" required>
+
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" id="username" name="username" placeholder="Elige un nombre de usuario" required>
 		
 					<label for="telefono">Número de Teléfono:</label>
 					<input type="tel" id="tel" name="telefono" placeholder="Ej: +34123456789" required>
@@ -109,10 +112,11 @@
                     <h1><i class="fa-regular fa-user"></i> Iniciar Sesión</h1>
                     <label for="login-email">Correo electrónico:</label>
                     <input type="email" id="login-email" name="login-email" placeholder="Ingresa tu correo" required>
-
+                    
                     <label for="login-password">Contraseña:</label>
                     <input type="password" id="login-password" name="login-password" placeholder="Ingresa tu contraseña" required>
-                    
+                    <span id="toggle-confirm-password" class="toggle-password" style="position: absolute; right: 55px; top: 59%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+
                     <button type="submit" class="boton-estilo">Iniciar Sesión</button>
                     
                     <p>¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>

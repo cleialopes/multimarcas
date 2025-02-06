@@ -49,7 +49,7 @@ const upload = multer({
 // Registro de usuarios con contraseña encriptada
 app.post('/api/register', async (req, res) => {
   try {
-    const { name, telefono, email, password } = req.body;
+    const { name, username, telefono, email, password } = req.body;
 
     // Verificar si el usuario ya existe
     db.get('SELECT * FROM users WHERE email = ?', [email], async (err, row) => {
@@ -64,8 +64,8 @@ app.post('/api/register', async (req, res) => {
       const passwordHash = await bcrypt.hash(password, saltRounds);
        // Insertar nuevo usuario
        db.run(
-        'INSERT INTO users (username, telefono, email, password) VALUES (?, ?, ?, ?)',
-        [name, telefono, email, passwordHash],
+        'INSERT INTO users (name, username, telefono, email, password) VALUES (?, ?, ?, ?, ?)',
+        [name, username, telefono, email, passwordHash],
         (err) => {
           if (err) {
             return res.status(500).send('Error en la base de datos');
@@ -84,23 +84,26 @@ app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
   db.get('SELECT * FROM users WHERE email = ?', [email], async (err, user) => {
-    if (err) {
-      return res.status(500).send('Error en la base de datos');
-    }
-    if (!user) {
-      return res.status(401).send('Usuario no encontrado');
-    }
+      if (err) {
+          return res.status(500).send('Error en la base de datos');
+      }
+      if (!user) {
+          return res.status(401).send('Usuario no encontrado');
+      }
 
-    // Comparar la contraseña con la almacenada
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).send('Contraseña incorrecta');
-    }
+      try {
+        // Comparar la contraseña con la almacenada
+          const isMatch = await bcrypt.compare(password, user.password);
+          if (!isMatch) {
+              return res.status(401).send('Contraseña incorrecta');
+          }
+          // Generar un token JWT
+          const token = jwt.sign({ id: user.id, email: user.email, username: user.username }, secretKey, { expiresIn: '1h' });
 
-    // Generar un token JWT
-    const token = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
-
-    res.json({ message: 'Inicio de sesión exitoso', token });
+          res.json({ message: 'Inicio de sesión exitoso', token, username: user.username });
+      } catch (error) { 
+          res.status(500).send("Error en el servidor");
+      }
   });
 });
 

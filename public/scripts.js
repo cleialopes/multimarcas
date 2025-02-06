@@ -316,6 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const userData = {
             name: sanitizeInput(formData.get('name')),
+            username: sanitizeInput(formData.get('username')),
             telefono: sanitizeInput(formData.get('telefono')),
             email: sanitizeInput(formData.get('email')),
             password: sanitizeInput(formData.get('password')),
@@ -346,24 +347,25 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-
+    
         const loginData = {
             email: sanitizeInput(formData.get('login-email')),
             password: sanitizeInput(formData.get('login-password')),
         };
-
+    
         try {
             const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(loginData)
             });
+    
             if (response.ok) {
                 const data = await response.json();
                 alert('Inicio de sesión exitoso');
                 localStorage.setItem("token", data.token);
-                localStorage.setItem("user", JSON.stringify({ name: formData.get("login-email") }));
-                
+                localStorage.setItem("user", JSON.stringify({ username: data.username }));
+    
                 updateUserInterface(); // Llamamos a la función que actualiza la UI
             } else {
                 const error = await response.text();
@@ -373,7 +375,6 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(`Error de conexión: ${err.message}`);
         }
     });
-
 
     // Alternar visibilidad de contraseñas
     function togglePasswordVisibility(inputId, toggleId) {
@@ -437,7 +438,7 @@ function updateUserInterface() {
 
     if (user) {
         userInfo.style.display = "inline-block"; // Mostrar la sección de usuario logueado
-        userNameDisplay.textContent = user.name; // Mostrar el nombre del usuario
+        userNameDisplay.textContent = user.username; // Mostrar el username en vez del email
         if (loginLink) loginLink.style.display = "none"; // Ocultar "Entrar/Suscribirte"
     } else {
         userInfo.style.display = "none"; // Ocultar la sección de usuario logueado
