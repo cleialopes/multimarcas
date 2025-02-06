@@ -6,6 +6,7 @@
     <title>Formulario de Inscripción - Tienda de Ropa</title>
     <link rel="stylesheet" href="generalstyle.css">
     <link rel="stylesheet" href="suscripcion.css">
+    <link rel="icon" href="img/logo.webp" type="image/x-icon">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc6nxZSfxOT9hcp9QwR2OwYKedpSitx8M"></script> <!--para el mapa-->
     <script src="https://kit.fontawesome.com/43d19060f3.js" crossorigin="anonymous"></script> <!--para que se vea la i-->
 </head>
@@ -36,6 +37,11 @@
                     </ul>
                 </li>
                 <li><a href="suscripcion.html"><i class="fa-regular fa-user"></i>Entrar/Suscribirte</a></li>
+                <!-- Sección para usuario logueado -->
+                <li id="user-info" style="display: none;">
+                    <i class="fa-regular fa-user"></i> <span id="user-name"></span>
+                    <button id="logout-button" class="boton-estilo">Cerrar Sesión</button>
+                </li>
                 <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
             </ul>
         </nav>
@@ -131,6 +137,6 @@
             <a href="#">Twitter</a>
         </div>
     </footer>
-    <script src="suscripcion.js"></script>
+    <script src="scripts.js"></script>
     </body>
     </html>
