@@ -270,19 +270,31 @@
 }
 
 /* boton de cerrar sesion */
+:root {
+    --logout-bg: transparent; /* Fondo inicial sin degradado */
+    --logout-border: #ccc; /* Color del borde inicial */
+    --logout-text: #666; /* Color del texto inicial */
+    --logout-hover-bg-start: #ff7e5f; /* Color inicial del degradado */
+    --logout-hover-bg-end: #feb47b; /* Color final del degradado */
+    --logout-hover-border: #ff7e5f; /* Borde en hover */
+    --logout-hover-text: white; /* Color del texto en hover */
+}
+
 #logout-button {
-    font-size: 12px; /* Reduce el tamaño del texto */
-    padding: 5px 10px; /* Ajusta el relleno para hacerlo más pequeño */
-    background-color: transparent; /* Lo hace más discreto */
-    border: 1px solid #ccc; /* Borde suave */
-    color: #666; /* Color de texto más sutil */
+    font-size: 12px; /* Mantiene el tamaño actual */
+    padding: 5px 10px;
+    background: var(--logout-bg); /* Fondo sin degradado */
+    border: 1px solid var(--logout-border);
+    color: var(--logout-text);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    border-radius: 5px; /* Opcional: Suaviza los bordes */
 }
 
 #logout-button:hover {
-    background-color: #f8f8f8; /* Un ligero cambio de color al pasar el mouse */
-    border-color: #aaa;
+    background: linear-gradient(45deg, var(--logout-hover-bg-start), var(--logout-hover-bg-end));
+    border-color: var(--logout-hover-border);
+    color: var(--logout-hover-text);
 }
 
 /* Estilos para pantallas de tablets */

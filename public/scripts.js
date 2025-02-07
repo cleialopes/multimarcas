@@ -225,6 +225,9 @@ function addMoreProducts() {
         productElement.innerHTML = `
             <div class="product-images">
                 <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo}" onclick="expandImage(this, ${i})">
+                <div class="tallas-overlay">
+                    ${tallasButtons}
+                </div>
                 <div class="product-thumbnails">
                     <img onclick="changeImage('main-image-${i}', '${producto.imagenes[0]}')" src="${producto.imagenes[0]}" alt="Imagen 1">
                     <img onclick="changeImage('main-image-${i}', '${producto.imagenes[1]}')" src="${producto.imagenes[1]}" alt="Imagen 2">
