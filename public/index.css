@@ -100,15 +100,40 @@
 }
 
 /* Modal */
+/* Flechas de navegación en el modal */
+.modal .prev, .modal .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+.modal .prev {
+    left: 10px;
+}
+
+.modal .next {
+    right: 10px;
+}
+
+.modal .prev:hover, .modal .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
 .modal-info {
-    text-align: center;
+    text-align: left;
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
-    width: 80%;
-    max-width: 500px;
-    margin: 20px auto;
+    max-width: 40%;
+    margin-left: 20px; /* Espacio entre la imagen y el texto */
 }
 
 .modal-info h2 {
@@ -133,11 +158,19 @@
 }
 
 .modal-content {
-    display: block;
-    margin: auto;
+    max-width: 60%;
+    max-height: 80vh;
+    margin-top: 100px;
+    border-radius: 10px;
+}
+
+.modal-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     max-width: 90%;
     max-height: 80vh;
-    border-radius: 10px;
+    margin: auto;
 }
 
 .close {

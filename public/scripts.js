@@ -129,6 +129,8 @@ function changeImage(mainImageId, newSrc) {
     document.getElementById(mainImageId).src = newSrc;
 }
 
+let currentImageIndex = 0; // Índice actual de la imagen en el modal
+
 function expandImage(img, index) {
     const modal = document.getElementById("imageModal");
     const expandedImg = document.getElementById("expandedImg");
@@ -137,30 +139,39 @@ function expandImage(img, index) {
     const modalDescription = document.getElementById("modal-description");
     const modalCare = document.getElementById("modal-care");
 
-    // Verifica que el índice esté dentro del rango de productos cargados
     if (!productos || productos.length === 0 || index >= productos.length) {
         console.error("Error: Producto no encontrado en la lista.");
         return;
     }
 
-    // Obtener la información del producto
     const producto = productos[index];
+    currentImageIndex = 0; // Reiniciar el índice cuando se abre la imagen
 
-    // Verifica que el modal y sus elementos existen
-    if (!modal || !expandedImg || !modalTitle || !modalPrice || !modalDescription || !modalCare) {
-        console.error("Error: Elementos del modal no encontrados.");
-        return;
-    }
-
-    // Asignar la información al modal
-    expandedImg.src = img.src;
+    expandedImg.src = producto.imagenes[currentImageIndex];
     modalTitle.textContent = producto.titulo;
     modalPrice.textContent = `Precio: ${producto.precio}`;
     modalDescription.textContent = producto.descripcion ? `Descripción: ${producto.descripcion}` : "Sin descripción.";
     modalCare.textContent = producto.cuidados ? `Cuidados: ${producto.cuidados}` : "No se especifican cuidados.";
 
-    // Mostrar el modal
+    // Guardar las imágenes del producto en el modal
+    expandedImg.dataset.productIndex = index;
+
     modal.style.display = "block";
+}
+
+// Función para cambiar la imagen dentro del modal
+function changeModalImage(direction) {
+    const expandedImg = document.getElementById("expandedImg");
+    const productIndex = expandedImg.dataset.productIndex;
+    const producto = productos[productIndex];
+
+    if (!producto || !producto.imagenes || producto.imagenes.length === 0) return;
+
+    currentImageIndex += direction;
+    if (currentImageIndex < 0) currentImageIndex = producto.imagenes.length - 1;
+    if (currentImageIndex >= producto.imagenes.length) currentImageIndex = 0;
+
+    expandedImg.src = producto.imagenes[currentImageIndex];
 }
 
 // Función para cerrar el modal

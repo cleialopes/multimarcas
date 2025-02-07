@@ -67,13 +67,17 @@
         <!-- Modal para expandir la imagen -->
         <div id="imageModal" class="modal">
             <span class="close" onclick="closeModal()">&times;</span>
-            <img class="modal-content" id="expandedImg">
-            <div class="modal-info">
-                <h2 id="modal-title"></h2>
-                <p id="modal-price"></p>
-                <p id="modal-description"></p>
-                <p id="modal-care"></p>
+            <button class="prev" onclick="changeModalImage(-1)">&#10094;</button>
+            <div class="modal-content-wrapper">
+                <img class="modal-content" id="expandedImg">
+                <div class="modal-info">
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-price"></p>
+                    <p id="modal-description"></p>
+                    <p id="modal-care"></p>
+                </div>
             </div>
+            <button class="next" onclick="changeModalImage(1)">&#10095;</button>
         </div>
 
         <!-- Modal para el carrito -->
