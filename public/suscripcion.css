@@ -382,22 +382,6 @@ svg {
     margin-right: 10px;
 }
 
-/* boton de cerrar sesion */
-#logout-button {
-    font-size: 12px; /* Reduce el tamaño del texto */
-    padding: 5px 10px; /* Ajusta el relleno para hacerlo más pequeño */
-    background-color: transparent; /* Lo hace más discreto */
-    border: 1px solid #ccc; /* Borde suave */
-    color: #666; /* Color de texto más sutil */
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-#logout-button:hover {
-    background-color: #f8f8f8; /* Un ligero cambio de color al pasar el mouse */
-    border-color: #aaa;
-}
-
 /* Estilos de las notificaciones */
 #notification-container {
     position: fixed;

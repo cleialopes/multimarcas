@@ -449,3 +449,4 @@ function updateUserInterface() {
         if (loginLink) loginLink.style.display = "inline-block"; // Mostrar "Entrar/Suscribirte"
     }
 }
+updateUserInterface();

@@ -15,6 +15,21 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public')); //carpeta con los archivos estáticos
 
+// Configuración de sesiones
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
+
+app.use(session({
+  store: new SQLiteStore({ db: 'sessions.db' }), // Almacena sesiones en SQLite
+  secret: 'XASDWERTY', // Poner una clave segura
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Cambia a true si usas HTTPS
+    maxAge: 24 * 60 * 60 * 1000, // 1 día de duración    // 3600000 // 1 hora
+  }
+}));
+
 // Verificar si la carpeta de uploads existe
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
@@ -99,7 +114,12 @@ app.post('/api/login', (req, res) => {
           }
           // Generar un token JWT
           const token = jwt.sign({ id: user.id, email: user.email, username: user.username }, secretKey, { expiresIn: '1h' });
-
+          // Guardar el usuario en la sesión
+          req.session.user = {
+            id: user.id,
+            username: user.username,
+            email: user.email
+          };
           res.json({ message: 'Inicio de sesión exitoso', token, username: user.username });
       } catch (error) { 
           res.status(500).send("Error en el servidor");
