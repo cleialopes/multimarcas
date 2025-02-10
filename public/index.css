@@ -99,6 +99,78 @@
     to { opacity: 0; }
 }
 
+/* Estilos para la sección de reseñas */
+.reviews-section {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    font-size: 14px;
+}
+
+.reviews h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.review {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.review strong {
+    color: #222;
+}
+
+.review p {
+    margin: 2px 0;
+    color: #555;
+}
+
+.add-review {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.add-review input, .add-review select, .add-review textarea {
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 12px;
+    background: transparent;
+    color: #333;
+}
+
+.add-review textarea {
+    resize: vertical;
+    min-height: 50px;
+}
+
+.add-review button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.add-review button:hover {
+    background-color: #555;
+}
+
+
 /* Modal */
 /* Flechas de navegación en el modal */
 .modal .prev, .modal .next {

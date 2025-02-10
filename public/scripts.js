@@ -87,22 +87,22 @@ function displayReviews(productIndex) {
     if (reviews.length === 0) {
         reviewsContainer.innerHTML = "<p>No hay reseñas aún.</p>";
     } else {
-        reviews.forEach(review => {
-            const reviewElement = document.createElement("div");
-            reviewElement.classList.add("review");
-            reviewElement.innerHTML = `
-                <p><strong>${review.name}</strong> - ${'⭐'.repeat(review.rating)}</p>
-                <p>${review.comment}</p>
-            `;
-            reviewsContainer.appendChild(reviewElement);
-        });
-    }
+    reviews.forEach(review => {
+        const reviewElement = document.createElement("div");
+        reviewElement.classList.add("review");
+        reviewElement.innerHTML = `
+            <p><strong>${review.name}</strong> - ${'⭐'.repeat(review.rating)}</p>
+            <p>${review.comment}</p>
+        `;
+        reviewsContainer.appendChild(reviewElement);
+    });
+}
 
-    // Actualizar la calificación en Products
-    const ratingElement = document.getElementById(`product-rating-${productIndex}`);
-    if (ratingElement) {
-        ratingElement.innerHTML = getAverageRating(productIndex);
-    }
+// Actualizar la calificación en Products
+const ratingElement = document.getElementById(`product-rating-${productIndex}`);
+if (ratingElement) {
+    ratingElement.innerHTML = getAverageRating(productIndex);
+}
 }
 
 function addToCart(titulo, precio, productIndex) {
