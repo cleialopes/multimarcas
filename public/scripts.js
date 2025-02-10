@@ -325,6 +325,9 @@ function addMoreProducts() {
         productElement.innerHTML = `
             <div class="product-images">
                 <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo}" onclick="expandImage(this, ${i})">
+                <button class="favorite-btn" onclick="toggleFavorite(${i})">
+                    <i id="favorite-icon-${i}" class="fa-regular fa-heart"></i>
+                </button>
             </div>
             <div class="product-info">
                 <h2 class="product-title">${producto.titulo}</h2>
@@ -345,6 +348,27 @@ function addMoreProducts() {
     if (productosCargados >= totalProductos) {
         document.querySelector('.add-more').style.display = 'none';
     }
+}
+
+function toggleFavorite(productIndex) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    
+    const icon = document.getElementById(`favorite-icon-${productIndex}`);
+    const product = productos[productIndex];
+
+    const isFavorite = favorites.some(fav => fav.id === productIndex);
+
+    if (isFavorite) {
+        favorites = favorites.filter(fav => fav.id !== productIndex);
+        icon.classList.remove("fa-solid");
+        icon.classList.add("fa-regular");
+    } else {
+        favorites.push({ id: productIndex, titulo: product.titulo, imagen: product.imagenes[0] });
+        icon.classList.remove("fa-regular");
+        icon.classList.add("fa-solid");
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
 // Objeto para almacenar las tallas seleccionadas
@@ -396,6 +420,16 @@ document.addEventListener("DOMContentLoaded", () => {
             userInfo.style.display = "none";
         }
     }
+
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    favorites.forEach(fav => {
+        const icon = document.getElementById(`favorite-icon-${fav.id}`);
+        if (icon) {
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+        }
+    });
     
     /* Función para cerrar sesión y eliminar datos del usuario */
     logoutButton.addEventListener("click", () => {

@@ -170,6 +170,25 @@
     background-color: #555;
 }
 
+/* favoritos */
+.favorite-btn {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: red;
+}
+
+.favorite-btn i {
+    transition: transform 0.2s ease-in-out;
+}
+
+.favorite-btn i:hover {
+    transform: scale(1.2);
+}
 
 /* Modal */
 /* Flechas de navegación en el modal */
