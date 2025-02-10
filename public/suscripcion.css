@@ -1,3 +1,8 @@
+img {
+    width: 250px;
+    border-radius: 50%;
+}
+
 :root {
 	--rotate-speed: 40;
 	--count: 8; /* Default count, the DOM element should override this */
