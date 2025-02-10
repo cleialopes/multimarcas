@@ -183,7 +183,7 @@
 }
 
 .favorite-btn i {
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .favorite-btn i:hover {
@@ -358,12 +358,16 @@
     padding: 10px 20px;
     background-color: #f39c12;
     color: white;
-    border: none;
+    transition: all 0.3s ease-in-out;
+    background: var(--logout-bg);
+    border: 1px solid var(--logout-border);
     cursor: pointer;
 }
 
 .add-more:hover {
-    background-color: #b67610;
+    background: linear-gradient(45deg, var(--logout-hover-bg-start), var(--logout-hover-bg-end));
+    border-color: var(--logout-hover-border);
+    color: var(--logout-hover-text);
 }
 
 /* Estilo para el carrito */
