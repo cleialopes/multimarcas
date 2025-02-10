@@ -295,7 +295,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const userInfo = document.getElementById("user-info");
     const userNameDisplay = document.getElementById("user-name");
     const logoutButton = document.getElementById("logout-button");
-
+    
+    /* Función para verificar si el usuario está logueado */
     function checkLoginStatus() {
         const user = localStorage.getItem("user");
         if (user) {
@@ -305,7 +306,8 @@ document.addEventListener("DOMContentLoaded", () => {
             userInfo.style.display = "none";
         }
     }
-
+    
+    /* Función para cerrar sesión y eliminar datos del usuario */
     logoutButton.addEventListener("click", () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -315,11 +317,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!registerForm) return;
 
-    // Manejo del registro de usuario
+    // Alternar visibilidad de contraseñas
+    function togglePasswordVisibility(inputId, toggleId) {
+        const passwordInput = document.getElementById(inputId);
+        const toggleIcon = document.getElementById(toggleId);
+
+        if (toggleIcon) {
+            toggleIcon.addEventListener('click', () => {
+                passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+                toggleIcon.textContent = passwordInput.type === 'password' ? '👁️' : '🙈';
+            });
+        }
+    }
+    
+    togglePasswordVisibility('password', 'toggle-password');
+    togglePasswordVisibility('confirm-password', 'toggle-confirm-password');
+
+
+    /* Función para manejar el registro de usuario */
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+
+        if (password.length < 8) {
+            showNotification("La contraseña debe tener al menos 8 caracteres.", "error");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showNotification("Las contraseñas no coinciden.", "error");
+            return;
+        }
     
+        const formData = new FormData(e.target);
         const userData = {
             name: sanitizeInput(formData.get('name')),
             username: sanitizeInput(formData.get('username')),
@@ -336,22 +368,21 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     
             if (response.ok) {
-                showNotification('Registro exitoso. Redirigiendo...', 'success'); // Agregar notificación
+                showNotification('Registro exitoso. Redirigiendo...', 'success');
                 localStorage.setItem("user", JSON.stringify({ name: userData.name }));
                 setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
+                    window.location.href = 'index.html';}, 2000);
             } else {
                 const error = await response.text();
-                showNotification(`Error: ${error}`, 'error'); // Agregar notificación
+                showNotification(`Error: ${error}`, 'error');
             }
         } catch (err) {
-            showNotification(`Error de conexión: ${err.message}`, 'error'); // Agregar notificación
+            showNotification(`Error de conexión: ${err.message}`, 'error'); 
         }
     });
 
 
-    // Manejo del inicio de sesión
+    /* Función para manejar el inicio de sesión */
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -370,37 +401,20 @@ document.addEventListener("DOMContentLoaded", () => {
     
             if (response.ok) {
                 const data = await response.json();
-                showNotification('Inicio de sesión exitoso. Redirigiendo...', 'success'); // Agregar notificación
+                showNotification('Inicio de sesión exitoso. Redirigiendo...', 'success'); 
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify({ username: data.username }));
     
                 setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
+                    window.location.href = 'index.html';}, 2000);
             } else {
                 const error = await response.text();
-                showNotification(`Error: ${error}`, 'error'); // Agregar notificación
+                showNotification(`Error: ${error}`, 'error');
             }
         } catch (err) {
-            showNotification(`Error de conexión: ${err.message}`, 'error'); // Agregar notificación
+            showNotification(`Error de conexión: ${err.message}`, 'error'); 
         }
     });
-
-    // Alternar visibilidad de contraseñas
-    function togglePasswordVisibility(inputId, toggleId) {
-        const passwordInput = document.getElementById(inputId);
-        const toggleIcon = document.getElementById(toggleId);
-
-        if (toggleIcon) {
-            toggleIcon.addEventListener('click', () => {
-                passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
-                toggleIcon.textContent = passwordInput.type === 'password' ? '👁️' : '🙈';
-            });
-        }
-    }
-    
-    togglePasswordVisibility('password', 'toggle-password');
-    togglePasswordVisibility('confirm-password', 'toggle-confirm-password');
 
     // Validación del teléfono sin espacios
     phoneInput.addEventListener("input", function () {
@@ -440,6 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+/* Función para manejar el inicio de sesión, debe de estar fora de otra function o no funcionarar en el index */
 function updateUserInterface() {
     const user = JSON.parse(localStorage.getItem("user"));
     const userInfo = document.getElementById("user-info");
