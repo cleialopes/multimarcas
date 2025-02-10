@@ -60,7 +60,7 @@
 }
 
 .add-to-cart {
-    background-color: #28a745;
+    background-color: #333;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -69,7 +69,7 @@
 }
 
 .add-to-cart:hover {
-    background-color: #218838;
+    background-color: #4a4949;
 }
 
 #notification-container {
@@ -210,9 +210,9 @@
 
 /* Estilo para la talla seleccionada */
 .selected-talla {
-    background-color: #28a745;
+    background-color: #f39c12;
     color: white;
-    border-color: #28a745;
+    border-color: #333;
 }
 
 /* Modal del carrito */
@@ -265,14 +265,14 @@
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #f39c12;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 .add-more:hover {
-    background-color: #0056b3;
+    background-color: #b67610;
 }
 
 /* Estilo para el carrito */

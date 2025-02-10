@@ -236,11 +236,6 @@ function addMoreProducts() {
         productElement.innerHTML = `
             <div class="product-images">
                 <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo}" onclick="expandImage(this, ${i})">
-                <div class="product-thumbnails">
-                    <img onclick="changeImage('main-image-${i}', '${producto.imagenes[0]}')" src="${producto.imagenes[0]}" alt="Imagen 1">
-                    <img onclick="changeImage('main-image-${i}', '${producto.imagenes[1]}')" src="${producto.imagenes[1]}" alt="Imagen 2">
-                    <img onclick="changeImage('main-image-${i}', '${producto.imagenes[2]}')" src="${producto.imagenes[2]}" alt="Imagen 3">
-                </div>
             </div>
             <div class="product-info">
                 <h2 class="product-title">${producto.titulo}</h2>

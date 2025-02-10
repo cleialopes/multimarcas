@@ -6,6 +6,22 @@ body {
     padding: 0;
 }
 
+.cart {
+    background-color: #f39c12;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.cart:hover {
+    background-color: #e67e22;
+    color: black;
+    transform: scale(1.1);
+}
+
 .container {
     width: 80%;
     margin: 0 auto;
@@ -49,7 +65,7 @@ nav {
 
 .nav-links a i {
     color: white;
-    margin-right: 5px; 
+    margin-right: 5px;
 }
 
 .nav-links li {
@@ -61,10 +77,13 @@ nav {
     color: white;
     text-decoration: none;
     font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease; 
 }
 
 .nav-links a:hover {
     text-decoration: underline;
+    color: #f39c12;
+    transform: scale(1.1);
 }
 
 /* Formulario de búsqueda */
@@ -140,8 +159,11 @@ footer p {
     color: white;
     text-decoration: none;
     margin: 0 10px;
+    transition: color 0.3s ease, transform 0.3s ease; 
 }
 
 .social-media a:hover {
     text-decoration: underline;
+    color: #f39c12;
+    transform: scale(1.1);
 }
