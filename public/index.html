@@ -75,6 +75,21 @@
                     <p id="modal-price"></p>
                     <p id="modal-description"></p>
                     <p id="modal-care"></p>
+                    <div class="reviews-section">
+                        <h3>Reseñas</h3>
+                        <div id="reviews-modal" class="reviews"></div>
+                        <div class="add-review">
+                            <input type="text" id="review-name-modal" placeholder="Tu nombre">
+                            <select id="review-rating-modal">
+                                <option value="5">⭐⭐⭐⭐⭐</option>
+                                <option value="4">⭐⭐⭐⭐</option>
+                                <option value="3">⭐⭐⭐</option>
+                                <option value="2">⭐⭐</option>
+                                <option value="1">⭐</option>
+                            </select>
+                            <textarea id="review-comment-modal" placeholder="Escribe tu reseña"></textarea>
+                            <button onclick="addReview()">Enviar Reseña</button>
+                        </div>
                 </div>
             </div>
             <button class="next" onclick="changeModalImage(1)">&#10095;</button>

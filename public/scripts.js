@@ -16,6 +16,95 @@ const productosPorPagina = 4;
 let cartCount = 0; // Contador del carrito
 const cartItems = []; // Array para almacenar los productos en el carrito
 
+// Función para añadir reseñas a los productos en el modal
+function addReview() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+        alert("Debes iniciar sesión para dejar una reseña.");
+        return;
+    }
+
+    const productIndex = document.getElementById("expandedImg").dataset.productIndex;
+    if (!productIndex) {
+        console.error("Error: No se encontró el índice del producto.");
+        return;
+    }
+
+    const nameInput = document.getElementById("review-name-modal");
+    const commentInput = document.getElementById("review-comment-modal");
+    const ratingInput = document.getElementById("review-rating-modal");
+    const reviewsContainer = document.getElementById("reviews-modal");
+
+    const name = nameInput.value.trim();
+    const comment = commentInput.value.trim();
+    const rating = ratingInput.value;
+
+    if (!name || !comment) {
+        alert("Por favor, completa todos los campos de la reseña.");
+        return;
+    }
+
+    const review = { name, comment, rating };
+
+    let reviews = JSON.parse(localStorage.getItem(`reviews-${productIndex}`)) || [];
+    reviews.push(review);
+    localStorage.setItem(`reviews-${productIndex}`, JSON.stringify(reviews));
+
+    nameInput.value = "";
+    commentInput.value = "";
+    ratingInput.value = "5";
+
+    displayReviews(productIndex);
+}
+
+// Función para calcular el promedio de calificación de un producto
+function getAverageRating(productIndex) {
+    let reviews = JSON.parse(localStorage.getItem(`reviews-${productIndex}`)) || [];
+    if (reviews.length === 0) return "Sin calificaciones";
+    
+    let total = reviews.reduce((sum, review) => sum + parseInt(review.rating), 0);
+    let average = total / reviews.length;
+    return '⭐'.repeat(Math.round(average)) + ` (${reviews.length} reseñas)`;
+}
+
+// Función para mostrar las reseñas en el modal
+function displayReviews(productIndex) {
+    const reviewsContainer = document.getElementById("reviews-modal");
+    if (!reviewsContainer) {
+        console.error("Error: No se encontró el contenedor de reseñas.");
+        return;
+    }
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const reviewSection = document.querySelector(".add-review");
+    if (reviewSection) {
+        reviewSection.style.display = user ? "block" : "none";
+    }
+
+    reviewsContainer.innerHTML = "";
+    const reviews = JSON.parse(localStorage.getItem(`reviews-${productIndex}`)) || [];
+
+    if (reviews.length === 0) {
+        reviewsContainer.innerHTML = "<p>No hay reseñas aún.</p>";
+    } else {
+        reviews.forEach(review => {
+            const reviewElement = document.createElement("div");
+            reviewElement.classList.add("review");
+            reviewElement.innerHTML = `
+                <p><strong>${review.name}</strong> - ${'⭐'.repeat(review.rating)}</p>
+                <p>${review.comment}</p>
+            `;
+            reviewsContainer.appendChild(reviewElement);
+        });
+    }
+
+    // Actualizar la calificación en Products
+    const ratingElement = document.getElementById(`product-rating-${productIndex}`);
+    if (ratingElement) {
+        ratingElement.innerHTML = getAverageRating(productIndex);
+    }
+}
+
 function addToCart(titulo, precio, productIndex) {
     const talla = selectedTallas[productIndex]; // Obtener la talla seleccionada para el producto específico
 
@@ -138,6 +227,7 @@ function expandImage(img, index) {
     const modalPrice = document.getElementById("modal-price");
     const modalDescription = document.getElementById("modal-description");
     const modalCare = document.getElementById("modal-care");
+    const reviewsContainer = document.getElementById("reviews-modal");
 
     if (!productos || productos.length === 0 || index >= productos.length) {
         console.error("Error: Producto no encontrado en la lista.");
@@ -145,19 +235,18 @@ function expandImage(img, index) {
     }
 
     const producto = productos[index];
-    currentImageIndex = 0; // Reiniciar el índice cuando se abre la imagen
 
-    expandedImg.src = producto.imagenes[currentImageIndex];
+    expandedImg.src = producto.imagenes[0];
     modalTitle.textContent = producto.titulo;
     modalPrice.textContent = `Precio: ${producto.precio}`;
     modalDescription.textContent = producto.descripcion ? `Descripción: ${producto.descripcion}` : "Sin descripción.";
     modalCare.textContent = producto.cuidados ? `Cuidados: ${producto.cuidados}` : "No se especifican cuidados.";
-
-    // Guardar las imágenes del producto en el modal
     expandedImg.dataset.productIndex = index;
-
+    
     modal.style.display = "block";
+    displayReviews(index);
 }
+
 
 // Función para cambiar la imagen dentro del modal
 function changeModalImage(direction) {
@@ -240,6 +329,7 @@ function addMoreProducts() {
             <div class="product-info">
                 <h2 class="product-title">${producto.titulo}</h2>
                 <p class="product-price">${producto.precio}</p>
+                <p class="product-rating" id="product-rating-${i}">${getAverageRating(i)}</p>
                 <div class="tallas-container">
                     ${tallasButtons}
                 </div>
