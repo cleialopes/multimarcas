@@ -15,6 +15,16 @@ db.serialize(() => {
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
+  db.run(`
+    CREATE TABLE IF NOT EXISTS messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    text TEXT NOT NULL,
+    stars INTEGER DEFAULT 5,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
 });
 
 module.exports = db;

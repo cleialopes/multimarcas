@@ -307,9 +307,9 @@
     --logout-bg: transparent; /* Fondo inicial sin degradado */
     --logout-border: #ccc; /* Color del borde inicial */
     --logout-text: #666; /* Color del texto inicial */
-    --logout-hover-bg-start: #ff7e5f; /* Color inicial del degradado */
-    --logout-hover-bg-end: #feb47b; /* Color final del degradado */
-    --logout-hover-border: #ff7e5f; /* Borde en hover */
+    --logout-hover-bg-start: #e21b14; /* Color inicial del degradado */
+    --logout-hover-bg-end: #e2e224e2; /* Color final del degradado */
+    --logout-hover-border: #f9631e; /* Borde en hover */
     --logout-hover-text: white; /* Color del texto en hover */
 }
 
