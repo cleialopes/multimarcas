@@ -53,7 +53,7 @@ async function toggleFavorite(productIndex) {
     const token = localStorage.getItem("token");
 
     if (!user || !token) {
-        alert("Debes iniciar sesión para añadir favoritos.");
+        showNotification("Debes iniciar sesión para añadir favoritos.");
         return;
     }
 
@@ -80,7 +80,7 @@ async function toggleFavorite(productIndex) {
             }
         } else {
             const error = await response.json();
-            alert(error.error);
+            showNotification(error.error);
         }
     } catch (err) {
         console.error("Error al gestionar favoritos:", err);
@@ -91,7 +91,7 @@ async function toggleFavorite(productIndex) {
 function addReview() {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
-        alert("Debes iniciar sesión para dejar una reseña.");
+        showNotification("Debes iniciar sesión para dejar una reseña.");
         return;
     }
 
@@ -111,7 +111,7 @@ function addReview() {
     const rating = ratingInput.value;
 
     if (!name || !comment) {
-        alert("Por favor, completa todos los campos de la reseña.");
+        showNotification("Por favor, completa todos los campos de la reseña.");
         return;
     }
 
@@ -182,7 +182,7 @@ function addToCart(titulo, precio, productIndex) {
     const talla = selectedTallas[productIndex]; // Obtener la talla seleccionada para el producto específico
 
     if (!talla) {
-        alert('Por favor, selecciona una talla.');
+        showNotification('Por favor, selecciona una talla.');
         return;
     }
 
@@ -344,7 +344,7 @@ function closeModal() {
 }
 // Función placeholder para finalizar compra
 function checkout() {
-    alert("Funcionalidad de finalizar compra aún no implementada.");
+    showNotification("Funcionalidad de finalizar compra aún no implementada.");
 }
 // Evento de búsqueda en tiempo real
 document.getElementById('search-input').addEventListener('input', () => {
@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutButton.addEventListener("click", () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
-        alert("Sesión cerrada");
+        showNotification("Sesión cerrada");
         window.location.reload();
     });
 
