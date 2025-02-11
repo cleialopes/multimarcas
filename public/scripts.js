@@ -1,4 +1,4 @@
-// Llamar la función JSON
+// Llamar la función JSON para obtener los productos de ropa
 var productos = [];
 async function getRopa() {
     const response = await fetch('/ropa');
@@ -16,6 +16,7 @@ const productosPorPagina = 4;
 let cartCount = 0; // Contador del carrito
 const cartItems = []; // Array para almacenar los productos en el carrito
 
+// Funcion para cargar los productos favoritos del usuario
 async function loadFavorites() {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
@@ -44,8 +45,9 @@ async function loadFavorites() {
         console.error("Error al cargar favoritos:", err);
     }
 }
-document.addEventListener("DOMContentLoaded", loadFavorites);
+document.addEventListener("DOMContentLoaded", loadFavorites); // Cargar favoritos cuando el DOM esté listo
 
+// Función para agregar o quitar un producto de la lista de favoritos
 async function toggleFavorite(productIndex) {
     const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
@@ -67,7 +69,7 @@ async function toggleFavorite(productIndex) {
             },
             body: JSON.stringify({ producto_id: productIndex }) // Asegurar el nombre correcto
         });
-
+        // Alternar el estado del icono entre "favorito" y "no favorito"
         if (response.ok) {
             if (icon.classList.contains("fa-solid")) {
                 icon.classList.remove("fa-solid");
@@ -98,7 +100,7 @@ function addReview() {
         console.error("Error: No se encontró el índice del producto.");
         return;
     }
-
+    // Obtener los valores de los campos de la reseña
     const nameInput = document.getElementById("review-name-modal");
     const commentInput = document.getElementById("review-comment-modal");
     const ratingInput = document.getElementById("review-rating-modal");
@@ -114,11 +116,11 @@ function addReview() {
     }
 
     const review = { name, comment, rating };
-
+    // Guardar la reseña en localStorage
     let reviews = JSON.parse(localStorage.getItem(`reviews-${productIndex}`)) || [];
     reviews.push(review);
     localStorage.setItem(`reviews-${productIndex}`, JSON.stringify(reviews));
-
+    // Limpiar los campos después de guardar la reseña
     nameInput.value = "";
     commentInput.value = "";
     ratingInput.value = "5";
@@ -133,6 +135,7 @@ function getAverageRating(productIndex) {
     
     let total = reviews.reduce((sum, review) => sum + parseInt(review.rating), 0);
     let average = total / reviews.length;
+    // Función para mostrar las reseñas en el modal
     return '⭐'.repeat(Math.round(average)) + ` (${reviews.length} reseñas)`;
 }
 
@@ -146,6 +149,7 @@ function displayReviews(productIndex) {
 
     const user = JSON.parse(localStorage.getItem("user"));
     const reviewSection = document.querySelector(".add-review");
+    // Muestra la sección de añadir reseña solo si el usuario está autenticado
     if (reviewSection) {
         reviewSection.style.display = user ? "block" : "none";
     }
@@ -173,7 +177,7 @@ if (ratingElement) {
     ratingElement.innerHTML = getAverageRating(productIndex);
 }
 }
-
+// Función para añadir un producto al carrito
 function addToCart(titulo, precio, productIndex) {
     const talla = selectedTallas[productIndex]; // Obtener la talla seleccionada para el producto específico
 
@@ -192,6 +196,7 @@ function addToCart(titulo, precio, productIndex) {
     showNotification(`"${titulo}" (Talla: ${talla}) fue añadido al carrito.`);
 }   
 
+// Función para mostrar una notificación emergente
 function showNotification(mensaje, tipo = 'info') {
     let notificationContainer = document.getElementById('notification-container');
     if (!notificationContainer) {
@@ -204,12 +209,13 @@ function showNotification(mensaje, tipo = 'info') {
     notification.className = `notification ${tipo}`;
     notification.textContent = mensaje;
     notificationContainer.appendChild(notification);
-
+    // Eliminar la notificación después de 3 segundos
     setTimeout(() => {
         notification.remove();
     }, 3000);
 }
 
+// Función para mostrar el carrito en un modal
 function showCart() {
     const cartModal = document.getElementById("cartModal");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -238,17 +244,18 @@ function showCart() {
         const cartFooter = document.createElement('div');
         cartFooter.className = 'cart-footer';
 
+        // Mostrar el total del carrito
         const totalElement = document.createElement('div');
         totalElement.className = 'total-price';
         totalElement.innerHTML = `Total: ${totalPrice.toFixed(2)}`;
         cartFooter.appendChild(totalElement);
-
+        // Botón para vaciar el carrito
         const emptyCartButton = document.createElement('button');
         emptyCartButton.textContent = 'Vaciar Carrito';
         emptyCartButton.className = 'empty-cart-btn';
         emptyCartButton.onclick = emptyCart;
         cartFooter.appendChild(emptyCartButton);
-
+        // Botón para finalizar la compra
         const checkoutButton = document.createElement('button');
         checkoutButton.textContent = 'Finalizar Compra';
         checkoutButton.onclick = checkout;
@@ -261,11 +268,11 @@ function showCart() {
 
     cartModal.style.display = "block";
 }
-
+// Función para cerrar el modal del carrito
 function closeCart() {
     document.getElementById("cartModal").style.display = "none";
 }
-
+// Función para eliminar un producto del carrito
 function removeFromCart(index) {
     cartItems.splice(index, 1);
     cartCount--;
@@ -273,7 +280,7 @@ function removeFromCart(index) {
     showCart();
     showNotification('Producto eliminado del carrito.');
 }
-
+// Función para vaciar el carrito completamente
 function emptyCart() {
     cartItems.length = 0;
     cartCount = 0;
@@ -282,13 +289,13 @@ function emptyCart() {
     cartItemsContainer.innerHTML = '<p>El carrito está vacío.</p>';
     showNotification('El carrito ha sido vaciado.');
 }
-
+// Función para cambiar la imagen principal al hacer clic en una miniatura
 function changeImage(mainImageId, newSrc) {
     document.getElementById(mainImageId).src = newSrc;
 }
 
-let currentImageIndex = 0; // Índice actual de la imagen en el modal
-
+let currentImageIndex = 0; // Almacenar la imagen actual en el modal
+// Función para expandir la imagen de un producto en el modal
 function expandImage(img, index) {
     const modal = document.getElementById("imageModal");
     const expandedImg = document.getElementById("expandedImg");
@@ -304,7 +311,7 @@ function expandImage(img, index) {
     }
 
     const producto = productos[index];
-
+    // Actualizar la información del modal con los datos del producto
     expandedImg.src = producto.imagenes[0];
     modalTitle.textContent = producto.titulo;
     modalPrice.textContent = `Precio: ${producto.precio}`;
@@ -316,7 +323,6 @@ function expandImage(img, index) {
     displayReviews(index);
 }
 
-
 // Función para cambiar la imagen dentro del modal
 function changeModalImage(direction) {
     const expandedImg = document.getElementById("expandedImg");
@@ -324,11 +330,11 @@ function changeModalImage(direction) {
     const producto = productos[productIndex];
 
     if (!producto || !producto.imagenes || producto.imagenes.length === 0) return;
-
+    // Cambiar la imagen según la dirección indicada (siguiente o anterior)
     currentImageIndex += direction;
     if (currentImageIndex < 0) currentImageIndex = producto.imagenes.length - 1;
     if (currentImageIndex >= producto.imagenes.length) currentImageIndex = 0;
-
+    // Actualizar la imagen en el modal
     expandedImg.src = producto.imagenes[currentImageIndex];
 }
 
@@ -336,27 +342,29 @@ function changeModalImage(direction) {
 function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
-
-
+// Función placeholder para finalizar compra
 function checkout() {
     alert("Funcionalidad de finalizar compra aún no implementada.");
 }
-
+// Evento de búsqueda en tiempo real
 document.getElementById('search-input').addEventListener('input', () => {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const productRow = document.getElementById('product-row');
 
     if (searchTerm.trim() === '') {
+        // Si el campo de búsqueda está vacío, mostrar todos los productos
         productRow.innerHTML = '';
         productosCargados = 0;
         addMoreProducts();
     } else {
+        // Filtrar los productos según el término de búsqueda
         productRow.innerHTML = '';
         const filteredProducts = productos.filter(producto =>
             producto.titulo.toLowerCase().includes(searchTerm)
         );
 
         if (filteredProducts.length > 0) {
+            // Mostrar los productos que coinciden con la búsqueda
             filteredProducts.forEach(producto => {
                 const productElement = document.createElement('div');
                 productElement.classList.add('product');
@@ -372,11 +380,37 @@ document.getElementById('search-input').addEventListener('input', () => {
                 productRow.appendChild(productElement);
             });
         } else {
+            // Mostrar mensaje si no se encontraron productos
             productRow.innerHTML = '<p>No se encontraron productos.</p>';
         }
     }
 });
 
+// Objeto para almacenar las tallas seleccionadas
+const selectedTallas = {};
+
+// Función para seleccionar una talla
+function selectTalla(productIndex, talla) {
+    selectedTallas[productIndex] = talla; // Guardar la talla seleccionada para el producto específico
+    highlightSelectedTalla(productIndex, talla); // Resaltar la talla seleccionada
+}
+
+// Función para resaltar la talla seleccionada
+function highlightSelectedTalla(productIndex, talla) {
+    // Seleccionar todos los botones de tallas del producto específico
+    const tallaButtons = document.querySelectorAll(`#product-row .product:nth-child(${productIndex + 1}) .talla-button`);
+    
+    // Resaltar la talla seleccionada y desresaltar las demás
+    tallaButtons.forEach(button => {
+        if (button.textContent === talla) {
+            button.classList.add('selected-talla'); // Añadir clase para resaltar
+        } else {
+            button.classList.remove('selected-talla'); // Quitar resaltado de otras tallas
+        }
+    });
+}
+
+// Función para cargar más productos en la página
 function addMoreProducts() {
     const productRow = document.getElementById('product-row');
     const totalProductos = productos.length;
@@ -411,36 +445,12 @@ function addMoreProducts() {
 
         productRow.appendChild(productElement);
     }
-
+    // Actualizar la cantidad de productos cargados
     productosCargados += productosPorPagina;
-
+    // Ocultar el botón de "Cargar más" si ya se mostraron todos los productos
     if (productosCargados >= totalProductos) {
         document.querySelector('.add-more').style.display = 'none';
     }
-}
-
-// Objeto para almacenar las tallas seleccionadas
-const selectedTallas = {};
-
-// Función para seleccionar una talla
-function selectTalla(productIndex, talla) {
-    selectedTallas[productIndex] = talla; // Guardar la talla seleccionada para el producto específico
-    highlightSelectedTalla(productIndex, talla); // Resaltar la talla seleccionada
-}
-
-// Función para resaltar la talla seleccionada
-function highlightSelectedTalla(productIndex, talla) {
-    // Seleccionar todos los botones de tallas del producto específico
-    const tallaButtons = document.querySelectorAll(`#product-row .product:nth-child(${productIndex + 1}) .talla-button`);
-    
-    // Resaltar la talla seleccionada y desresaltar las demás
-    tallaButtons.forEach(button => {
-        if (button.textContent === talla) {
-            button.classList.add('selected-talla'); // Añadir clase para resaltar
-        } else {
-            button.classList.remove('selected-talla'); // Quitar resaltado de otras tallas
-        }
-    });
 }
 
 //aqui empieza el codigo de la validacion de los formularios
