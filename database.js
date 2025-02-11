@@ -8,22 +8,21 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
-  username TEXT UNIQUE NOT NULL, -- Nuevo campo
+  username TEXT UNIQUE NOT NULL, 
   telefono TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
+  // Crea tablaba de favoritos si no existe
   db.run(`
-    CREATE TABLE IF NOT EXISTS messages (
+  CREATE TABLE IF NOT EXISTS favoritos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    text TEXT NOT NULL,
-    stars INTEGER DEFAULT 5,
-    date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    )
+    producto_id INTEGER NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+  )
   `);
 });
 

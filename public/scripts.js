@@ -16,6 +16,75 @@ const productosPorPagina = 4;
 let cartCount = 0; // Contador del carrito
 const cartItems = []; // Array para almacenar los productos en el carrito
 
+async function loadFavorites() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
+
+    if (!user || !token) return;  // Verifica si el usuario y el token existen
+
+    try {
+        const response = await fetch('/api/favorites', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            console.error("Error obteniendo favoritos:", await response.text());
+            return;
+        }
+
+        const favorites = await response.json();
+        favorites.forEach(productIndex => {
+            const icon = document.getElementById(`favorite-icon-${productIndex}`);
+            if (icon) {
+                icon.classList.remove("fa-regular");
+                icon.classList.add("fa-solid");
+            }
+        });
+    } catch (err) {
+        console.error("Error al cargar favoritos:", err);
+    }
+}
+document.addEventListener("DOMContentLoaded", loadFavorites);
+
+async function toggleFavorite(productIndex) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
+
+    if (!user || !token) {
+        alert("Debes iniciar sesión para añadir favoritos.");
+        return;
+    }
+
+    const product = productos[productIndex];
+    const icon = document.getElementById(`favorite-icon-${productIndex}`);
+
+    try {
+        const response = await fetch('/api/favorites', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ producto_id: productIndex }) // Asegurar el nombre correcto
+        });
+
+        if (response.ok) {
+            if (icon.classList.contains("fa-solid")) {
+                icon.classList.remove("fa-solid");
+                icon.classList.add("fa-regular");
+            } else {
+                icon.classList.remove("fa-regular");
+                icon.classList.add("fa-solid");
+            }
+        } else {
+            const error = await response.json();
+            alert(error.error);
+        }
+    } catch (err) {
+        console.error("Error al gestionar favoritos:", err);
+    }
+}
+
 // Función para añadir reseñas a los productos en el modal
 function addReview() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -348,27 +417,6 @@ function addMoreProducts() {
     if (productosCargados >= totalProductos) {
         document.querySelector('.add-more').style.display = 'none';
     }
-}
-
-function toggleFavorite(productIndex) {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    
-    const icon = document.getElementById(`favorite-icon-${productIndex}`);
-    const product = productos[productIndex];
-
-    const isFavorite = favorites.some(fav => fav.id === productIndex);
-
-    if (isFavorite) {
-        favorites = favorites.filter(fav => fav.id !== productIndex);
-        icon.classList.remove("fa-solid");
-        icon.classList.add("fa-regular");
-    } else {
-        favorites.push({ id: productIndex, titulo: product.titulo, imagen: product.imagenes[0] });
-        icon.classList.remove("fa-regular");
-        icon.classList.add("fa-solid");
-    }
-
-    localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
 // Objeto para almacenar las tallas seleccionadas

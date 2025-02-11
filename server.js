@@ -135,6 +135,51 @@ app.get('/ropa', (req, res) => {
   });
 });
 
+app.post('/api/favorites', (req, res) => {
+  const { producto_id } = req.body;
+  const user = req.session.user;
+
+  if (!user) {
+    return res.status(401).json({ error: 'Usuario no autenticado' });
+  }
+
+  db.get('SELECT * FROM favoritos WHERE user_id = ? AND producto_id = ?', [user.id, producto_id], (err, row) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error en la base de datos' });
+    }
+
+    if (row) {
+      // Si ya está en favoritos, eliminarlo
+      db.run('DELETE FROM favoritos WHERE user_id = ? AND producto_id = ?', [user.id, producto_id], (err) => {
+        if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+        res.json({ message: 'Producto eliminado de favoritos' });
+      });
+    } else {
+      // Si no está en favoritos, agregarlo
+      db.run('INSERT INTO favoritos (user_id, producto_id) VALUES (?, ?)', [user.id, producto_id], (err) => {
+        if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+        res.json({ message: 'Producto agregado a favoritos' });
+      });
+    }
+  });
+});
+
+// Ruta para obtener favoritos del usuario logueado
+app.get('/api/favorites', (req, res) => {
+  const user = req.session.user;
+
+  if (!user) {
+    return res.status(401).json({ error: 'Usuario no autenticado' });
+  }
+
+  db.all('SELECT producto_id FROM favoritos WHERE user_id = ?', [user.id], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error en la base de datos' });
+    }
+    res.json(rows.map(row => row.producto_id));
+  });
+});
+
 app.listen(3000, () => {
   console.log('Server started on http://localhost:3000');
 });
