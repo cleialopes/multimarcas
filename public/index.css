@@ -3,15 +3,19 @@
     text-decoration: none;
     cursor: pointer;
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: transparent;
+    background-color: white;
     border: 2px solid red;
     color: red;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
 }
     
 /* Efecto al pasar el mouse */
@@ -30,6 +34,40 @@
     background-color: red;
     color: white;
 }
+.favorite-button {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background-color: transparent;
+    /* border: 2px solid red; */
+    color: red;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.favorite-button:hover {
+    background-color: red;
+    color: white;
+}
+
+.favorite-button:active {
+    transform: scale(0.9);
+}
+
+.favorite-button.active {
+    background-color: red;
+    color: white;
+}
+
+.product {
+    position: relative;
+}
 
 /* Productos */
 .product-row {
@@ -39,6 +77,7 @@
 }
 
 .product {
+    position: relative;
     border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 20px;
@@ -93,12 +132,21 @@
 }
 
 .add-to-cart {
+    position: absolute;
+    top: 55px; /* Ajusta según necesidad */
+    right: 10px; /* Ajusta según necesidad */
+    width: 30px;
+    height: 30px;
     background-color: #333;
-    color: white;
-    border: none;
-    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 14px;
+    color: white;
+    font-size: 18px;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    cursor: pointer;
+    z-index: 5; /* Asegura que el botón esté sobre la imagen */
 }
 
 .add-to-cart:hover {
@@ -259,6 +307,10 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+h2 {
+    color: white;
 }
 
 .modal-content {

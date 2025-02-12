@@ -466,7 +466,7 @@ function addMoreProducts() {
                 <p class="product-price">${producto.precio}</p>
                 <p class="product-rating" id="product-rating-${i}">${getAverageRating(i)}</p>
                 <div class="tallas-container">${tallasButtons}</div>
-                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})">Añadir al Carrito</button>
+                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})">🛒</button>
                 <button class="favorite-button" data-id="${producto.id}" onclick="toggleFavorite(${producto.id})">🤍 Añadir</button>
             </div>
         `;
