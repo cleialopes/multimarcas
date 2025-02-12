@@ -1,13 +1,15 @@
 // Llamar la función JSON para obtener los productos de ropa
 var productos = [];
 async function getRopa() {
-    const response = await fetch('/ropa');
-    if (!response.ok) {
-        throw new Error('Error loading JSON');
+    try {
+        const response = await fetch('/ropa');
+        if (!response.ok) {
+            throw new Error('Error cargando JSON');
+        }
+        productos = await response.json();
+        if (document.body.id === "index") addMoreProducts();
+    } catch (error) {
     }
-    // Cargar los primeros productos al iniciar la página
-    productos = await response.json();
-    if (document.body.id === "index") addMoreProducts();
 }
 getRopa();
 
@@ -16,75 +18,106 @@ const productosPorPagina = 4;
 let cartCount = 0; // Contador del carrito
 const cartItems = []; // Array para almacenar los productos en el carrito
 
-// Funcion para cargar los productos favoritos del usuario
-async function loadFavorites() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const token = localStorage.getItem("token");
 
-    if (!user || !token) return;  // Verifica si el usuario y el token existen
-
-    try {
-        const response = await fetch('/api/favorites', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-
-        if (!response.ok) {
-            console.error("Error obteniendo favoritos:", await response.text());
-            return;
-        }
-
-        const favorites = await response.json();
-        favorites.forEach(productIndex => {
-            const icon = document.getElementById(`favorite-icon-${productIndex}`);
-            if (icon) {
-                icon.classList.remove("fa-regular");
-                icon.classList.add("fa-solid");
-            }
-        });
-    } catch (err) {
-        console.error("Error al cargar favoritos:", err);
-    }
-}
-document.addEventListener("DOMContentLoaded", loadFavorites); // Cargar favoritos cuando el DOM esté listo
-
-// Función para agregar o quitar un producto de la lista de favoritos
-async function toggleFavorite(productIndex) {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const token = localStorage.getItem("token");
-
-    if (!user || !token) {
-        showNotification("Debes iniciar sesión para añadir favoritos.");
+// Función para agregar o eliminar un producto de favoritos
+async function toggleFavorite(productId) {
+    if (!productId) {
+        showNotification("Error: producto_id no válido.");
         return;
     }
 
-    const product = productos[productIndex];
-    const icon = document.getElementById(`favorite-icon-${productIndex}`);
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+        showNotification("Debes iniciar sesión para usar favoritos.");
+        return;
+    }
+
 
     try {
         const response = await fetch('/api/favorites', {
             method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ producto_id: productIndex }) // Asegurar el nombre correcto
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ producto_id: Number(productId) }) // Asegurar que es un número
         });
-        // Alternar el estado del icono entre "favorito" y "no favorito"
-        if (response.ok) {
-            if (icon.classList.contains("fa-solid")) {
-                icon.classList.remove("fa-solid");
-                icon.classList.add("fa-regular");
-            } else {
-                icon.classList.remove("fa-regular");
-                icon.classList.add("fa-solid");
-            }
-        } else {
-            const error = await response.json();
-            showNotification(error.error);
-        }
-    } catch (err) {
-        console.error("Error al gestionar favoritos:", err);
+
+        const result = await response.json();
+        showNotification(result.message);
+        updateFavoriteButton(productId);
+        loadFavorites();
+    } catch (error) {
     }
+}
+
+
+// Función para actualizar el estado del botón de favoritos
+async function updateFavoriteButton(productId) {
+    try {
+        const response = await fetch('/api/favorites');
+        if (!response.ok) throw new Error("Error al obtener favoritos");
+
+        const favoritos = await response.json();
+        const isFavorite = favoritos.includes(productId);
+
+        const button = document.querySelector(`.favorite-button[data-id="${productId}"]`);
+        if (button) {
+            button.innerHTML = isFavorite ? "❤️" : "🤍";
+        }
+    } catch (error) {
+        console.error("Error al actualizar botones de favoritos:", error);
+    }
+}
+
+
+// Función para cargar los favoritos del usuario autenticado
+async function loadFavorites() {
+    try {
+        const response = await fetch('/api/favorites');
+        if (!response.ok) throw new Error("Error al obtener favoritos");
+
+        const favoritos = await response.json();
+        displayFavorites(favoritos);
+
+        favoritos.forEach(updateFavoriteButton);
+    } catch (error) {
+        console.error("Error al cargar favoritos:", error);
+    }
+}
+
+// Función para mostrar los productos favoritos en el modal
+function displayFavorites(favoritos) {
+    const favoritesContainer = document.getElementById("favorites-items");
+    favoritesContainer.innerHTML = "";
+
+    if (favoritos.length === 0) {
+        favoritesContainer.innerHTML = "<p>No tienes productos en favoritos.</p>";
+        return;
+    }
+
+    favoritos.forEach(productId => {
+        const producto = productos.find(p => p.id === productId);
+        if (!producto) return;
+
+        const itemElement = document.createElement("div");
+        itemElement.classList.add("favorite-item");
+        itemElement.innerHTML = `
+            <img src="${producto.imagenes[0]}" alt="${producto.titulo}">
+            <h3>${producto.titulo}</h3>
+            <p>${producto.precio}</p>
+            <button onclick="toggleFavorite(${productId})">Eliminar</button>
+        `;
+        favoritesContainer.appendChild(itemElement);
+    });
+}
+
+// Mostrar el modal de favoritos
+function showFavorites() {
+    document.getElementById("favoritesModal").style.display = "block";
+    loadFavorites();
+}
+
+// Cerrar el modal de favoritos
+function closeFavorites() {
+    document.getElementById("favoritesModal").style.display = "none";
 }
 
 // Función para añadir reseñas a los productos en el modal
@@ -420,7 +453,6 @@ function addMoreProducts() {
         const productElement = document.createElement('div');
         productElement.classList.add('product');
 
-        // Generar botones para cada talla
         const tallasButtons = Object.keys(producto.tallas).map(talla => `
             <button class="talla-button" onclick="selectTalla(${i}, '${talla}')">${talla}</button>
         `).join('');
@@ -428,30 +460,30 @@ function addMoreProducts() {
         productElement.innerHTML = `
             <div class="product-images">
                 <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo}" onclick="expandImage(this, ${i})">
-                <button class="favorite-btn" onclick="toggleFavorite(${i})">
-                    <i id="favorite-icon-${i}" class="fa-regular fa-heart"></i>
-                </button>
             </div>
             <div class="product-info">
                 <h2 class="product-title">${producto.titulo}</h2>
                 <p class="product-price">${producto.precio}</p>
                 <p class="product-rating" id="product-rating-${i}">${getAverageRating(i)}</p>
-                <div class="tallas-container">
-                    ${tallasButtons}
-                </div>
+                <div class="tallas-container">${tallasButtons}</div>
                 <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})">Añadir al Carrito</button>
+                <button class="favorite-button" data-id="${producto.id}" onclick="toggleFavorite(${producto.id})">🤍 Añadir</button>
             </div>
         `;
 
         productRow.appendChild(productElement);
+        updateFavoriteButton(producto.id);
     }
-    // Actualizar la cantidad de productos cargados
+
     productosCargados += productosPorPagina;
-    // Ocultar el botón de "Cargar más" si ya se mostraron todos los productos
     if (productosCargados >= totalProductos) {
         document.querySelector('.add-more').style.display = 'none';
     }
 }
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    loadFavorites();
+});
 
 //aqui empieza el codigo de la validacion de los formularios
 function sanitizeInput(input) {
@@ -479,16 +511,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    favorites.forEach(fav => {
-        const icon = document.getElementById(`favorite-icon-${fav.id}`);
-        if (icon) {
-            icon.classList.remove("fa-regular");
-            icon.classList.add("fa-solid");
-        }
-    });
-    
     /* Función para cerrar sesión y eliminar datos del usuario */
     logoutButton.addEventListener("click", () => {
         localStorage.removeItem("user");

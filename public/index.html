@@ -44,6 +44,7 @@
                 <li><a href="suscripcion.html"><i class="fa-regular fa-user"></i></i>Entrar/Suscribirte</a></li>
                 <li><a href="#" class="cart" onclick="showCart()">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
             </ul>
+                <a href="#" class="favorite-icon" onclick="showFavorites()">❤️</a>
         </nav>
     </header>
     <main>
@@ -54,6 +55,14 @@
             <video autoplay loop muted playsinline>
                 <source src="img/video.mp4" type="video/mp4">
             </video>
+        </div>
+        <!-- Modal de Favoritos -->
+        <div id="favoritesModal" class="modal">
+            <span class="close" onclick="closeFavorites()">&times;</span>
+            <h2>Mis Favoritos</h2>
+            <div id="favorites-items" class="cart-items">
+                <!-- Los productos favoritos se mostrarán aquí -->
+            </div>
         </div>
         <!-- Contenedor principal -->
         <div class="container">

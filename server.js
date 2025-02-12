@@ -130,8 +130,10 @@ app.post('/api/login', (req, res) => {
 // Obtener datos de ropa desde un archivo JSON
 app.get('/ropa', (req, res) => {
   fs.readFile('data/ropa.json', 'utf8', (err, data) => {
-    if (err) return res.status(500).send('Error al leer el archivo');
-    res.send(JSON.parse(data));
+    if (err) {
+      return res.status(500).send('Error al leer el archivo');
+    } 
+    res.json(JSON.parse(data));
   });
 });
 
@@ -143,21 +145,28 @@ app.post('/api/favorites', (req, res) => {
     return res.status(401).json({ error: 'Usuario no autenticado' });
   }
 
+  if (!producto_id) {
+    return res.status(400).json({ error: 'Falta producto_id' });
+  }
+
   db.get('SELECT * FROM favoritos WHERE user_id = ? AND producto_id = ?', [user.id, producto_id], (err, row) => {
     if (err) {
       return res.status(500).json({ error: 'Error en la base de datos' });
     }
 
     if (row) {
-      // Si ya está en favoritos, eliminarlo
+       // Si ya está en favoritos, eliminarlo
       db.run('DELETE FROM favoritos WHERE user_id = ? AND producto_id = ?', [user.id, producto_id], (err) => {
-        if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+        if (err) {
+          return res.status(500).json({ error: 'Error en la base de datos' });
+        }
         res.json({ message: 'Producto eliminado de favoritos' });
       });
     } else {
-      // Si no está en favoritos, agregarlo
       db.run('INSERT INTO favoritos (user_id, producto_id) VALUES (?, ?)', [user.id, producto_id], (err) => {
-        if (err) return res.status(500).json({ error: 'Error en la base de datos' });
+        if (err) {
+          return res.status(500).json({ error: 'Error en la base de datos' });
+        }
         res.json({ message: 'Producto agregado a favoritos' });
       });
     }

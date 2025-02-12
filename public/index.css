@@ -1,3 +1,36 @@
+.favorite-icon {
+    font-size: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid red;
+    color: red;
+}
+    
+/* Efecto al pasar el mouse */
+.favorite-icon:hover {
+    background-color: red;
+    color: white;
+}
+
+/* Efecto al hacer clic */
+.favorite-icon:active {
+    transform: scale(0.9);
+}
+
+/* Versión marcada como favorita */
+.favorite-icon.active {
+    background-color: red;
+    color: white;
+}
+
 /* Productos */
 .product-row {
     display: flex;
@@ -168,26 +201,6 @@
 
 .add-review button:hover {
     background-color: #555;
-}
-
-/* favoritos */
-.favorite-btn {
-    position: absolute;
-    top: 20px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: red;
-}
-
-.favorite-btn i {
-    transition: transform 0.5s ease-in-out;
-}
-
-.favorite-btn i:hover {
-    transform: scale(1.2);
 }
 
 /* Modal */
