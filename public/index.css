@@ -64,9 +64,21 @@
     background-color: red;
     color: white;
 }
+.favorite-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
 
-.product {
-    position: relative;
+.favorite-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+}
+.favorite-item h2, h3 {
+    color: white;
 }
 
 /* Productos */
@@ -300,6 +312,7 @@
 .modal {
     display: none;
     position: fixed;
+    align-items: center;
     z-index: 1000;
     left: 0;
     top: 0;
