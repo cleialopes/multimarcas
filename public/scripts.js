@@ -15,10 +15,9 @@ getRopa();
 
 let productosCargados = 0;
 const productosPorPagina = 4;
-let cartCount = 0; // Contador del carrito
-const cartItems = []; // Array para almacenar los productos en el carrito
+let cartItems = JSON.parse(localStorage.getItem('cart')) || []; // Recuperar carrito guardado
 
-
+// -------------------------------------------------------------------empieza el codigo de los favoritos ---------
 // Función para agregar o eliminar un producto de favoritos
 async function toggleFavorite(productId) {
     if (!productId) {
@@ -31,7 +30,6 @@ async function toggleFavorite(productId) {
         showNotification("Debes iniciar sesión para usar favoritos.");
         return;
     }
-
 
     try {
         const response = await fetch('/api/favorites', {
@@ -47,7 +45,6 @@ async function toggleFavorite(productId) {
     } catch (error) {
     }
 }
-
 
 // Función para actualizar el estado del botón de favoritos
 async function updateFavoriteButton(productId) {
@@ -66,7 +63,6 @@ async function updateFavoriteButton(productId) {
         console.error("Error al actualizar botones de favoritos:", error);
     }
 }
-
 
 // Función para cargar los favoritos del usuario autenticado
 async function loadFavorites() {
@@ -121,6 +117,12 @@ function closeFavorites() {
     document.getElementById("favoritesModal").style.display = "none";
 }
 
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    loadFavorites();
+});
+
+// -------------------------------------------------------------------Empieza el codigo de rezeñas ---------
 // Función para añadir reseñas a los productos en el modal
 function addReview() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -211,6 +213,7 @@ if (ratingElement) {
     ratingElement.innerHTML = getAverageRating(productIndex);
 }
 }
+// -----------------------------------------------------------------------empeza el codigo de carrito
 // Función para añadir un producto al carrito
 function addToCart(titulo, precio, productIndex) {
     const talla = selectedTallas[productIndex]; // Obtener la talla seleccionada para el producto específico
@@ -220,33 +223,11 @@ function addToCart(titulo, precio, productIndex) {
         return;
     }
 
-    cartCount++; // Incrementar el contador del carrito
-    document.getElementById('cart-count').innerText = cartCount; // Actualizar el contador en el header
-
     // Agregar producto al carrito
     cartItems.push({ titulo, precio, talla });
-
-    // Mostrar la notificación
+    updateLocalStorageCart(); // Guardar en localStorage
+    updateCartCount(); // Actualizar contador
     showNotification(`"${titulo}" (Talla: ${talla}) fue añadido al carrito.`);
-}   
-
-// Función para mostrar una notificación emergente
-function showNotification(mensaje, tipo = 'info') {
-    let notificationContainer = document.getElementById('notification-container');
-    if (!notificationContainer) {
-        notificationContainer = document.createElement('div');
-        notificationContainer.id = 'notification-container';
-        document.body.appendChild(notificationContainer);
-    }
-
-    const notification = document.createElement('div');
-    notification.className = `notification ${tipo}`;
-    notification.textContent = mensaje;
-    notificationContainer.appendChild(notification);
-    // Eliminar la notificación después de 3 segundos
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
 }
 
 // Función para mostrar el carrito en un modal
@@ -283,12 +264,14 @@ function showCart() {
         totalElement.className = 'total-price';
         totalElement.innerHTML = `Total: ${totalPrice.toFixed(2)}`;
         cartFooter.appendChild(totalElement);
+        
         // Botón para vaciar el carrito
         const emptyCartButton = document.createElement('button');
         emptyCartButton.textContent = 'Vaciar Carrito';
         emptyCartButton.className = 'empty-cart-btn';
         emptyCartButton.onclick = emptyCart;
         cartFooter.appendChild(emptyCartButton);
+        
         // Botón para finalizar la compra
         const checkoutButton = document.createElement('button');
         checkoutButton.textContent = 'Finalizar Compra';
@@ -302,32 +285,70 @@ function showCart() {
 
     cartModal.style.display = "block";
 }
+
+// Función para eliminar un producto del carrito
+function removeFromCart(index) {
+    cartItems.splice(index, 1);
+    updateLocalStorageCart(); // Guardar en localStorage
+    updateCartCount(); // Actualizar contador
+    showCart();
+    showNotification('Producto eliminado del carrito.');
+}
+
+// Función para vaciar el carrito completamente
+function emptyCart() {
+    cartItems = [];
+    updateLocalStorageCart(); // Guardar en localStorage
+    updateCartCount(); // Actualizar contador
+    showCart();
+    showNotification('El carrito ha sido vaciado.');
+}
 // Función para cerrar el modal del carrito
 function closeCart() {
     document.getElementById("cartModal").style.display = "none";
 }
-// Función para eliminar un producto del carrito
-function removeFromCart(index) {
-    cartItems.splice(index, 1);
-    cartCount--;
-    document.getElementById('cart-count').innerText = cartCount;
-    showCart();
-    showNotification('Producto eliminado del carrito.');
-}
-// Función para vaciar el carrito completamente
-function emptyCart() {
-    cartItems.length = 0;
-    cartCount = 0;
-    document.getElementById('cart-count').innerText = cartCount;
-    const cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = '<p>El carrito está vacío.</p>';
-    showNotification('El carrito ha sido vaciado.');
-}
-// Función para cambiar la imagen principal al hacer clic en una miniatura
-function changeImage(mainImageId, newSrc) {
-    document.getElementById(mainImageId).src = newSrc;
+
+// Función para actualizar el almacenamiento del carrito
+function updateLocalStorageCart() {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
 }
 
+// Función para actualizar el contador del carrito
+function updateCartCount() {
+    document.getElementById('cart-count').innerText = cartItems.length;
+}
+
+// Función placeholder para finalizar compra
+function checkout() {
+    showNotification("Funcionalidad de finalizar compra aún no implementada.");
+}
+
+// Cargar el carrito al iniciar la página
+document.addEventListener("DOMContentLoaded", () => {
+    updateCartCount();
+});
+
+// -----------------------------------------------------empieza el codigo de notificaciones
+// Función para mostrar una notificación emergente
+function showNotification(mensaje, tipo = 'info') {
+    let notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) {
+        notificationContainer = document.createElement('div');
+        notificationContainer.id = 'notification-container';
+        document.body.appendChild(notificationContainer);
+    }
+
+    const notification = document.createElement('div');
+    notification.className = `notification ${tipo}`;
+    notification.textContent = mensaje;
+    notificationContainer.appendChild(notification);
+    // Eliminar la notificación después de 3 segundos
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// ---------------------------------------------------------------empieza el codigo de la galeria de imagenes
 let currentImageIndex = 0; // Almacenar la imagen actual en el modal
 // Función para expandir la imagen de un producto en el modal
 function expandImage(img, index) {
@@ -364,11 +385,11 @@ function changeModalImage(direction) {
     const producto = productos[productIndex];
 
     if (!producto || !producto.imagenes || producto.imagenes.length === 0) return;
-    // Cambiar la imagen según la dirección indicada (siguiente o anterior)
+    
     currentImageIndex += direction;
     if (currentImageIndex < 0) currentImageIndex = producto.imagenes.length - 1;
     if (currentImageIndex >= producto.imagenes.length) currentImageIndex = 0;
-    // Actualizar la imagen en el modal
+    
     expandedImg.src = producto.imagenes[currentImageIndex];
 }
 
@@ -376,10 +397,7 @@ function changeModalImage(direction) {
 function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
-// Función placeholder para finalizar compra
-function checkout() {
-    showNotification("Funcionalidad de finalizar compra aún no implementada.");
-}
+// ----------------------------------------------------------------------------empieza el codigo de la busqueda
 // Evento de búsqueda en tiempo real
 document.getElementById('search-input').addEventListener('input', () => {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
@@ -420,6 +438,7 @@ document.getElementById('search-input').addEventListener('input', () => {
     }
 });
 
+// ---------------------------------------------------------------------------empieza el codigo de las tallas
 // Objeto para almacenar las tallas seleccionadas
 const selectedTallas = {};
 
@@ -486,12 +505,8 @@ function addMoreProducts() {
         document.querySelector('.add-more').style.display = 'none';
     }
 }
-// Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
-    loadFavorites();
-});
 
-//aqui empieza el codigo de la validacion de los formularios
+//------------------------------------------------------aqui empieza el codigo de la validacion de los formularios
 function sanitizeInput(input) {
     return input.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim();
 }

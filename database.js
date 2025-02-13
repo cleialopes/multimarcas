@@ -25,17 +25,17 @@ db.serialize(() => {
     FOREIGN KEY(user_id) REFERENCES users(id)
   )
   `);
-  db.run(`
-    INSERT OR IGNORE INTO users (name, username, telefono, email, password)
-    VALUES(
-      'jozicleia',
-      'cleia'
-      '664825763'
-      'cleialopes530@gmail.com',
-      '$2b$10$MYJgRAjM1WB9LS9wtgsJ.O2Nhkdt.SYBpwjBf7wscAOA9.O9Sr8fa',
-      1
-    )
-  `);
+  // db.run(`
+  //   INSERT OR IGNORE INTO users (name, username, telefono, email, password)
+  //   VALUES(
+  //     'jozicleia',
+  //     'cleia'
+  //     '664825763'
+  //     'cleialopes530@gmail.com',
+  //     '$2b$10$MYJgRAjM1WB9LS9wtgsJ.O2Nhkdt.SYBpwjBf7wscAOA9.O9Sr8fa',
+  //     1
+  //   )
+  // `);
 });
 
 module.exports = db;
