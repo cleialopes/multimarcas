@@ -12,7 +12,8 @@ db.serialize(() => {
   telefono TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  isadmin BOOLEAN DEFAULT 0
     )
   `);
   // Crea tablaba de favoritos si no existe
@@ -23,6 +24,17 @@ db.serialize(() => {
     producto_id INTEGER NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(id)
   )
+  `);
+  db.run(`
+    INSERT OR IGNORE INTO users (name, username, telefono, email, password)
+    VALUES(
+      'jozicleia',
+      'cleia'
+      '664825763'
+      'cleialopes530@gmail.com',
+      '$2b$10$MYJgRAjM1WB9LS9wtgsJ.O2Nhkdt.SYBpwjBf7wscAOA9.O9Sr8fa',
+      1
+    )
   `);
 });
 
