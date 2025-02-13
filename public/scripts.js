@@ -462,12 +462,14 @@ function addMoreProducts() {
                 <img id="main-image-${i}" src="${producto.imagenes[0]}" alt="${producto.titulo}" onclick="expandImage(this, ${i})">
             </div>
             <div class="product-info">
+            
+                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})">🛒</button>
+                <button class="favorite-button" data-id="${producto.id}" onclick="toggleFavorite(${producto.id})">🤍 Añadir</button>
+                <div class="tallas-container">${tallasButtons}</div>
                 <h2 class="product-title">${producto.titulo}</h2>
                 <p class="product-price">${producto.precio}</p>
                 <p class="product-rating" id="product-rating-${i}">${getAverageRating(i)}</p>
-                <div class="tallas-container">${tallasButtons}</div>
-                <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})">🛒</button>
-                <button class="favorite-button" data-id="${producto.id}" onclick="toggleFavorite(${producto.id})">🤍 Añadir</button>
+                
             </div>
         `;
 

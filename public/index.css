@@ -9,7 +9,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: white;
+    background-color: transparent;
     border: 2px solid red;
     color: red;
     position: absolute;
@@ -20,7 +20,7 @@
     
 /* Efecto al pasar el mouse */
 .favorite-icon:hover {
-    background-color: red;
+    background-color: #deb8b8;
     color: white;
 }
 
@@ -36,10 +36,10 @@
 }
 .favorite-button {
     position: absolute;
-    top: 20px;
-    right: 10px;
+    top: 54%;
+    /* right: 10px; */
     background-color: transparent;
-    /* border: 2px solid red; */
+    border: none;
     color: red;
     width: 30px;
     height: 30px;
@@ -52,7 +52,7 @@
 }
 
 .favorite-button:hover {
-    background-color: red;
+    background-color: #deb8b8;
     color: white;
 }
 
@@ -100,7 +100,9 @@
     border-radius: 5px;
     transition: transform 0.2s;
 }
-
+.product h2 {
+    color: black;
+}
 .product:hover {
     transform: scale(1.02);
 }
@@ -145,8 +147,8 @@
 
 .add-to-cart {
     position: absolute;
-    top: 55px; /* Ajusta según necesidad */
-    right: 10px; /* Ajusta según necesidad */
+    top: 54%; /* Ajusta según necesidad */
+    right: 70%; /* Ajusta según necesidad */
     width: 30px;
     height: 30px;
     background-color: #333;
@@ -359,15 +361,15 @@ h2 {
 /* Estilos para los botones de tallas */
 .tallas-container {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 5px;
     margin-bottom: 10px;
 }
 
 .talla-button {
-    padding: 5px 10px;
+    padding: 3px 5px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    background-color: #b7b4b4;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.2s;
@@ -504,62 +506,72 @@ h2 {
 }
 
 /* Estilos para pantallas de tablets */
-@media (max-width: 1024px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        margin: 10px 0;
-    }
-
-    .nav-links li {
-        margin: 10px 0;
-    }
-
+/* Media Query para Tablets (Pantallas menores a 1024px) */
+@media screen and (max-width: 1024px) {
     .product {
-        width: 45%;
-        margin: 10px auto;
+        width: 45%; /* Ajusta el ancho de los productos */
     }
 
-    .search-form input {
-        width: 80%;
+    .product img {
+        width: 400px;
+        height: 300px;
+    }
+
+    .modal-info {
+        max-width: 60%;
     }
 }
 
-/* Estilos para pantallas de móviles */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        margin: 10px 0;
-    }
-
-    .nav-links li {
-        margin: 10px 0;
-    }
-
-    .search-form input {
-        width: 100%;
-    }
-
+/* Media Query para Móviles (Pantallas menores a 768px) */
+@media screen and (max-width: 768px) {
     .product {
-        width: 100%;
-        margin: 10px auto;
+        width: 80%; /* Ocupar todo el ancho */
     }
 
-    .video-background video {
-        object-fit: contain;
+    .product img {
+        width: 400px;
+        height: 300px;
     }
 
-    footer {
+    .product-thumbnails img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .modal-info {
+        max-width: 80%;
         padding: 10px;
+    }
+
+    .cart-footer button {
+        width: 100%;
+    }
+
+    .favorite-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+}
+
+/* Media Query para móviles pequeños (Pantallas menores a 480px) */
+@media screen and (max-width: 480px) {
+    .product img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .product-thumbnails img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .modal-info {
+        max-width: 90%;
+        padding: 5px;
+    }
+
+    .cart-footer button {
         font-size: 14px;
     }
 }
