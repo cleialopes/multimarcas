@@ -5,15 +5,28 @@
     flex-direction: column; 
     align-items: center; 
     justify-content: center;
-    background-color: transparent;
-    top: 35%;
+    background-color: rgba(255, 255, 255, 0.5); /* Blanco con 50% de transparencia */
+    top: 45%;
     gap: 5px;
-    padding: 5px;
-    border: 2px solid #333; 
+    padding: 5px; 
     border-radius: 10px; 
     width: fit-content;
     margin: auto; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; 
+}
+
+.product:hover .button-container {
+    opacity: 1;
+    visibility: visible;
+}
+
+.button-container div {
+    display: flex;
+    gap: 10px; 
+    align-items: center;
 }
 
 .button-container button {
@@ -30,11 +43,9 @@
 
 .add-to-cart {
     background-color: #333;
+    border-radius: 5px;
     width: 30px;
     height: 30px;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     color: white;
     z-index: 5;  
 }
@@ -44,8 +55,9 @@
 
 /* favoritos*/
 .favorite-button {
-    background-color: transparent;
+    background-color: #deb8b8;
     border: none;
+    border-radius: 5px;
     color: red;
     display: flex;
     align-items: center;
@@ -55,19 +67,19 @@
 }
 
 .favorite-button:hover {
-    background-color: #deb8b8;
+    background-color: #ab7777;
     color: white;
 }
 
 .talla-button {
     padding: 3px 5px;
     border: 1px solid #ddd;
-    background-color: #b7b4b4;
+    background-color: #deb8b8;
     border-radius: 5px;
 }
 
 .talla-button:hover {
-    background-color: #ddd;
+    background-color: #ab7777;
 } 
 
 .favorite-icon {
