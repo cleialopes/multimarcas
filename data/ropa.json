@@ -55,8 +55,8 @@
         "titulo": "Vestido Primavera",
         "precio": "€30.00",
         "imagenes": [
-            "img/vestido_verde1.png",
             "img/vestido_verde2.png",
+            "img/vestido_verde1.png",
             "img/vestido_verde3.png"
         ],
         "tallas": {

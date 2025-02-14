@@ -42,8 +42,9 @@
 }
 
 .add-to-cart {
-    background-color: #333;
+    background-color: #deb8b8;
     border-radius: 5px;
+    border: none;
     width: 30px;
     height: 30px;
     color: white;

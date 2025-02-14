@@ -225,8 +225,8 @@ function addToCart(titulo, precio, productIndex) {
 
     // Agregar producto al carrito
     cartItems.push({ titulo, precio, talla });
-    updateLocalStorageCart(); // Guardar en localStorage
-    updateCartCount(); // Actualizar contador
+    updateLocalStorageCart(); 
+    updateCartCount(); 
     showNotification(`"${titulo}" (Talla: ${talla}) fue añadido al carrito.`);
 }
 
@@ -485,7 +485,7 @@ function addMoreProducts() {
                 <div class="button-container">
                     <div>
                         <button class="favorite-button" data-id="${producto.id}" onclick="toggleFavorite(${producto.id})">🤍</button>
-                        <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})">🛒</button>
+                        <button class="add-to-cart" onclick="addToCart('${producto.titulo}', '${producto.precio}', ${i})"><i class="fa-solid fa-cart-shopping" style="color:rgb(42, 40, 48);"></i></button>
                     </div>
                     <div class="tallas-container">${tallasButtons}</div>
                 </div>
