@@ -100,7 +100,7 @@ function displayFavorites(favoritos) {
             <img src="${producto.imagenes[0]}" alt="${producto.titulo}">
             <h3>${producto.titulo}</h3>
             <p>${producto.precio}</p>
-            <button onclick="toggleFavorite(${productId})">Eliminar</button>
+            <button onclick="toggleFavorite(${productId})">🗑️</button>
         `;
         favoritesContainer.appendChild(itemElement);
     });
@@ -251,7 +251,7 @@ function showCart() {
             itemElement.innerHTML = `
                 <h3>${item.titulo} (Talla: ${item.talla})</h3>
                 <p>Precio: ${item.precio}</p>
-                <button onclick="removeFromCart(${index})">Eliminar</button>
+                <button onclick="removeFromCart(${index})">🗑️</button>
             `;
             cartItemsContainer.appendChild(itemElement);
         });
