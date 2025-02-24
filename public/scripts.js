@@ -96,11 +96,21 @@ function displayFavorites(favoritos) {
 
         const itemElement = document.createElement("div");
         itemElement.classList.add("favorite-item");
+
+        // Crear los botones de selección de talla
+        let tallasHTML = '<div class="tallas-container">';
+        Object.keys(producto.tallas).forEach(talla => {
+            tallasHTML += `<button class="talla-button" onclick="selectTallaFavoritos(${productId}, '${talla}')">${talla}</button>`;
+        });
+        tallasHTML += '</div>';
+
         itemElement.innerHTML = `
             <img src="${producto.imagenes[0]}" alt="${producto.titulo}">
             <h3>${producto.titulo}</h3>
             <p>${producto.precio}</p>
-            <button onclick="toggleFavorite(${productId})">🗑️</button>
+            ${tallasHTML}
+            <button onclick="toggleFavorite(${productId})"><i class="fa-sharp fa-solid fa-trash fa-shake"></i></button>
+            <button class="add-to-cart" onclick="addToCartFavoritos('${producto.titulo}', '${producto.precio}', ${productId})">🛒</button>
         `;
         favoritesContainer.appendChild(itemElement);
     });
@@ -187,7 +197,7 @@ function displayReviews(productIndex) {
     const reviewSection = document.querySelector(".add-review");
     // Muestra la sección de añadir reseña solo si el usuario está autenticado
     if (reviewSection) {
-        reviewSection.style.display = user ? "block" : "none";
+        reviewSection.style.display = user ? "flex" : "none";
     }
 
     reviewsContainer.innerHTML = "";
@@ -251,7 +261,7 @@ function showCart() {
             itemElement.innerHTML = `
                 <h3>${item.titulo} (Talla: ${item.talla})</h3>
                 <p>Precio: ${item.precio}</p>
-                <button onclick="removeFromCart(${index})">🗑️</button>
+                <button onclick="removeFromCart(${index})"><i class="fa-sharp fa-solid fa-trash fa-shake"></i></button>
             `;
             cartItemsContainer.appendChild(itemElement);
         });
@@ -358,26 +368,57 @@ function expandImage(img, index) {
     const modalPrice = document.getElementById("modal-price");
     const modalDescription = document.getElementById("modal-description");
     const modalCare = document.getElementById("modal-care");
-    const reviewsContainer = document.getElementById("reviews-modal");
+    const modalTallasContainer = document.getElementById("modal-tallas-container");
 
     if (!productos || productos.length === 0 || index >= productos.length) {
-        console.error("Error: Producto no encontrado en la lista.");
+        console.error("Error: Producto no encontrado.");
         return;
     }
 
     const producto = productos[index];
-    // Actualizar la información del modal con los datos del producto
+
     expandedImg.src = producto.imagenes[0];
     modalTitle.textContent = producto.titulo;
     modalPrice.textContent = `Precio: ${producto.precio}`;
     modalDescription.textContent = producto.descripcion ? `Descripción: ${producto.descripcion}` : "Sin descripción.";
     modalCare.textContent = producto.cuidados ? `Cuidados: ${producto.cuidados}` : "No se especifican cuidados.";
     expandedImg.dataset.productIndex = index;
-    
+
+    // Generar botones de tallas
+    modalTallasContainer.innerHTML = ""; // Limpiar contenido previo
+    Object.keys(producto.tallas).forEach(talla => {
+        const tallaButton = document.createElement("button");
+        tallaButton.className = "talla-button";
+        tallaButton.textContent = talla;
+        tallaButton.onclick = () => selectTalla(index, talla);
+
+        modalTallasContainer.appendChild(tallaButton);
+    });
+
+    // Actualizar botones de favoritos y carrito
+    document.getElementById("modal-favorite-btn").setAttribute("data-id", producto.id);
+    document.getElementById("modal-cart-btn").setAttribute("data-index", index);
+
     modal.style.display = "block";
     displayReviews(index);
 }
 
+function toggleFavoriteFromModal() {
+    const productId = document.getElementById("modal-favorite-btn").getAttribute("data-id");
+    toggleFavorite(productId);
+}
+
+function addToCartFromModal() {
+    const index = document.getElementById("modal-cart-btn").getAttribute("data-index");
+    const producto = productos[index];
+
+    if (!selectedTallas[index]) {
+        showNotification("Por favor, selecciona una talla antes de agregar al carrito.");
+        return;
+    }
+
+    addToCart(producto.titulo, producto.precio, index);
+}
 // Función para cambiar la imagen dentro del modal
 function changeModalImage(direction) {
     const expandedImg = document.getElementById("expandedImg");

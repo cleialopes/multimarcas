@@ -1,3 +1,14 @@
+.modal-buttons-container{
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5); /* Blanco con 50% de transparencia */ 
+    padding: 5px; 
+    border-radius: 10px;
+    width: fit-content;
+}
+
 /*contenedor de botones */
 .button-container {
     position: absolute;
@@ -23,9 +34,8 @@
     visibility: visible;
 }
 
-.button-container div {
+.button-container div, .modal-buttons {
     display: flex;
-    gap: 10px; 
     align-items: center;
 }
 
@@ -48,7 +58,8 @@
     width: 30px;
     height: 30px;
     color: white;
-    z-index: 5;  
+    z-index: 5; 
+    margin: 2px; 
 }
 .add-to-cart:hover {
     background-color: #4a4949;
@@ -64,7 +75,8 @@
     align-items: center;
     justify-content: center;
     width: 30px;
-    height: 30px; 
+    height: 30px;
+    margin: 2px; 
 }
 
 .favorite-button:hover {
@@ -238,41 +250,44 @@
 
 /* Estilos para la sección de reseñas */
 .reviews-section {
+    display: flex;
+    flex-direction: row;
     padding: 10px;
     border-radius: 5px;
     margin-top: 15px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     font-size: 14px;
+    gap: 30px;
 }
 
-.reviews h3 {
+/* .reviews h3 {
     font-size: 16px;
     margin-bottom: 8px;
     color: #333;
     font-weight: 500;
-}
+} */
 
-.review {
+/* .review {
     padding: 5px 0;
     border-bottom: 1px solid #eee;
     font-size: 13px;
-}
+} */
 
-.review:last-child {
+/* .review:last-child {
     border-bottom: none;
 }
 
 .review strong {
     color: #222;
-}
+} */
 
-.review p {
+/* .review p {
     margin: 2px 0;
     color: #555;
-}
+} */
 
 .add-review {
-    display: flex;
+
     flex-direction: column;
     gap: 5px;
     margin-top: 8px;
@@ -323,24 +338,29 @@
 }
 
 .modal .prev {
-    left: 10px;
+    left: 230px;
 }
 
-.modal .next {
-    right: 10px;
-}
+ .modal .next {
+    right: 790px;
+} 
 
 .modal .prev:hover, .modal .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-info {
+    display : flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
+    margin-top: 150px;
     border-radius: 10px;
-    max-width: 40%;
+    width: 500px;
+    height: 560px;
     margin-left: 20px; /* Espacio entre la imagen y el texto */
 }
 
@@ -371,9 +391,9 @@ h2 {
 }
 
 .modal-content {
-    max-width: 60%;
-    max-height: 80vh;
-    margin-top: 100px;
+    width: 500px;
+    height: 600px;
+    margin-top: 150px;
     border-radius: 10px;
 }
 

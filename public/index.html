@@ -64,6 +64,7 @@
                 <!-- Los productos favoritos se mostrarán aquí -->
             </div>
         </div>
+        
         <!-- Contenedor principal -->
         <div class="container">
             <!-- <h1>Tienda de Ropa</h1> -->
@@ -80,15 +81,27 @@
             <button class="prev" onclick="changeModalImage(-1)">&#10094;</button>
             <div class="modal-content-wrapper">
                 <img class="modal-content" id="expandedImg">
+                <button class="next" onclick="changeModalImage(1)">&#10095;</button>
                 <div class="modal-info">
-                    <h2 id="modal-title"></h2>
-                    <p id="modal-price"></p>
-                    <p id="modal-description"></p>
-                    <p id="modal-care"></p>
+                    <div>
+                        <h2 id="modal-title"></h2>
+                        <p id="modal-price"></p>
+                        <p id="modal-description"></p>
+                        <p id="modal-care"></p>
+                    </div>
+                    <div>
+                        <div class="modal-buttons-container"> 
+                            <div class="modal-buttons">
+                                <button id="modal-favorite-btn" class="favorite-button" onclick="toggleFavoriteFromModal()">❤️</button>
+                                <button id="modal-cart-btn" class="add-to-cart" onclick="addToCartFromModal()">🛒</button>
+                            </div>
+                            <div class="tallas-container" id="modal-tallas-container"></div> 
+                        </div>
+                        <button>consultar mi talla</button>
+                    </div>
                     <div class="reviews-section">
-                        <h3>Reseñas</h3>
-                        <div id="reviews-modal" class="reviews"></div>
                         <div class="add-review">
+                            <h3>Reseñas</h3>
                             <input type="text" id="review-name-modal" placeholder="Tu nombre">
                             <select id="review-rating-modal">
                                 <option value="5">⭐⭐⭐⭐⭐</option>
@@ -100,10 +113,10 @@
                             <textarea id="review-comment-modal" placeholder="Escribe tu reseña"></textarea>
                             <button onclick="addReview()">Enviar Reseña</button>
                         </div>
+                        <div id="reviews-modal" class="reviews"></div>
                     </div>
                 </div>
-                <button class="next" onclick="changeModalImage(1)">&#10095;</button>
-            </div>
+            </div>    
         </div>
         <!-- Modal para el carrito -->
         <div id="cartModal" class="modal">
