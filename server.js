@@ -158,6 +158,32 @@ app.get('/api/favorites', (req, res) => {
   });
 });
 
+// Ruta para inicio de sesión de administrador
+app.post('/api/loginAdmin', (req, res) => {
+  const { username, password } = req.body;
+
+  db.get('SELECT * FROM users WHERE username = ? AND isadmin = 1', [username], async (err, user) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error en la base de datos' });
+    }
+    if (!user) {
+      return res.status(401).json({ message: 'Usuario no encontrado o no autorizado' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Contraseña incorrecta' });
+    }
+
+    req.session.user = { id: user.id, username: user.username, email: user.email, isadmin: true };
+    res.json({ message: 'Inicio de sesión exitoso', redirect: '/dashboardAdmin' });
+  });
+});
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+});
+
 app.listen(3000, () => {
   console.log('Server started on http://localhost:3000');
 });
