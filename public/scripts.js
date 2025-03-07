@@ -15,10 +15,10 @@ getRopa();
 
 let productosCargados = 0;
 const productosPorPagina = 4;
-let cartItems = JSON.parse(localStorage.getItem('cart')) || []; // Recuperar carrito guardado
+let cartItems = JSON.parse(localStorage.getItem('cart')) || []; 
 
-// -------------------------------------------------------------------empieza el codigo de los favoritos ---------
-// Función para agregar o eliminar un producto de favoritos
+// -------------------------------------------------------------------favoritos
+// Agregar o eliminar un producto de favoritos
 async function toggleFavorite(productId) {
     if (!productId) {
         showNotification("Error: producto_id no válido.");
@@ -35,7 +35,7 @@ async function toggleFavorite(productId) {
         const response = await fetch('/api/favorites', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ producto_id: Number(productId) }) // Asegurar que es un número
+            body: JSON.stringify({ producto_id: Number(productId) })
         });
 
         const result = await response.json();
@@ -46,7 +46,7 @@ async function toggleFavorite(productId) {
     }
 }
 
-// Función para actualizar el estado del botón de favoritos
+// Actualizar el estado del botón de favoritos
 async function updateFavoriteButton(productId) {
     try {
         const response = await fetch('/api/favorites');
@@ -64,7 +64,7 @@ async function updateFavoriteButton(productId) {
     }
 }
 
-// Función para cargar los favoritos del usuario autenticado
+// Cargar los favoritos del usuario autenticado
 async function loadFavorites() {
     if (!localStorage.getItem("user")) return;
     try {
@@ -80,7 +80,7 @@ async function loadFavorites() {
     }
 }
 
-// Función para mostrar los productos favoritos en el modal
+// Mostrar los productos favoritos en el modal
 function displayFavorites(favoritos) {
     const favoritesContainer = document.getElementById("favorites-items");
     favoritesContainer.innerHTML = "";
@@ -132,8 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loadFavorites();
 });
 
-// -------------------------------------------------------------------Empieza el codigo de rezeñas ---------
-// Función para añadir reseñas a los productos en el modal
+// -------------------------------------------------------------------rezeñas
+// Añadir reseñas a los productos en el modal
 function addReview() {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
@@ -166,7 +166,6 @@ function addReview() {
     let reviews = JSON.parse(localStorage.getItem(`reviews-${productIndex}`)) || [];
     reviews.push(review);
     localStorage.setItem(`reviews-${productIndex}`, JSON.stringify(reviews));
-    // Limpiar los campos después de guardar la reseña
     nameInput.value = "";
     commentInput.value = "";
     ratingInput.value = "5";
@@ -174,18 +173,18 @@ function addReview() {
     displayReviews(productIndex);
 }
 
-// Función para calcular el promedio de calificación de un producto
+// Calcular el promedio de calificación de un producto
 function getAverageRating(productIndex) {
     let reviews = JSON.parse(localStorage.getItem(`reviews-${productIndex}`)) || [];
     if (reviews.length === 0) return "Sin calificaciones";
     
     let total = reviews.reduce((sum, review) => sum + parseInt(review.rating), 0);
     let average = total / reviews.length;
-    // Función para mostrar las reseñas en el modal
+    // Mostrar las reseñas en el modal
     return '⭐'.repeat(Math.round(average)) + ` (${reviews.length} reseñas)`;
 }
 
-// Función para mostrar las reseñas en el modal
+// Mostrar las reseñas en el modal
 function displayReviews(productIndex) {
     const reviewsContainer = document.getElementById("reviews-modal");
     if (!reviewsContainer) {
@@ -195,7 +194,7 @@ function displayReviews(productIndex) {
 
     const user = JSON.parse(localStorage.getItem("user"));
     const reviewSection = document.querySelector(".add-review");
-    // Muestra la sección de añadir reseña solo si el usuario está autenticado
+    // Sección de añadir reseña solo si el usuario está autenticado
     if (reviewSection) {
         reviewSection.style.display = user ? "flex" : "none";
     }
@@ -223,10 +222,10 @@ if (ratingElement) {
     ratingElement.innerHTML = getAverageRating(productIndex);
 }
 }
-// -----------------------------------------------------------------------empeza el codigo de carrito
-// Función para añadir un producto al carrito
+// ----------------------------------------------------------------------carrito
+// Añadir un producto al carrito
 function addToCart(titulo, precio, productIndex) {
-    const talla = selectedTallas[productIndex]; // Obtener la talla seleccionada para el producto específico
+    const talla = selectedTallas[productIndex];
 
     if (!talla) {
         showNotification('Por favor, selecciona una talla.');
@@ -240,7 +239,7 @@ function addToCart(titulo, precio, productIndex) {
     showNotification(`"${titulo}" (Talla: ${talla}) fue añadido al carrito.`);
 }
 
-// Función para mostrar el carrito en un modal
+// Mostrar el carrito en un modal
 function showCart() {
     const cartModal = document.getElementById("cartModal");
     const cartItemsContainer = document.getElementById("cart-items");
@@ -296,39 +295,39 @@ function showCart() {
     cartModal.style.display = "block";
 }
 
-// Función para eliminar un producto del carrito
+// Eliminar un producto del carrito
 function removeFromCart(index) {
     cartItems.splice(index, 1);
-    updateLocalStorageCart(); // Guardar en localStorage
-    updateCartCount(); // Actualizar contador
+    updateLocalStorageCart(); 
+    updateCartCount(); 
     showCart();
     showNotification('Producto eliminado del carrito.');
 }
 
-// Función para vaciar el carrito completamente
+// Vaciar el carrito completamente
 function emptyCart() {
     cartItems = [];
-    updateLocalStorageCart(); // Guardar en localStorage
-    updateCartCount(); // Actualizar contador
+    updateLocalStorageCart(); 
+    updateCartCount(); 
     showCart();
     showNotification('El carrito ha sido vaciado.');
 }
-// Función para cerrar el modal del carrito
+// Cerrar el modal del carrito
 function closeCart() {
     document.getElementById("cartModal").style.display = "none";
 }
 
-// Función para actualizar el almacenamiento del carrito
+// Actualizar el almacenamiento del carrito
 function updateLocalStorageCart() {
     localStorage.setItem('cart', JSON.stringify(cartItems));
 }
 
-// Función para actualizar el contador del carrito
+// Actualizar el contador del carrito
 function updateCartCount() {
     document.getElementById('cart-count').innerText = cartItems.length;
 }
 
-// Función placeholder para finalizar compra
+// Placeholder para finalizar compra
 function checkout() {
     showNotification("Funcionalidad de finalizar compra aún no implementada.");
 }
@@ -338,8 +337,8 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
 });
 
-// -----------------------------------------------------empieza el codigo de notificaciones
-// Función para mostrar una notificación emergente
+// -----------------------------------------------------Notificaciones
+// Mostrar una notificación emergente
 function showNotification(mensaje, tipo = 'info') {
     let notificationContainer = document.getElementById('notification-container');
     if (!notificationContainer) {
@@ -358,9 +357,9 @@ function showNotification(mensaje, tipo = 'info') {
     }, 3000);
 }
 
-// ---------------------------------------------------------------empieza el codigo de la galeria de imagenes
-let currentImageIndex = 0; // Almacenar la imagen actual en el modal
-// Función para expandir la imagen de un producto en el modal
+// ---------------------------------------------------------------Galeria de imagenes
+let currentImageIndex = 0;
+// Expandir la imagen de un producto en el modal
 function expandImage(img, index) {
     const modal = document.getElementById("imageModal");
     const expandedImg = document.getElementById("expandedImg");
@@ -385,7 +384,7 @@ function expandImage(img, index) {
     expandedImg.dataset.productIndex = index;
 
     // Generar botones de tallas
-    modalTallasContainer.innerHTML = ""; // Limpiar contenido previo
+    modalTallasContainer.innerHTML = ""; 
     Object.keys(producto.tallas).forEach(talla => {
         const tallaButton = document.createElement("button");
         tallaButton.className = "talla-button";
@@ -419,7 +418,7 @@ function addToCartFromModal() {
 
     addToCart(producto.titulo, producto.precio, index);
 }
-// Función para cambiar la imagen dentro del modal
+// Cambiar la imagen dentro del modal
 function changeModalImage(direction) {
     const expandedImg = document.getElementById("expandedImg");
     const productIndex = expandedImg.dataset.productIndex;
@@ -434,7 +433,7 @@ function changeModalImage(direction) {
     expandedImg.src = producto.imagenes[currentImageIndex];
 }
 
-// Función para cerrar el modal
+// Cerrar el modal
 function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
@@ -473,23 +472,22 @@ document.getElementById('search-input').addEventListener('input', () => {
                 productRow.appendChild(productElement);
             });
         } else {
-            // Mostrar mensaje si no se encontraron productos
             productRow.innerHTML = '<p>No se encontraron productos.</p>';
         }
     }
 });
 
-// ---------------------------------------------------------------------------empieza el codigo de las tallas
+// ---------------------------------------------------------------------------Tallas
 // Objeto para almacenar las tallas seleccionadas
 const selectedTallas = {};
 
-// Función para seleccionar una talla
+// Seleccionar una talla
 function selectTalla(productIndex, talla) {
     selectedTallas[productIndex] = talla; // Guardar la talla seleccionada para el producto específico
     highlightSelectedTalla(productIndex, talla); // Resaltar la talla seleccionada
 }
 
-// Función para resaltar la talla seleccionada
+// Resaltar la talla seleccionada
 function highlightSelectedTalla(productIndex, talla) {
     // Seleccionar todos los botones de tallas del producto específico
     const tallaButtons = document.querySelectorAll(`#product-row .product:nth-child(${productIndex + 1}) .talla-button`);
@@ -497,14 +495,14 @@ function highlightSelectedTalla(productIndex, talla) {
     // Resaltar la talla seleccionada y desresaltar las demás
     tallaButtons.forEach(button => {
         if (button.textContent === talla) {
-            button.classList.add('selected-talla'); // Añadir clase para resaltar
+            button.classList.add('selected-talla'); 
         } else {
-            button.classList.remove('selected-talla'); // Quitar resaltado de otras tallas
+            button.classList.remove('selected-talla'); 
         }
     });
 }
 
-// Función para cargar más productos en la página
+// Cargar más productos en la página
 function addMoreProducts() {
     const productRow = document.getElementById('product-row');
     const totalProductos = productos.length;
@@ -546,7 +544,7 @@ function addMoreProducts() {
     }
 }
 
-//------------------------------------------------------aqui empieza el codigo de la validacion de los formularios
+//------------------------------------------------------Validacion de formulario
 function sanitizeInput(input) {
     return input.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim();
 }
@@ -561,7 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userNameDisplay = document.getElementById("user-name");
     const logoutButton = document.getElementById("logout-button");
     
-    /* Función para verificar si el usuario está logueado */
+    /* Verificar si el usuario está logueado */
     function checkLoginStatus() {
         const user = localStorage.getItem("user");
         if (user) {
@@ -572,7 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /* Función para cerrar sesión y eliminar datos del usuario */
+    /* Cerrar sesión y eliminar datos del usuario */
     logoutButton.addEventListener("click", () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -599,7 +597,7 @@ document.addEventListener("DOMContentLoaded", () => {
     togglePasswordVisibility('confirm-password', 'toggle-confirm-password');
 
 
-    /* Función para manejar el registro de usuario */
+    /* Manejar el registro de usuario */
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const password = document.getElementById('password').value;
@@ -647,7 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* Función para manejar el inicio de sesión */
+    /* Manejar el inicio de sesión */
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -719,7 +717,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/* Función para manejar el inicio de sesión, debe de estar fora de otra function o no funcionarar en el index */
+/* Manejar el inicio de sesión */
 function updateUserInterface() {
     const user = JSON.parse(localStorage.getItem("user"));
     const userInfo = document.getElementById("user-info");
@@ -727,12 +725,12 @@ function updateUserInterface() {
     const loginLink = document.querySelector('nav .nav-links li a[href="suscripcion.html"]');
 
     if (user) {
-        userInfo.style.display = "inline-block"; // Mostrar la sección de usuario logueado
-        userNameDisplay.textContent = user.username; // Mostrar el nombre de usuario
-        if (loginLink) loginLink.style.display = "none"; // Ocultar "Entrar/Suscribirte"
+        userInfo.style.display = "inline-block"; 
+        userNameDisplay.textContent = user.username; 
+        if (loginLink) loginLink.style.display = "none"; 
     } else {
-        userInfo.style.display = "none"; // Ocultar la sección de usuario logueado
-        if (loginLink) loginLink.style.display = "inline-block"; // Mostrar "Entrar/Suscribirte"
+        userInfo.style.display = "none"; 
+        if (loginLink) loginLink.style.display = "inline-block"; 
     }
 }
 updateUserInterface();
